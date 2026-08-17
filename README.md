@@ -1,13 +1,20 @@
 # is-it-offsides
 
-**Is It Offside?** — an eleven-scenario soccer offside quiz. Each scenario animates a passage
+**Is It Offside?** — a twelve-scenario soccer offside quiz. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
 
-The scenarios run easy → very hard, through the pair that splits crowds — a rebound off a
+The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
+past the second-last defender when the ball goes somewhere else entirely, who never becomes
+involved and is therefore onside — then the pair that splits crowds, a rebound off a
 goalkeeper's *deliberate save* (still offside) versus a defender's *deliberate play* (which
-resets it) — and finish on the assistant referee's delayed flag.
+resets it), and finish on the assistant referee's delayed flag.
+
+The pitch reframes itself to whatever it is drawn on: on a phone it rotates to portrait so
+the attack runs up the screen and the figures are roughly twice the size, and each scenario
+is framed to its own action rather than always showing the whole half. `⛶ Full` hands the
+diagram the entire viewport with the answer buttons pinned over it.
 
 An assistant referee runs the touchline of every scenario, holding their required position:
 level with the second-last defender, or with the ball once the ball is nearer the goal line.
