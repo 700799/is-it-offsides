@@ -132,7 +132,7 @@ svg.pitch.close .spot{stroke-width:1.3}
 .scrub::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);margin-top:-3px}
 .scrub::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
 .scrub:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
-.caption{display:flex;gap:10px;align-items:center;background:#fff;border-top:3px solid var(--ink);padding:9px 12px;font-size:13.5px;font-weight:700;color:#3d3f49;min-height:44px}
+.caption{display:flex;gap:10px;align-items:center;background:#fff;border-bottom:3px solid var(--ink);padding:9px 12px;font-size:13.5px;font-weight:700;color:#3d3f49;min-height:44px}
 .step-n{flex:0 0 auto;background:var(--ink);color:#fff;border-radius:999px;font-size:11px;font-weight:900;padding:3px 9px}
 .legend{display:flex;flex-wrap:wrap;gap:5px 14px;padding:7px 11px;background:#f4f1e6;border-top:3px dashed #c9c4b2;font-size:11.5px;font-weight:700;color:#5c5e69;align-items:center}
 .legend span{white-space:nowrap}
@@ -175,8 +175,35 @@ body.answering .wrap{padding-bottom:104px}
 .answers .btn.picked{outline:4px solid var(--ink);outline-offset:3px}
 .answers .btn.faded{opacity:.4}
 
+/* ---------- explanation drawer ----------
+   The verdict slides up over the page instead of pushing the pitch off-screen,
+   so the diagram stays where it was and the reading is a deliberate step. */
+#scrim{position:fixed;inset:0;background:rgba(23,24,28,.5);z-index:60;opacity:0;
+  pointer-events:none;transition:opacity .22s}
+body.drawer #scrim{opacity:1;pointer-events:auto}
+#drawer{position:fixed;left:0;right:0;bottom:0;z-index:70;max-width:940px;margin:0 auto;
+  max-height:86vh;display:flex;flex-direction:column;
+  background:var(--cream-2);border:4px solid var(--ink);border-bottom:0;
+  border-radius:22px 22px 0 0;box-shadow:0 -8px 0 rgba(23,24,28,.22);
+  transform:translateY(102%);transition:transform .26s cubic-bezier(.2,.8,.25,1)}
+body.drawer #drawer{transform:translateY(0)}
+#drawer .grab{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:9px 14px 7px;
+  border-bottom:3px solid var(--ink);background:var(--cream)}
+#drawer .grab .bar{width:44px;height:5px;border-radius:99px;background:var(--grey);margin:0 auto}
+#drawer .body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px}
+#drawer .foot{flex:0 0 auto;display:flex;gap:9px;padding:10px 14px calc(12px + env(safe-area-inset-bottom));
+  border-top:3px solid var(--ink);background:var(--cream)}
+#drawer .foot .btn{flex:1}
+.dclose{border:3px solid var(--ink);border-radius:999px;background:#fff;font-family:var(--font);
+  font-weight:900;font-size:13px;padding:5px 12px;cursor:pointer;color:var(--ink);flex:0 0 auto}
+/* reopening the verdict once the drawer is dismissed */
+@media (prefers-reduced-motion:reduce){
+  #drawer{transition:none}
+  #scrim{transition:none}
+}
+
 /* ---------- feedback ---------- */
-.feedback{margin:18px 0 0;border:4px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 4px 0 var(--ink)}
+.feedback{margin:0;border:4px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 4px 0 var(--ink)}
 .feedback .verdict{padding:11px 14px;font-weight:900;font-size:16px;letter-spacing:.3px;border-bottom:3px solid var(--ink);color:var(--ink)}
 .feedback.ok .verdict{background:var(--green)}
 .feedback.bad .verdict{background:var(--red)}
@@ -187,7 +214,7 @@ body.answering .wrap{padding-bottom:104px}
 .rankup svg{width:40px;height:46px;flex:0 0 auto}
 .rankup.pop{animation:pop .5s ease-out}
 @keyframes pop{0%{transform:scale(.9)}55%{transform:scale(1.04)}100%{transform:scale(1)}}
-.nextrow{margin:16px 0 0;display:flex;justify-content:flex-end}
+.nextrow{margin:14px 0 0;display:flex;gap:9px;justify-content:flex-end}
 
 /* ---------- results ---------- */
 .result-hero{text-align:center;padding:6px 0 4px}
@@ -324,6 +351,9 @@ footer b{color:#4a4c56}
     <path d="M-30 -18l-14 6 14 6z" fill="#ffd44d" stroke="#17181c" stroke-width="2.8" stroke-linejoin="round"/>
   </g>
 
+  <pattern id="netpat" width="7" height="7" patternUnits="userSpaceOnUse">
+    <path d="M0 0h7M0 0v7" stroke="#fffaf0" stroke-width="1.1" stroke-opacity=".6" fill="none"/>
+  </pattern>
   <pattern id="turfdots" width="15" height="15" patternUnits="userSpaceOnUse">
     <circle cx="7.5" cy="7.5" r="1.7" fill="#ffffff" opacity=".14"/>
   </pattern>
@@ -378,6 +408,7 @@ footer b{color:#4a4c56}
           <button class="vbtn" type="button" data-view="close">🔍 Zoom</button>
           <button class="vbtn" type="button" id="fsBtn">⛶ Full</button>
         </div>
+        <div class="caption" aria-hidden="true"><span class="step-n" id="stepN">1/1</span><span id="caption"></span></div>
         <div id="sceneMount"></div>
         <div class="stage-bar" id="stageBar">
           <input class="scrub" id="scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="Scrub through the passage of play">
@@ -388,7 +419,6 @@ footer b{color:#4a4c56}
           <button class="btn on" id="btnOnside" type="button">✅ ONSIDE</button>
         </div>
         <div class="motion-note" id="motionNote" hidden>Motion reduced — showing the frozen moment the ball is played.</div>
-        <div class="caption" aria-hidden="true"><span class="step-n" id="stepN">1/1</span><span id="caption"></span></div>
         <div class="legend">
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
@@ -400,10 +430,25 @@ footer b{color:#4a4c56}
         </div>
       </div>
 
-      <div id="feedbackMount" aria-live="polite" aria-atomic="true"></div>
-      <div class="nextrow"><button class="btn" id="nextBtn" type="button" hidden>Next scenario ▶</button></div>
+      <div class="nextrow" id="afterRow" hidden>
+        <button class="btn ghost" id="whyBtn" type="button">📖 Why?</button>
+        <button class="btn" id="nextBtn" type="button">Next scenario ▶</button>
+      </div>
     </div>
   </section>
+
+  <!-- ===== explanation drawer ===== -->
+  <div id="scrim" hidden></div>
+  <aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+    <div class="grab">
+      <div class="bar" aria-hidden="true"></div>
+      <button class="dclose" id="drawerClose" type="button" aria-label="Close the explanation">✕</button>
+    </div>
+    <div class="body" id="feedbackMount" aria-live="polite" aria-atomic="true"></div>
+    <div class="foot">
+      <button class="btn" id="drawerNext" type="button">Next scenario ▶</button>
+    </div>
+  </aside>
 
   <!-- ===== results ===== -->
   <section id="screen-results" hidden>
@@ -465,8 +510,8 @@ function halo(parent,x,y,text,o){
    offside line, the attacker's line, the ball's line) is a vertical line in
    landscape and a horizontal one in portrait. */
 const PW=560,PH=360;
-const GOAL_X=530,GY0=150,GY1=210;
-const BOX18={x:420,y0:70,y1:290}, BOX6={x:500,y0:130,y1:230};
+const GOAL_X=530,GY0=118,GY1=242,GOAL_D=34;
+const BOX18={x:420,y0:44,y1:316}, BOX6={x:500,y0:92,y1:268};
 const HALF_X=40;
 
 let ORIENT='land';
@@ -509,11 +554,16 @@ function drawPitch(svg){
   const spot=mapPt(458,180);
   E('circle',{cx:spot[0],cy:spot[1],r:2.6,fill:'#f2f9ff'},g);
   /* penalty arc: a half-circle bulging away from the goal, drawn in display space */
-  const a0=mapPt(BOX18.x,141), a1=mapPt(BOX18.x,219);
-  E('path',Object.assign({d:'M'+a0[0]+' '+a0[1]+'A45 45 0 0 '+(isPort()?1:0)+' '+a1[0]+' '+a1[1]},L),g);
+  const a0=mapPt(BOX18.x,147.5), a1=mapPt(BOX18.x,212.5);
+  E('path',Object.assign({d:'M'+a0[0]+' '+a0[1]+'A50 50 0 0 '+(isPort()?1:0)+' '+a1[0]+' '+a1[1]},L),g);
   const gl=E('line',Object.assign({},L,{'stroke-width':3}),g);
   planeLine(gl,GOAL_X);
-  R(GOAL_X,GY0,GOAL_X+13,GY1,{fill:'rgba(255,255,255,.3)',stroke:'#fffaf0','stroke-width':3});
+  /* the goal is deliberately oversized and netted — it has to be unmistakable */
+  R(GOAL_X,GY0,GOAL_X+GOAL_D,GY1,{fill:'#3f7f33','fill-opacity':.55});
+  R(GOAL_X,GY0,GOAL_X+GOAL_D,GY1,{fill:'url(#netpat)'});
+  R(GOAL_X,GY0,GOAL_X+GOAL_D,GY1,{fill:'none',stroke:'#fffaf0','stroke-width':4.5,'stroke-linejoin':'round'});
+  const gp0=mapPt(GOAL_X,GY0),gp1=mapPt(GOAL_X,GY1);
+  E('line',{x1:gp0[0],y1:gp0[1],x2:gp1[0],y2:gp1[1],stroke:'#fffaf0','stroke-width':7,'stroke-linecap':'round'},g);
   return g;
 }
 
@@ -531,8 +581,8 @@ function sceneBounds(sc){
   }
   see([x0,AR_Y()]);                   // the AR on the touchline is always in frame
   return {
-    x:[Math.max(x0-44,0),Math.min(x1+52,PW)],
-    y:[Math.max(y0-46,0),Math.min(y1+74,PH)]
+    x:[Math.max(x0-44,0),Math.min(x1+52,PW+GOAL_D+5)],
+    y:[Math.max(y0-46,-42),Math.min(y1+74,PH+16)]
   };
 }
 function fitBox(sc){
@@ -546,15 +596,24 @@ function fitBox(sc){
 const BEAN_S=1.34;
 const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d'],
   ar:['#ffd44d','#d9a800']};
-function bean(team,dir){
+function bean(team,dir,pose){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
   const m=E('g',{transform:'scale('+(dir||1)+',1)'},g);
+  /* both arms up over the head, holding the ball — a legal throw-in */
+  if(pose==='throw'){
+    E('path',{d:'M-9 -4C-16 -10-17 -20-13 -27',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
+    E('path',{d:'M9 -4C16 -10 17 -20 13 -27',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
+  }
   E('rect',{x:-8,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
   E('rect',{x:1,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
   E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
   E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
     fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
+  /* the officials wear pinstripes, so they read as officials at a glance */
+  if(team==='ar'){
+    [-6.5,-1.5,3.5].forEach(x=>E('rect',{x:x,y:-7.5,width:2.4,height:23,fill:'#17181c','fill-opacity':.82},m));
+  }
   E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
     fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
   return g;
@@ -615,12 +674,12 @@ const SCENARIOS=[
   answer:'onside',freezeT:.5,
   law:['Law 11.4 — No offence direct from a throw-in'],
   actors:[
-    {id:'T7',team:'blue',n:7,track:[[0,300,18],[1,306,30]]},
+    {id:'T7',team:'blue',n:7,pose:'throw',track:[[0,300,-12],[.5,300,-12],[1,304,-6]]},
     {id:'A9',team:'blue',n:9,track:[[0,428,120],[.5,440,128],[1,470,150]]},
     {id:'D4',team:'red',n:4,track:[[0,378,90],[.5,385,96],[1,402,122]]},
     {id:'D5',team:'red',n:5,track:[[0,374,252],[.5,380,250],[1,396,240]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,508,178]]}],
-  ball:{track:[[0,300,18],[.5,300,18],[.8,441,129],[1,471,149]]},
+  ball:{track:[[0,300,-24],[.5,300,-24],[.8,441,129],[1,471,149]]},
   caps:[[0,'Quick throw-in on the right touchline…'],[.5,'⚽ THROWN — and yes, the 9 is miles beyond the last defender.'],[.8,'He controls it and turns. Any flag?']],
   why:['He is unmistakably in an offside position — the dashed line shows it. But position alone is never the offence.','There is <b>no offside offence if a player receives the ball directly from a throw-in</b>, a goal kick, or a corner kick. All three are written into Law 11 as exceptions. His position simply does not matter here. Play on.']
 },
@@ -698,6 +757,7 @@ const SCENARIOS=[
     {id:'D5',team:'red',n:5,track:[[0,424,250],[1,432,246]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[.62,516,180],[.78,513,198],[1,513,198]]}],
   ball:{track:[[0,300,180],[.4,332,180],[.86,534,192],[1,534,192]]},
+  impact:[[.7,'👀 KEEPER UNSIGHTED']],
   caps:[[0,'The 8 winds up from distance…'],[.4,'⚽ SHOT STRUCK — the 9 is offside, and standing right in the keeper’s window.'],[.7,'👀 The keeper picks it up late — he was screened.'],[.9,'In it goes. He never touched it.']],
   why:['A player in an offside position commits an offence not only by touching the ball, but by <b>interfering with an opponent</b> — and that expressly includes <b>clearly obstructing an opponent’s line of vision</b>.','No touch is required. By standing in an offside position directly in the keeper’s sightline and affecting his ability to play the ball, the 9 has committed the offence. Goal disallowed.']
 },
@@ -712,7 +772,8 @@ const SCENARIOS=[
     {id:'D4',team:'red',n:4,track:[[0,434,110],[1,442,116]]},
     {id:'D5',team:'red',n:5,track:[[0,428,250],[1,438,246]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,182],[.6,516,182],[.72,518,150],[1,518,150]]}],
-  ball:{track:[[0,300,232],[.4,332,226],[.66,530,152],[.82,494,160],[1,536,178]]},
+  ball:{track:[[0,300,232],[.4,332,226],[.66,528,120],[.8,486,150],[1,536,172]]},
+  impact:[[.66,'🥅 OFF THE POST']],
   caps:[[0,'The 8 lets fly…'],[.4,'⚽ SHOT STRUCK — the 9 is in an offside position right here.'],[.68,'🥅 OFF THE POST.'],[.86,'And the 9 gobbles up the rebound.']],
   why:['He was in an offside position at the moment his teammate shot. The question is only whether he then became involved.','He did — by <b>gaining an advantage</b>. Law 11 states that a player in an offside position who plays a ball that has <b>rebounded or been deflected off the goalpost</b>, the crossbar, a match official or an opponent has committed an offence. The woodwork does not wipe the slate clean. Disallowed.']
 },
@@ -728,6 +789,7 @@ const SCENARIOS=[
     {id:'D5',team:'red',n:5,track:[[0,430,254],[1,440,250]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[.56,516,180],[.68,506,168],[1,504,172]]}],
   ball:{track:[[0,290,180],[.4,326,180],[.66,504,170],[.84,478,212],[1,536,196]]},
+  impact:[[.66,'🧤 SAVED — parried, not cleared']],
   caps:[[0,'Another effort from range…'],[.4,'⚽ SHOT STRUCK — the 9 is offside at this instant. Remember that.'],[.68,'🧤 A strong hand — that is a SAVE, not a clearance.'],[.88,'The 9 hammers the loose ball in.']],
   why:['This is the one that splits crowds. He was offside when the shot was hit, and the ball reached him only via the goalkeeper.','Law 11 spells out the carve-out: a player in an offside position <b>is</b> penalised for playing a ball that rebounds or is deflected from a <b>deliberate save by any opponent</b>. A save is expressly excluded from the "deliberate play" reset.','Compare this with the very next scenario — the difference between a <b>save</b> and a <b>deliberate play</b> is the entire ballgame. Disallowed.']
 },
@@ -743,6 +805,7 @@ const SCENARIOS=[
     {id:'D5',team:'red',n:5,track:[[0,434,254],[1,444,250]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,514,184]]}],
   ball:{track:[[0,240,180],[.4,290,176],[.62,452,168],[.82,470,206],[1,536,192]]},
+  impact:[[.62,'🦵 DELIBERATE PLAY — controlled']],
   caps:[[0,'A hopeful ball forward…'],[.4,'⚽ BALL PLAYED — and yes, the 9 is in an offside position here.'],[.64,'🦵 But the 4 steps across and heads it deliberately. Slate wiped.'],[.86,'It drops to the 9. He finishes.']],
   why:['Start where you must: at the pass, the 9 <b>was</b> in an offside position. So far, identical to the last one.','But then an opponent <b>deliberately played</b> the ball. Law 11 defines that as a player having control of the ball with the possibility of passing it to a teammate, gaining possession of it, or clearing it — and an inaccurate or unsuccessful clearance still counts as deliberate play.','A deliberate play by an opponent <b>starts a new phase</b> and cancels the earlier offside position. Only a deliberate <b>save</b> is excluded — and a controlled header back is not a save. Goal stands. Play on.']
 },
@@ -758,6 +821,7 @@ const SCENARIOS=[
     {id:'D5',team:'red',n:5,track:[[0,436,252],[.4,440,250],[1,450,246]]},
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,514,186]]}],
   ball:{track:[[0,250,182],[.4,296,178],[.58,412,186],[.76,470,206],[1,536,196]]},
+  impact:[[.58,'🦴 DEFLECTION — no control']],
   caps:[[0,'Blue lines it up and drills it…'],[.4,'⚽ BALL PLAYED — the 9 is offside at this instant.'],[.58,'🦴 It smashes off the 4’s shin. He never had a chance to control it.'],[.82,'It loops to the 9, who finishes.']],
   why:['Same starting point as the last one: the 9 was in an offside position when his teammate played the ball. The only question is whether what happened next wiped it out.','It did not, because this was a <b>deflection</b>, not a deliberate play. Law 11 defines deliberate play as a player having <b>control</b> of the ball with the possibility of passing it to a team-mate, gaining possession of it, or clearing it. The 4 had none of that. The ball was drilled at him from a few yards, its direction was unexpected, and he threw out a leg on instinct — a movement that achieved contact but no control.','A deflection off an opponent does not start a new phase. Worse, Law 11 lists playing a ball deflected off an opponent as <b>gaining an advantage</b> from the offside position. Disallowed.','This is the hardest call in the whole law, and the one that decides the arguments. Compare the three ways a ball can reach you off an opponent: a <b>deliberate play</b> resets it (previous scenario, onside), a <b>deliberate save</b> never does (scenario 10, offside), and a <b>deflection</b> never does either (this one, offside). Time, clear sight and control are what separate the first from the last.']
 },
@@ -815,7 +879,7 @@ function buildScene(mount,sc){
   const bb=sceneBounds(sc);          // visible bounds: labels are clamped inside these
 
   /* the gap between the offside line and the attacker — neutral until answered */
-  const band=E('rect',{opacity:0,fill:'#17181c','fill-opacity':.16},svg);
+  const band=E('rect',{class:'band',opacity:0,fill:'#17181c','fill-opacity':.16},svg);
 
   const lineG=E('g',{opacity:0},svg);
   E('line',{class:'ann',stroke:'#ffd44d','stroke-width':3.4,'stroke-dasharray':'11 8'},lineG);
@@ -839,7 +903,7 @@ function buildScene(mount,sc){
   sc.actors.forEach((a,ai)=>{
     const g=E('g',{},svg);
     const dir=a.team==='blue'?1:-1;
-    const bg=bean(a.team,dir);
+    const bg=bean(a.team,dir,a.pose);
     bg.setAttribute('transform','scale('+BEAN_S+')');
     g.appendChild(bg);
     let txt=String(a.n);
@@ -891,12 +955,14 @@ function buildScene(mount,sc){
   const attLab=halo(labG,0,0,'his line',{size:10,hw:3.5,anchor:isPort()?'start':'middle'});
   const ballLab=halo(labG,0,0,'the ball',{size:10,hw:3.5});
 
+  const burst=E('circle',{class:'ann',r:11,fill:'none',stroke:'#ffd44d','stroke-width':4,opacity:0},svg);
+
   const badge=E('g',{opacity:0},svg);
   const bRect=E('rect',{x:0,y:0,width:0,height:24,rx:12,fill:'#17181c'},badge);
   const bText=E('text',{class:'badge-t',x:0,y:16,'font-size':11.5,'font-weight':900,fill:'#fffaf0','text-anchor':'middle'},badge);
 
   const h={svg,els,ball,band,lineG,lineLab,attG,attLab,ballLineG,ballLab,
-    traj,run,spot,badge,bRect,bText,arG,arFlag,judged,slId,bb,verdict:null,view:'fit'};
+    traj,run,spot,burst,badge,bRect,bText,arG,arFlag,judged,slId,bb,verdict:null,view:'fit'};
   h.setView=function(mode){
     h.view=mode;
     svg.classList.toggle('close',mode==='close');
@@ -983,7 +1049,7 @@ function updateScene(h,sc,t){
   put(h.arG,arX,AR_Y());
   /* the flag stays down while the call is still open — raising it would answer
      the question. It only goes up in the epilogue, and only when it should. */
-  const flagUp=h.showRun&&sc.answer==='offside'&&t>sc.freezeT+.01;
+  const flagUp=h.revealed&&sc.answer==='offside'&&t>sc.freezeT+.01;
   h.arFlag.setAttribute('transform','rotate('+(flagUp?0:118)+')');
 
   /* spotlights on the two players the decision is actually about */
@@ -994,7 +1060,7 @@ function updateScene(h,sc,t){
   }
 
   /* the run onto the ball, revealed only once the call has been made */
-  if(h.showRun&&t>sc.freezeT+.01){
+  if(t>sc.freezeT+.01){
     const s=lerpTrack(actorOf(sc,h.judged).track,sc.freezeT);
     const e=lerpTrack(actorOf(sc,h.judged).track,t);
     if(Math.abs(e[0]-s[0])+Math.abs(e[1]-s[1])>14){
@@ -1004,13 +1070,26 @@ function updateScene(h,sc,t){
     }else h.run.setAttribute('opacity',0);
   }else h.run.setAttribute('opacity',0);
 
+  let ring=0,rp=null;
+  if(sc.impact)for(const im of sc.impact){
+    const u=(t-im[0])/.17;
+    if(u>=0&&u<1){ring=1-u;rp=lerpTrack(sc.ball.track,im[0]);}
+  }
+  if(rp){
+    const d=mapPt(rp[0],rp[1]);
+    h.burst.setAttribute('opacity',(ring*0.95).toFixed(3));
+    h.burst.setAttribute('cx',d[0]);h.burst.setAttribute('cy',d[1]);
+    h.burst.setAttribute('r',(11+26*(1-ring)).toFixed(1));
+  }else h.burst.setAttribute('opacity',0);
+
   let lab=null;
-  if(frozen&&t<sc.freezeT+.02) lab='⚽ BALL PLAYED';
-  else if(reset) lab='🦵 DELIBERATE PLAY — offside wiped';
+  if(t>=sc.freezeT&&t<sc.freezeT+.15) lab='⚽ BALL PLAYED';
+  if(sc.impact)for(const im of sc.impact){if(t>=im[0]&&t<im[0]+.17)lab=im[1];}
+  if(!lab&&reset) lab='🦵 DELIBERATE PLAY — offside wiped';
   if(lab){
     const w=lab.length*6.6+22;
     h.badge.setAttribute('opacity',1);
-    h.badge.setAttribute('transform','translate('+(isPort()?52:16)+',14)');
+    h.badge.setAttribute('transform','translate('+(isPort()?Math.max(h.bb.y[1]-w-9,8):16)+',14)');
     h.bRect.setAttribute('width',w);
     h.bText.setAttribute('x',w/2);
     h.bText.textContent=lab;
@@ -1020,7 +1099,7 @@ function updateScene(h,sc,t){
 function createPlayer(sc,h,els){
   const DUR=4200;
   let raf=null,t=0,playing=false,phase='pre';
-  const cap=()=>phase==='pre'?sc.freezeT:1;
+  const cap=()=>1;
 
   function apply(v){
     t=v;updateScene(h,sc,v);
@@ -1051,7 +1130,7 @@ function createPlayer(sc,h,els){
   }
   function play(){
     if(REDUCED){apply(cap());setBtn();return;}
-    if(t>=cap()-1e-6)t=(phase==='pre')?0:sc.freezeT;
+    if(t>=cap()-1e-6)t=0;
     playing=true;frame.start=null;
     setBtn();
     raf=requestAnimationFrame(frame);
@@ -1067,7 +1146,7 @@ function createPlayer(sc,h,els){
     toggle(){playing?stop():play();},
     freeze(){stop();apply(sc.freezeT);},
     redraw(){apply(t);},
-    epilogue(){phase='epilogue';h.showRun=true;if(REDUCED){apply(1);}else{t=sc.freezeT;play();}}
+    epilogue(){phase='epilogue';h.revealed=true;if(REDUCED){apply(1);}else{t=sc.freezeT;play();}}
   };
 }
 
@@ -1118,9 +1197,9 @@ function applyOrient(force){
   ORIENT=want;
   if(!$('screen-quiz').hidden&&SCENARIOS[state.i]){
     const at=state.player?state.player.time():0;
-    const showRun=state.scene?!!state.scene.showRun:false;
+    const revealed=state.scene?!!state.scene.revealed:false;
     const verdict=state.scene?state.scene.verdict:null;
-    buildCurrentScene({at:at,showRun:showRun,verdict:verdict});
+    buildCurrentScene({at:at,revealed:revealed,verdict:verdict});
   }
   return true;
 }
@@ -1135,8 +1214,8 @@ function renderQuestion(){
   $('qTitle').textContent=sc.title;
   $('qBrief').textContent=sc.brief;
   $('feedbackMount').innerHTML='';
-  $('nextBtn').hidden=true;
-  $('nextBtn').textContent=(state.i===SCENARIOS.length-1)?'See my result ▶':'Next scenario ▶';
+  setDrawer(false);
+  $('afterRow').hidden=true;
 
   ['btnOffside','btnOnside'].forEach(id=>{
     const b=$(id);b.disabled=false;b.classList.remove('picked','faded');
@@ -1162,12 +1241,12 @@ function buildCurrentScene(restore){
   if(state.player)state.player.stop();
   const h=buildScene($('sceneMount'),sc);
   state.scene=h;
-  if(restore){h.showRun=restore.showRun;h.verdict=restore.verdict;}
+  if(restore){h.revealed=restore.revealed;h.verdict=restore.verdict;}
   state.player=createPlayer(sc,h,
     {caption:$('caption'),scrub:$('scrub'),play:$('playBtn'),step:$('stepN')});
   setView(state.view||'fit');
   if(restore){
-    if(restore.showRun)state.player.unlockPhase();
+    if(restore.revealed)state.player.unlockPhase();
     state.player.seek(restore.at);
   }
 }
@@ -1194,7 +1273,8 @@ function answer(choice){
   picked.classList.add('picked');other.classList.add('faded');
 
   const fb=D('div','feedback '+(ok?'ok':'bad'),$('feedbackMount'));
-  D('div','verdict',fb,(ok?'✅ Correct — ':'❌ Not quite — ')+'this one is '+sc.answer.toUpperCase()+'.');
+  D('div','verdict',fb,(ok?'✅ Correct — ':'❌ Not quite — ')+'this one is '+sc.answer.toUpperCase()+'.')
+    .id='drawerTitle';
   const body=D('div','body',fb);
   sc.why.forEach(p=>D('p','',body,p));
   const law=D('div','law',body);
@@ -1207,14 +1287,17 @@ function answer(choice){
     D('div','',ru,'<span class="chip sm y">RANK UP</span> You are now: <b>'+after.name+'</b> — <i>'+after.blurb+'</i>');
   }
 
-  $('nextBtn').hidden=false;
-  $('nextBtn').focus();
+  $('afterRow').hidden=false;
+  $('nextBtn').textContent=(state.i===SCENARIOS.length-1)?'See my result ▶':'Next scenario ▶';
   updateStatus();
   state.player.epilogue();
+  setDrawer(true);
 }
 
 function renderResults(){
   document.body.classList.remove('answering');
+  setDrawer(false);
+  $('afterRow').hidden=true;
   show('screen-results');
   const st=stageFor(state.correct);
   renderAvatar($('resultAv'),st);
@@ -1247,6 +1330,16 @@ $('variants').addEventListener('click',e=>{
   const b=e.target.closest('.vbtn[data-view]');if(b)setView(b.dataset.view);
 });
 
+/* The verdict arrives as a drawer sliding up over the page, so the pitch stays put
+   and can be re-read against the explanation. Dismissing it leaves a Why? button. */
+function setDrawer(on){
+  const dr=$('drawer'),sc=$('scrim');
+  if(on){dr.hidden=false;sc.hidden=false;requestAnimationFrame(()=>document.body.classList.add('drawer'));
+    setTimeout(()=>$('drawerNext').focus(),260);}
+  else{document.body.classList.remove('drawer');
+    setTimeout(()=>{if(!document.body.classList.contains('drawer')){dr.hidden=true;sc.hidden=true;}},300);}
+}
+
 /* full-screen pop-out: the pitch takes the whole viewport, with the two answer
    buttons pinned over it so the call can still be made from in there */
 function setFs(on){
@@ -1262,10 +1355,17 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&state.fs)setFs(false);});
 
 let rzT=null;
 addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>applyOrient(false),160);});
-$('nextBtn').addEventListener('click',()=>{
+$('drawerClose').addEventListener('click',()=>setDrawer(false));
+$('scrim').addEventListener('click',()=>setDrawer(false));
+$('whyBtn').addEventListener('click',()=>setDrawer(true));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('drawer'))setDrawer(false);});
+function advance(){
+  setDrawer(false);
   if(state.i===SCENARIOS.length-1){renderResults();}
   else{state.i++;renderQuestion();}
-});
+}
+$('nextBtn').addEventListener('click',advance);
+$('drawerNext').addEventListener('click',advance);
 $('againBtn').addEventListener('click',()=>{
   state.i=0;state.correct=0;state.wrong=0;state.answers=[];
   show('screen-quiz');renderQuestion();
