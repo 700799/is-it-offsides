@@ -41,14 +41,16 @@ between them:
 6. When it comes off an opponent — deliberate play, a save, a deflection
 7. Exceptions and the restart
 
-Each chapter carries one diagram per point, selectable inside the card, each resting on
-the decisive frame with the offside line and the verdict already drawn, plus a quote of
-what the book actually says. There is a contents list to jump around, and the quiz is one
-button away at any point, before or after reading.
+Each chapter carries one diagram per point, selectable inside the card. Every diagram is
+drawn with the smallest cast that can make its point — one passer, the attacker being
+judged, the second-last defender, and the keeper — so there is nothing to read past, and
+with only two opponents the second-last is unambiguous. The passage plays, the card shows
+one short line, and the assistant referee's flag is pinned to the edge of the frame where
+it cannot cover anyone.
 
-Most tutorial diagrams are derived from a quiz scenario's geometry by id rather than drawn
-again, so the pictures cannot drift from the scenarios they teach; only four situations
-needed drawing from scratch (own half, arms, players off the field, and the restart).
+Anything longer than a line lives behind **More detail**, which opens a drawer with the
+full explanation and a quote of what the book actually says. There is a contents list to
+jump around, and the quiz is one button away at any point, before or after reading.
 
 ## Running it locally
 
