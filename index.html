@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
-<title>Is It Offside? — Thirteen Calls, Two Buttons</title>
-<meta name="description" content="Thirteen offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
+<title>Is It Offside? — The Offside Challenge</title>
+<meta name="description" content="Review the rules for offside, then take the Offside Challenge: thirteen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -89,6 +89,32 @@ svg text{font-family:var(--font)}
 .lead{max-width:660px;margin:14px auto 18px;color:#3d3f49;font-size:clamp(15px,2.5vw,18px);font-weight:600}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
+/* ---------- landing menu ---------- */
+.kicker{font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px}
+.statline{max-width:620px;margin:2px auto 0;font-size:clamp(14px,2.3vw,16.5px);font-weight:700;color:#3d3f49}
+.statline b{font-size:1.55em;letter-spacing:-1px;color:var(--ink);-webkit-text-stroke:0}
+.quotebox{position:relative;background:var(--cream-2);border:4px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 18px 14px;margin:22px auto 0;max-width:620px;transform:rotate(-.7deg)}
+.quotebox .q{font-size:clamp(16px,3.1vw,21px);font-weight:900;line-height:1.32;letter-spacing:-.4px}
+.quotebox .q em{font-style:italic;background:linear-gradient(transparent 56%,var(--yellow) 56%)}
+.quotebox .beat{font-size:13px;font-weight:700;color:var(--grey);margin:7px 0}
+.quotebox .q + .q{margin-top:0}
+.quotebox .by{font-size:12px;font-weight:700;color:var(--grey);margin-top:11px;line-height:1.45}
+.menurow{display:grid;gap:14px;margin:24px 0 0;grid-template-columns:1fr 1fr}
+@media (max-width:640px){.menurow{grid-template-columns:1fr}}
+.opt{display:block;text-align:left;background:#fff;border:4px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 17px;cursor:pointer;font-family:var(--font);color:var(--ink);
+  transition:transform .07s}
+.opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
+.opt .oi{font-size:28px;line-height:1;display:block;margin-bottom:8px}
+.opt .ot{display:block;font-size:clamp(17px,3.2vw,21px);font-weight:900;letter-spacing:-.5px;line-height:1.15}
+.opt .od{display:block;font-size:13px;font-weight:700;color:#5c5e69;margin-top:6px;line-height:1.4}
+.opt.learn{background:var(--sky)}
+.opt.quiz{background:var(--yellow)}
+.foot-note{max-width:620px;margin:18px auto 34px;font-size:11.5px;font-weight:700;color:var(--grey);line-height:1.5;text-align:center}
+body.menu .statusbar{display:none}
+.chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
+
 /* ---------- the law walkthrough ---------- */
 .learntop{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .learntop .btn{font-size:15px;padding:11px 20px}
@@ -136,7 +162,7 @@ body.learning .step-n{display:none}
 .tip{margin-top:16px;border:3px dashed var(--ink);border-radius:14px;background:#fff8e0;padding:11px 14px;font-size:14px;color:#3d3f49;font-weight:600}
 .tip::before{content:"🧢 Coach tip — ";font-weight:900;color:var(--green-dk)}
 
-/* ---------- quiz card ---------- */
+/* ---------- challenge card ---------- */
 .q-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 .q-title{font-size:clamp(21px,4vw,30px);letter-spacing:-.6px;line-height:1.12;margin:2px 0 6px}
 .brief{color:#4a4c56;font-weight:600;margin:0 2px 14px;font-size:15px}
@@ -172,6 +198,7 @@ svg.pitch.close .spot{stroke-width:1.3}
 .legend{display:flex;flex-wrap:wrap;gap:5px 14px;padding:7px 11px;background:#f4f1e6;border-top:3px dashed #c9c4b2;font-size:11.5px;font-weight:700;color:#5c5e69;align-items:center}
 .legend span{white-space:nowrap}
 .legend .sw{display:inline-block;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);vertical-align:-2px;margin-right:5px}
+.legend .glove{display:inline-block;width:13px;height:13px;border-radius:4px 6px 6px 4px;border:2.5px solid var(--ink);background:var(--cream-2);vertical-align:-2px;margin-right:5px}
 .legend .arflag{display:inline-block;width:15px;height:11px;border:2.5px solid var(--ink);vertical-align:-1px;margin-right:5px;background:linear-gradient(135deg,var(--yellow) 50%,var(--red) 50%)}
 .legend .dash{display:inline-block;width:24px;height:0;border-top:3px dashed #d9a800;vertical-align:4px;margin-right:5px}
 .legend .ball-line{display:inline-block;width:24px;height:0;border-top:3px solid #e0432a;vertical-align:4px;margin-right:5px}
@@ -414,18 +441,60 @@ footer b{color:#4a4c56}
       <span class="chip sm r" id="statusBad">❌ 0</span>
     </div>
     <ul class="dots" id="statusDots" aria-label="Question progress"></ul>
+    <button class="chip sm home" id="homeBtn" type="button" title="Back to the main page">🏠 Main</button>
   </div>
 </div>
 
 <div class="wrap">
 
-  <!-- ===== the law, as a walkthrough (this is the landing page) ===== -->
-  <section id="screen-learn">
+  <!-- ===== landing menu: two doors, rules or challenge ===== -->
+  <section id="screen-menu">
+    <header class="hero">
+      <div class="kicker">The line nobody can see</div>
+      <h1>Is It <em>Offside?</em></h1>
+      <p class="lead">Offside is the most controversial enigma in sport. One invisible line, drawn
+      by a defender who isn’t looking, judged in the frame nobody agrees on — and then argued
+      about for the rest of the season.</p>
+      <p class="statline"><b>85%*</b> of fans and parents on the touchline will admit, if you ask
+      them nicely, that they don’t actually know what offside is.</p>
+    </header>
+
+    <div class="quotebox">
+      <p class="q">“How is that <em>offside?</em> Tell me. Go on — how is that offside.”</p>
+      <p class="beat">— the referee, wisely saying nothing —</p>
+      <p class="q">“No, seriously. <em>Tell me.</em> I genuinely don’t know what the rule is.”</p>
+      <p class="by">Every coach, every touchline, every weekend. At least the American gaffer in
+      the football show about the football team was honest enough to say the second part out loud.
+      This is that second part, answered.</p>
+    </div>
+
+    <div class="menurow">
+      <button class="opt learn" id="menuLearn" type="button">
+        <span class="oi" aria-hidden="true">📖</span>
+        <span class="ot">Review the rules for offside</span>
+        <span class="od">Seven chapters, seventeen diagrams. The whole of Law 11, drawn and
+        animated — position, involvement, the margins, the exceptions.</span>
+      </button>
+      <button class="opt quiz" id="menuQuiz" type="button">
+        <span class="oi" aria-hidden="true">🚩</span>
+        <span class="ot">Take the Offside Challenge</span>
+        <span class="od">Thirteen calls, easy to brutal. Watch the passage, then press one of two
+        buttons. No replay booth, no hiding.</span>
+      </button>
+    </div>
+
+    <p class="foot-note">* Not a real study — nobody has surveyed it, and we are not going to
+    pretend otherwise. Ask around at your next match and see whether it holds up.</p>
+  </section>
+
+  <!-- ===== the law, as a walkthrough ===== -->
+  <section id="screen-learn" hidden>
     <header class="hero">
       <h1 class="small">How <em>Offside</em> Works</h1>
       <div class="learntop">
-        <button class="btn big" id="startBtn">▶ Take the quiz</button>
+        <button class="btn big" id="startBtn">🚩 Take the Challenge</button>
         <button class="btn big ghost" id="tocBtn" type="button">☰ Contents</button>
+        <button class="btn big ghost" id="learnHome" type="button">🏠 Main page</button>
       </div>
     </header>
 
@@ -447,7 +516,7 @@ footer b{color:#4a4c56}
     </div>
   </section>
 
-  <!-- ===== quiz ===== -->
+  <!-- ===== the offside challenge ===== -->
   <section id="screen-quiz" hidden>
     <div class="card">
       <div class="q-head" id="qHead"></div>
@@ -475,7 +544,7 @@ footer b{color:#4a4c56}
         <div class="legend">
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
-          <span><i class="sw" style="background:#6fc25a"></i>Keeper</span>
+          <span><i class="glove"></i>Keeper — same shirt, gloves</span>
           <span><i class="arflag"></i>AR’s flag — travels along the offside line</span>
           <span><i class="dash"></i>Offside line (2nd-last opponent)</span>
           <span><i class="att-line"></i>The judged attacker</span>
@@ -514,8 +583,9 @@ footer b{color:#4a4c56}
       </div>
       <ul class="review" id="resultReview"></ul>
       <div class="again">
-        <button class="btn big" id="againBtn" type="button">↻ Play again</button>
+        <button class="btn big" id="againBtn" type="button">↻ Take it again</button>
         <button class="btn big ghost" id="learnBtn" type="button">📖 Back to the rules</button>
+        <button class="btn big ghost" id="resultHome" type="button">🏠 Main page</button>
       </div>
     </div>
   </section>
@@ -528,7 +598,7 @@ footer b{color:#4a4c56}
   </footer>
 </div>
 
-<noscript><p style="text-align:center;font-weight:700;padding:20px">This quiz draws its moving pitches with JavaScript — enable it to play.</p></noscript>
+<noscript><p style="text-align:center;font-weight:700;padding:20px">This site draws its moving pitches with JavaScript — enable it to play.</p></noscript>
 
 <script>
 'use strict';
@@ -649,7 +719,9 @@ function fitBox(sc){
 
 /* a chunky bean, drawn facing right; mirrored for the defending side */
 const BEAN_S=1.34;
-const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d']};
+/* the keeper wears his own side's shirt — gloves are what tell him apart, exactly as
+   on a real pitch, where the offside line does not care who is in goal */
+const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#f4795b','#cf5335']};
 function bean(team,dir,pose){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
@@ -667,11 +739,22 @@ function bean(team,dir,pose){
   }
   E('rect',{x:-8,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
   E('rect',{x:1,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
+  if(team==='gk'){
+    /* Both arms out, pale mitts on the ends. The keeper wears his own side's shirt —
+       the offside line never cared who was in goal — so the gloves are the only
+       thing that tells him apart. */
+    E('path',{d:'M10 -4c6 0 7.5 3 7.5 6.5s-1.5 6.5-7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
+  }
   E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
   E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
     fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
   E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
     fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+  if(team==='gk'){
+    /* the mitts sit on the ends of both arms, only just wider than the figure already was */
+    E('rect',{x:-19.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+    E('rect',{x:10.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+  }
   return g;
 }
 
@@ -1126,7 +1209,12 @@ function buildScene(mount,sc){
   });
 
   const els={};
-  sc.actors.forEach((a,ai)=>{
+  /* Paint the judged attacker last so he is never buried under a defender who happens
+     to finish in the same spot — he is the one the whole frame is about. Labels still
+     stagger by the actor's own index, so nothing else moves. */
+  const order=sc.actors.slice().sort((p,q)=>(p.id===judged?1:0)-(q.id===judged?1:0));
+  order.forEach(a=>{
+    const ai=sc.actors.indexOf(a);
     const g=E('g',{},svg);
     const dir=a.team==='blue'?1:-1;
     const bg=bean(a.team,dir,a.pose);
@@ -1379,7 +1467,7 @@ function createPlayer(sc,h,els){
   };
 }
 
-/* ================= quiz ================= */
+/* ================= the offside challenge ================= */
 const $=id=>document.getElementById(id);
 const state={i:0,r:0,s:0,mode:'learn',correct:0,wrong:0,answers:[],player:null,scene:null,view:'fit',fs:false};
 
@@ -1399,12 +1487,26 @@ function updateStatus(){
 }
 
 function show(screen){
-  ['screen-learn','screen-quiz','screen-results'].forEach(s=>$(s).hidden=(s!==screen));
+  ['screen-menu','screen-learn','screen-quiz','screen-results'].forEach(s=>$(s).hidden=(s!==screen));
   /* One stage element, reparented — so every bit of scene, player, view and
      full-screen wiring keeps working without being duplicated. */
-  const slot=screen==='screen-learn'?$('learnStageSlot'):$('quizStageSlot');
+  const slot=screen==='screen-learn'?$('learnStageSlot'):screen==='screen-quiz'?$('quizStageSlot'):null;
   if(slot&&$('stage').parentNode!==slot)slot.appendChild($('stage'));
   document.body.classList.toggle('learning',screen==='screen-learn');
+  document.body.classList.toggle('menu',screen==='screen-menu');
+}
+
+/* the main page: two doors, the rules or the challenge */
+function renderMenu(){
+  state.mode='menu';
+  if(state.player)state.player.stop();
+  setDrawer(false);setFs(false);
+  show('screen-menu');
+  window.scrollTo({top:0,behavior:'auto'});
+}
+function startChallenge(){
+  state.i=0;state.correct=0;state.wrong=0;state.answers=[];
+  show('screen-quiz');renderQuestion();
 }
 
 function setView(mode){
@@ -1453,7 +1555,7 @@ function renderRule(){
   $('rTitle').textContent=c.n+'. '+c.title;
   $('rCount').textContent='Chapter '+c.n+' of '+LEARN.length;
   $('rPrev').disabled=state.r===0;
-  $('rNext').textContent=(state.r===LEARN.length-1)?'▶ Take the quiz':'Next chapter ▶';
+  $('rNext').textContent=(state.r===LEARN.length-1)?'🚩 Take the Challenge':'Next chapter ▶';
 
   const tabs=$('rTabs');tabs.innerHTML='';
   tabs.hidden=c.shots.length<2;
@@ -1631,13 +1733,15 @@ function renderResults(){
 }
 
 /* ================= wiring ================= */
-$('startBtn').addEventListener('click',()=>{state.i=0;state.correct=0;state.wrong=0;
-  state.answers=[];show('screen-quiz');renderQuestion();});
+$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;renderRule();});
+$('menuQuiz').addEventListener('click',startChallenge);
+['homeBtn','learnHome','resultHome'].forEach(id=>$(id).addEventListener('click',renderMenu));
+$('startBtn').addEventListener('click',startChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});
 $('rNext').addEventListener('click',()=>{
   if(state.r<LEARN.length-1){state.r++;state.s=0;renderRule();}
-  else{state.i=0;state.correct=0;state.wrong=0;state.answers=[];show('screen-quiz');renderQuestion();}
+  else startChallenge();
 });
 $('learnBtn').addEventListener('click',()=>renderRule());
 $('moreBtn').addEventListener('click',openDetail);
@@ -1689,13 +1793,10 @@ $('nextBtn').addEventListener('click',advance);
 $('drawerNext').addEventListener('click',()=>{
   if(state.mode==='learn')setDrawer(false); else advance();
 });
-$('againBtn').addEventListener('click',()=>{
-  state.i=0;state.correct=0;state.wrong=0;state.answers=[];
-  show('screen-quiz');renderQuestion();
-});
+$('againBtn').addEventListener('click',startChallenge);
 
 updateStatus();
-renderRule();
+renderMenu();
 </script>
 </body>
 </html>

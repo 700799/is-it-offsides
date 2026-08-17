@@ -1,10 +1,13 @@
 # is-it-offsides
 
 **Is It Offside?** — a graphical walkthrough of the whole offside law, plus a
-thirteen-scenario quiz. Each scenario animates a passage
+thirteen-scenario test called **the Offside Challenge**. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
+
+The landing page is a main page with two doors — *review the rules* or *take the
+challenge* — and every screen keeps a route back to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes
@@ -30,7 +33,7 @@ ranked categories.
 
 ## The tutorial
 
-The landing page covers the offside law in **seven chapters**, holding **17 diagrams**
+The rules door covers the offside law in **seven chapters**, holding **17 diagrams**
 between them:
 
 1. Where you have to be — the two position tests, and who defines the line
@@ -44,7 +47,9 @@ between them:
 Each chapter carries one diagram per point, selectable inside the card. Every diagram is
 drawn with the smallest cast that can make its point — one passer, the attacker being
 judged, the second-last defender, and the keeper — so there is nothing to read past, and
-with only two opponents the second-last is unambiguous. The passage plays, the card shows
+with only two opponents the second-last is unambiguous. The keeper wears his own side's
+shirt and is told apart by his gloves, because the offside line has never cared who is
+in goal. The passage plays, the card shows
 one short line, and the assistant referee's flag is pinned to the edge of the frame where
 it cannot cover anyone.
 
@@ -80,5 +85,9 @@ Vercel treat this as a Node project and attempt an install/build it does not nee
 - The 2026/27 Laws permit competitions to use semi-automated offside technology; that changes
   who draws the line, not where it is, so every answer here is unaffected.
 - All characters are original cartoon figures. No licensed marks, real clubs, or real players.
+- The "85%" on the main page is a joke, not a finding, and the page says so in a footnote
+  directly underneath it. Nobody has surveyed this.
+- The angry-coach exchange on the main page is written for this site. It nods at a certain
+  television manager's honesty about not knowing the rule; it does not quote him.
 - Respects `prefers-reduced-motion`: scenes render as the frozen freeze-frame with the
   transport controls removed rather than animating.
