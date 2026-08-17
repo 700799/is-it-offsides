@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
-<title>Is It Offside? — Twelve Calls, Two Buttons</title>
-<meta name="description" content="Twelve offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
+<title>Is It Offside? — Thirteen Calls, Two Buttons</title>
+<meta name="description" content="Thirteen offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -331,9 +331,9 @@ footer b{color:#4a4c56}
   <!-- ===== intro ===== -->
   <section id="screen-intro">
     <header class="hero">
-      <div class="kicker">Twelve calls · Two buttons</div>
+      <div class="kicker">Thirteen calls · Two buttons</div>
       <h1>Is It <em>Offside</em>?</h1>
-      <p class="lead">Twelve scenarios, easy to genuinely brutal. Each one freezes at <b>the moment the ball is played</b>. Make the call.</p>
+      <p class="lead">Thirteen scenarios, easy to genuinely brutal. Each one freezes at <b>the moment the ball is played</b>. Make the call.</p>
       <div style="margin-top:26px">
         <button class="btn big" id="startBtn">▶ Take the offside quiz</button>
       </div>
@@ -724,7 +724,22 @@ const SCENARIOS=[
   why:['Start where you must: at the pass, the 9 <b>was</b> in an offside position. So far, identical to the last one.','But then an opponent <b>deliberately played</b> the ball. Law 11 defines that as a player having control of the ball with the possibility of passing it to a teammate, gaining possession of it, or clearing it — and an inaccurate or unsuccessful clearance still counts as deliberate play.','A deliberate play by an opponent <b>starts a new phase</b> and cancels the earlier offside position. Only a deliberate <b>save</b> is excluded — and a controlled header back is not a save. Goal stands. Play on.']
 },
 {
-  id:12,diff:'Very hard',title:'The Flag That Never Came',
+  id:12,diff:'Very hard',title:'Off the Shin',
+  brief:'The 9 is in an offside position again. But this time the pass is drilled hard at a defender only a few yards away, who throws out a leg on instinct. It cannons off his shin and loops straight to the 9, who scores.',
+  answer:'offside',freezeT:.4,
+  law:['Law 11.2 — A deflection is not a deliberate play','Gaining an advantage'],
+  actors:[
+    {id:'P8',team:'blue',n:8,track:[[0,250,182],[.4,296,178],[1,310,178]]},
+    {id:'A9',team:'blue',n:9,track:[[0,466,214],[.4,474,214],[.84,468,204],[1,504,192]]},
+    {id:'D4',team:'red',n:4,track:[[0,396,192],[.4,404,188],[.58,412,186],[1,418,194]]},
+    {id:'D5',team:'red',n:5,track:[[0,436,252],[.4,440,250],[1,450,246]]},
+    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,514,186]]}],
+  ball:{track:[[0,250,182],[.4,296,178],[.58,412,186],[.76,470,206],[1,536,196]]},
+  caps:[[0,'Blue lines it up and drills it…'],[.4,'⚽ BALL PLAYED — the 9 is offside at this instant.'],[.58,'🦴 It smashes off the 4’s shin. He never had a chance to control it.'],[.82,'It loops to the 9, who finishes.']],
+  why:['Same starting point as the last one: the 9 was in an offside position when his teammate played the ball. The only question is whether what happened next wiped it out.','It did not, because this was a <b>deflection</b>, not a deliberate play. Law 11 defines deliberate play as a player having <b>control</b> of the ball with the possibility of passing it to a team-mate, gaining possession of it, or clearing it. The 4 had none of that. The ball was drilled at him from a few yards, its direction was unexpected, and he threw out a leg on instinct — a movement that achieved contact but no control.','A deflection off an opponent does not start a new phase. Worse, Law 11 lists playing a ball deflected off an opponent as <b>gaining an advantage</b> from the offside position. Disallowed.','This is the hardest call in the whole law, and the one that decides the arguments. Compare the three ways a ball can reach you off an opponent: a <b>deliberate play</b> resets it (previous scenario, onside), a <b>deliberate save</b> never does (scenario 10, offside), and a <b>deflection</b> never does either (this one, offside). Time, clear sight and control are what separate the first from the last.']
+},
+{
+  id:13,diff:'Very hard',title:'The Flag That Never Came',
   brief:'A ball over the top, and it is desperately tight — a shoulder in it. The assistant referee’s flag stays down. The 9 races clear, rounds the keeper and rolls it in. Only then does the flag go up.',
   answer:'offside',freezeT:.42,
   law:['Law 11.1 — Offside position','Guidelines — the AR’s delayed flag'],
@@ -744,10 +759,10 @@ const SCENARIOS=[
 const STAGES=[
  {min:0,max:0,  name:'Gridiron Rookie',   blurb:'Thinks offside is a hockey thing.',        gear:['gear-pads','gear-cleats','hand-ball-oval','gear-helmet']},
  {min:1,max:2,  name:'Helmet Off',        blurb:'Fresh air. Dangerous new ideas.',          gear:['gear-pads','gear-cleats','hand-ball-oval','gear-hair']},
- {min:3,max:4,  name:'Pads Down',         blurb:'Starting to see the line.',                gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
- {min:5,max:7,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',           gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
- {min:8,max:9,  name:'Proper Baller',     blurb:'Reads the game. Mostly.',                  gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
- {min:10,max:12, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
+ {min:3,max:5,  name:'Pads Down',         blurb:'Starting to see the line.',                gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
+ {min:6,max:8,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',           gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
+ {min:9,max:10,  name:'Proper Baller',     blurb:'Reads the game. Mostly.',                  gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
+ {min:11,max:13, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
 ];
 const stageFor=n=>STAGES.find(s=>n>=s.min&&n<=s.max)||STAGES[STAGES.length-1];
 function renderAvatar(el,stage){
@@ -759,9 +774,9 @@ function renderAvatar(el,stage){
 
 const CATEGORIES=[
  {min:0,max:4, name:'🏈 Gridiron Lifer',            css:'',  blurb:'You brought a helmet to a football match and the flag never came down. In your defence, the offside law has confused entire nations for a century.'},
- {min:5,max:7, name:'🤔 Offside-Curious',           css:'',  blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
- {min:8,max:10, name:'🚩 Assistant Referee (Prov.)', css:'',  blurb:'Steady flag arm. You understand that it is judged at the moment the ball is played, which already puts you ahead of most of the stadium.'},
- {min:11,max:12,name:'🛰️ Semi-Automated Overlord',   css:'',  blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
+ {min:5,max:8, name:'🤔 Offside-Curious',           css:'',  blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
+ {min:9,max:11, name:'🚩 Assistant Referee (Prov.)', css:'',  blurb:'Steady flag arm. You understand that it is judged at the moment the ball is played, which already puts you ahead of most of the stadium.'},
+ {min:12,max:13,name:'🛰️ Semi-Automated Overlord',   css:'',  blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
 ];
 const catFor=n=>CATEGORIES.find(c=>n>=c.min&&n<=c.max);
 
@@ -822,9 +837,17 @@ function buildScene(mount,sc){
     els[a.id]=g;
   });
 
+  /* The ball has to be findable at a glance on green, so: a cast shadow to sit it
+     on the grass, a cream ring to lift it off the turf, and real panel seams so it
+     reads as a football rather than a dot. */
   const ball=E('g',{},svg);
-  E('circle',{cx:0,cy:0,r:7.5*BEAN_S,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.8},ball);
-  E('path',{d:'M0 -6.2l4.8 3.5-1.9 5.8h-5.9l-1.9-5.8z',fill:'#17181c'},ball);
+  const bs=E('g',{transform:'scale('+BEAN_S+')'},ball);
+  E('ellipse',{cx:0,cy:11.5,rx:9,ry:3.1,fill:'#17181c','fill-opacity':.32},bs);
+  E('circle',{cx:0,cy:0,r:11.4,fill:'#fffaf0','fill-opacity':.5},bs);
+  E('circle',{cx:0,cy:0,r:9.4,fill:'#fffaf0',stroke:'#17181c','stroke-width':3},bs);
+  E('path',{d:'M0 -5.1L4.85 -1.58L3 4.13L-3 4.13L-4.85 -1.58Z',fill:'#17181c'},bs);
+  E('path',{d:'M0 -9.4V-5.1M6.9 -6.9L4.85 -1.58M5.8 7.6L3 4.13M-5.8 7.6L-3 4.13M-6.9 -6.9L-4.85 -1.58',
+    stroke:'#17181c','stroke-width':2,'stroke-linecap':'round'},bs);
 
   /* The assistant referee, on the touchline. Law 11's guidelines put them in line
      with the second-last defender — or the ball, when the ball is nearer the goal
@@ -1165,7 +1188,7 @@ function renderResults(){
   $('resultScore').innerHTML=state.correct+'<span>/'+SCENARIOS.length+'</span>';
   const c=catFor(state.correct);
   $('resultCat').textContent=c.name;
-  $('resultCat').style.background=state.correct>=11?'#6fc25a':state.correct>=8?'#ffd44d':state.correct>=5?'#bfe3ff':'#f4795b';
+  $('resultCat').style.background=state.correct>=12?'#6fc25a':state.correct>=9?'#ffd44d':state.correct>=5?'#bfe3ff':'#f4795b';
   $('resultBlurb').textContent=c.blurb;
 
   const ul=$('resultReview');ul.innerHTML='';
