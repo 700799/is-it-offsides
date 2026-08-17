@@ -18,9 +18,10 @@ the attack runs up the screen and the figures are roughly twice the size, and ea
 is framed to its own action rather than always showing the whole half. `⛶ Full` hands the
 diagram the entire viewport with the answer buttons pinned over it.
 
-An assistant referee runs the touchline of every scenario, holding their required position:
-level with the second-last defender, or with the ball once the ball is nearer the goal line.
-Their flag stays down while the call is yours, and only goes up once you have answered.
+The assistant referee appears on every scenario as their flag, travelling along the
+touchline in the AR's required position: level with the second-last defender, or with the
+ball once the ball is nearer the goal line. It stays down while the call is yours, and
+only goes up once you have answered.
 
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
