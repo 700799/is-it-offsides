@@ -101,22 +101,34 @@ svg text{font-family:var(--font)}
 
 /* ---------- stage ---------- */
 .stage{border:4px solid var(--ink);border-radius:18px;overflow:hidden;background:#e8f3fb;margin:6px 0 4px}
-.stage svg.pitch{display:block;width:100%;height:auto}
-.stage-bar{display:flex;align-items:center;gap:10px;background:var(--ink);padding:9px 12px}
-.stage-bar .btn{font-size:13px;padding:6px 14px;box-shadow:none;border-width:2.5px}
+.stage svg.pitch{display:block;width:100%;height:auto;background:#57a747}
+/* the close-up doubles the zoom, so counter-scale the annotation so it stays the
+   same size on screen — the reference does the same with per-view font sizes */
+svg.pitch.close text{font-size:5.4px;stroke-width:2}
+svg.pitch.close .ann{stroke-width:1.7}
+svg.pitch.close .spot{stroke-width:1.3}
+.variants{display:flex;gap:8px;padding:10px 12px 9px;flex-wrap:wrap;background:#eaf4fd;border-bottom:3px solid var(--ink)}
+.vbtn{border:3px solid var(--ink);border-radius:999px;background:#fff;font-family:var(--font);font-weight:800;font-size:12.5px;padding:6px 13px;box-shadow:0 3px 0 var(--ink);cursor:pointer;color:var(--ink)}
+.vbtn:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
+.vbtn.on{background:var(--blue);color:#fff}
+.stage-bar{display:flex;align-items:center;gap:9px;background:var(--ink);padding:9px 12px}
+.stage-bar .btn{font-size:13px;padding:7px 15px;box-shadow:none;border-width:2.5px;white-space:nowrap}
 .stage-bar .btn:hover{transform:none}
+.stage-bar .btn.ghost{color:var(--blue)}
 .scrub{
-  flex:1;min-width:60px;-webkit-appearance:none;appearance:none;background:transparent;height:20px;cursor:pointer;
+  flex:1;min-width:50px;-webkit-appearance:none;appearance:none;background:transparent;height:20px;cursor:pointer;
 }
-.scrub::-webkit-slider-runnable-track{height:14px;border-radius:999px;background:#3a3c46;border:2px solid #52545f}
-.scrub::-moz-range-track{height:14px;border-radius:999px;background:#3a3c46;border:2px solid #52545f}
+.scrub::-webkit-slider-runnable-track{height:14px;border-radius:999px;border:2px solid #52545f;background:linear-gradient(to right,var(--yellow) 0 var(--fill,0%),#3a3c46 var(--fill,0%) 100%)}
+.scrub::-moz-range-track{height:14px;border-radius:999px;border:2px solid #52545f;background:linear-gradient(to right,var(--yellow) 0 var(--fill,0%),#3a3c46 var(--fill,0%) 100%)}
 .scrub::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);margin-top:-3px}
 .scrub::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
 .scrub:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 .caption{display:flex;gap:10px;align-items:center;background:#fff;border-top:3px solid var(--ink);padding:9px 12px;font-size:13.5px;font-weight:700;color:#3d3f49;min-height:44px}
+.step-n{flex:0 0 auto;background:var(--ink);color:#fff;border-radius:999px;font-size:11px;font-weight:900;padding:3px 9px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 12px;background:#f4f1e6;border-top:3px dashed #c9c4b2;font-size:11.5px;font-weight:700;color:#5c5e69;align-items:center}
 .legend .sw{display:inline-block;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);vertical-align:-2px;margin-right:5px}
 .legend .dash{display:inline-block;width:24px;height:0;border-top:3px dashed #d9a800;vertical-align:4px;margin-right:5px}
+.legend .ball-line{display:inline-block;width:24px;height:0;border-top:3px solid #e0432a;vertical-align:4px;margin-right:5px}
 .motion-note{padding:9px 12px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700}
 
 /* ---------- answers ---------- */
@@ -165,6 +177,12 @@ footer b{color:#4a4c56}
   .answers{grid-template-columns:1fr}
   .statusbar .inner{gap:8px;padding:7px 12px}
   .dots li{width:11px;height:11px}
+  /* the pitch is only ~310px wide here, so scale the annotation up to stay
+     readable and give the scrubber its own row instead of a sliver */
+  .stage-bar{flex-wrap:wrap}
+  .scrub{flex:1 0 100%;order:3}
+  svg.pitch text:not(.badge-t){font-size:15px}
+  svg.pitch.close text:not(.badge-t){font-size:7.5px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -179,79 +197,91 @@ footer b{color:#4a4c56}
 <!-- ===== sprite sheet: original cartoon figures, no licensed marks ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 
+  <!-- the same bean as the pitch figures, scaled up: backpack, capsule, feet.
+       The visor lives in the head layers so a jersey can recolour the capsule
+       without painting over the face, and the helmet can replace it outright. -->
   <g id="char-body">
-    <path d="M-9 12 L-11 34" stroke="#17181c" stroke-width="8" stroke-linecap="round"/>
-    <path d="M9 12 L11 34" stroke="#17181c" stroke-width="8" stroke-linecap="round"/>
-    <path d="M-16 -6 L-27 10" stroke="#17181c" stroke-width="7" stroke-linecap="round"/>
-    <path d="M16 -6 L27 10" stroke="#17181c" stroke-width="7" stroke-linecap="round"/>
-    <path d="M0 -17c12 0 16 8 16 17v9c0 8-6 12-16 12s-16-4-16-12v-9c0-9 4-17 16-17z" fill="#fffaf0" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
-    <circle cx="0" cy="-32" r="15" fill="#f6cfa8" stroke="#17181c" stroke-width="3"/>
-    <circle cx="-5.5" cy="-34" r="2.1" fill="#17181c"/>
-    <circle cx="5.5" cy="-34" r="2.1" fill="#17181c"/>
-    <path d="M-5 -26q5 4.5 10 0" stroke="#17181c" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <rect x="-15" y="24" width="13" height="11" rx="5" fill="#17181c"/>
+    <rect x="2" y="24" width="13" height="11" rx="5" fill="#17181c"/>
+    <path d="M-20 -8c-11 0-14 6-14 12s3 12 14 12z" fill="#c9c4b2" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -30c14 0 22 10 22 22v21c0 9-8 13-22 13s-22-4-22-13v-21c0-12 8-22 22-22z" fill="#fffaf0" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
   </g>
 
+  <g id="gear-visor">
+    <path d="M5 -22c11 0 17 6 17 12.5s-6 12.5-17 12.5c-8.5 0-13.5-6-13.5-12.5s5-12.5 13.5-12.5z" fill="#dff0ff" stroke="#17181c" stroke-width="3"/>
+  </g>
   <g id="gear-pads">
-    <path d="M-21 -14c0-6 9-8 21-8s21 2 21 8v7c0 3-4 4-8 3-5-1-8-3-13-3s-8 2-13 3c-4 1-8 0-8-3z" fill="#b07df5" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M0 -22v11" stroke="#17181c" stroke-width="2"/>
+    <path d="M-27 -5c0-8 12-12 27-12s27 4 27 12v8c0 4-5 5-10 4-6-1-11-4-17-4s-11 3-17 4c-5 1-10 0-10-4z" fill="#b07df5" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M0 -17v14" stroke="#17181c" stroke-width="2.4"/>
   </g>
   <g id="gear-helmet">
-    <path d="M-16 -34c0-11 7-17 16-17s16 6 16 17c0 6-1 9-3 11h-26c-2-2-3-5-3-11z" fill="#4aa3ff" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M-14 -26h28" stroke="#17181c" stroke-width="2.5"/>
-    <path d="M-13 -24c2 8 6 11 13 11s11-3 13-11" fill="none" stroke="#17181c" stroke-width="2.6" stroke-linecap="round"/>
-    <path d="M-8 -19h16" stroke="#17181c" stroke-width="2.2" stroke-linecap="round"/>
-    <path d="M-3 -50l6-4" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-24 -6c0-18 10-30 24-30s24 12 24 30c0 4-1 7-2 9h-44c-1-2-2-5-2-9z" fill="#4aa3ff" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M-22 -6h44" stroke="#17181c" stroke-width="2.6"/>
+    <path d="M-20 -3c3 10 9 15 20 15s17-5 20-15" fill="none" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M-13 4h26" stroke="#17181c" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M-4 -35l8-6" stroke="#17181c" stroke-width="3.2" stroke-linecap="round"/>
   </g>
   <g id="gear-hair">
-    <path d="M-15 -38c1-9 7-13 15-13s14 4 15 13c-4-5-9-6-15-6s-11 1-15 6z" fill="#5a3a24" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+    <use href="#gear-visor"/>
+    <path d="M-22 -17c1-12 9-19 22-19s21 7 22 19c-6-7-13-10-22-10s-16 3-22 10z" fill="#5a3a24" stroke="#17181c" stroke-width="2.8" stroke-linejoin="round"/>
   </g>
   <g id="gear-headband">
-    <path d="M-15 -38c1-9 7-13 15-13s14 4 15 13c-4-5-9-6-15-6s-11 1-15 6z" fill="#5a3a24" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
-    <path d="M-15.5 -37.5q15.5 -6 31 0" stroke="#17181c" stroke-width="6.5" fill="none" stroke-linecap="round"/>
-    <path d="M-15.5 -37.5q15.5 -6 31 0" stroke="#ffd44d" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <use href="#gear-visor"/>
+    <path d="M-22 -17c1-12 9-19 22-19s21 7 22 19c-6-7-13-10-22-10s-16 3-22 10z" fill="#5a3a24" stroke="#17181c" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M-22.5 -16q22.5 -9 45 0" stroke="#17181c" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M-22.5 -16q22.5 -9 45 0" stroke="#ffd44d" stroke-width="4.4" fill="none" stroke-linecap="round"/>
   </g>
   <g id="gear-jersey-plain">
-    <path d="M0 -17c12 0 16 8 16 17v9c0 8-6 12-16 12s-16-4-16-12v-9c0-9 4-17 16-17z" fill="#8b8d98" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0 -30c14 0 22 10 22 22v21c0 9-8 13-22 13s-22-4-22-13v-21c0-12 8-22 22-22z" fill="#8b8d98" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
   </g>
   <g id="gear-jersey-soccer">
-    <path d="M0 -17c12 0 16 8 16 17v9c0 8-6 12-16 12s-16-4-16-12v-9c0-9 4-17 16-17z" fill="#4aa3ff" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M-8 -16v6h16v-6" fill="none" stroke="#17181c" stroke-width="2.2"/>
-    <text x="0" y="9" font-size="13" font-weight="900" fill="#fffaf0" stroke="#17181c" stroke-width="2.4" paint-order="stroke" text-anchor="middle">10</text>
+    <path d="M0 -30c14 0 22 10 22 22v21c0 9-8 13-22 13s-22-4-22-13v-21c0-12 8-22 22-22z" fill="#4aa3ff" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
+    <text x="-11" y="9" font-size="15" font-weight="900" fill="#fffaf0" stroke="#17181c" stroke-width="2.6" paint-order="stroke" text-anchor="middle">10</text>
   </g>
   <g id="gear-shorts">
-    <path d="M-13 18h26v9c0 2-2 3-5 3h-16c-3 0-5-1-5-3z" fill="#fffaf0" stroke="#17181c" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M-22 12h44v6c0 7-8 10-22 10s-22-3-22-10z" fill="#fffaf0" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
   </g>
   <g id="gear-cleats">
-    <path d="M-17 32h11v6h-11z" fill="#17181c" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
-    <path d="M6 32h11v6H6z" fill="#17181c" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="-15" y="24" width="13" height="11" rx="5" fill="#17181c" stroke="#17181c" stroke-width="2.4"/>
+    <rect x="2" y="24" width="13" height="11" rx="5" fill="#17181c" stroke="#17181c" stroke-width="2.4"/>
   </g>
   <g id="gear-boots">
-    <path d="M-18 31h12v7h-12z" fill="#ff6f9c" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
-    <path d="M6 31h12v7H6z" fill="#ff6f9c" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="-16" y="24" width="14" height="11" rx="5" fill="#ff6f9c" stroke="#17181c" stroke-width="2.6"/>
+    <rect x="2" y="24" width="14" height="11" rx="5" fill="#ff6f9c" stroke="#17181c" stroke-width="2.6"/>
   </g>
   <g id="gear-boots-gold">
-    <path d="M-18 31h12v7h-12z" fill="#ffd44d" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
-    <path d="M6 31h12v7H6z" fill="#ffd44d" stroke="#17181c" stroke-width="2.5" stroke-linejoin="round"/>
-    <path d="M-14 34h5M10 34h5" stroke="#17181c" stroke-width="1.8"/>
+    <rect x="-16" y="24" width="14" height="11" rx="5" fill="#ffd44d" stroke="#17181c" stroke-width="2.6"/>
+    <rect x="2" y="24" width="14" height="11" rx="5" fill="#ffd44d" stroke="#17181c" stroke-width="2.6"/>
+    <path d="M-12 29h6M6 29h6" stroke="#17181c" stroke-width="1.9"/>
   </g>
   <g id="gear-socks">
-    <path d="M-14 24h8v9h-8zM6 24h8v9H6z" fill="#4aa3ff" stroke="#17181c" stroke-width="2.4"/>
+    <path d="M-16 18h14v8h-14zM2 18h14v8H2z" fill="#4aa3ff" stroke="#17181c" stroke-width="2.6"/>
   </g>
   <g id="gear-armband">
-    <path d="M14 -6h9v7h-9z" fill="#ffd44d" stroke="#17181c" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M13 -4h10v9H13z" fill="#ffd44d" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
   </g>
   <g id="hand-ball-oval">
-    <ellipse cx="-30" cy="10" rx="10" ry="6.5" transform="rotate(-28 -30 10)" fill="#b06a3a" stroke="#17181c" stroke-width="3"/>
-    <path d="M-34 6l7 7" stroke="#fffaf0" stroke-width="2.2" stroke-linecap="round"/>
+    <ellipse cx="-32" cy="14" rx="12" ry="8" transform="rotate(-28 -32 14)" fill="#b06a3a" stroke="#17181c" stroke-width="3"/>
+    <path d="M-37 9l9 9" stroke="#fffaf0" stroke-width="2.4" stroke-linecap="round"/>
   </g>
   <g id="hand-ball-soccer">
-    <circle cx="22" cy="30" r="9" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
-    <path d="M22 24l4.5 3.4-1.7 5.4h-5.6l-1.7-5.4z" fill="#17181c"/>
+    <circle cx="31" cy="27" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
+    <path d="M31 20l5.5 4-2 6.6h-7l-2-6.6z" fill="#17181c"/>
   </g>
   <g id="gear-flag">
-    <path d="M27 10v-26" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
-    <path d="M27 -26l16 6-16 6z" fill="#ffd44d" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M-30 16v-34" stroke="#17181c" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M-30 -18l-14 6 14 6z" fill="#ffd44d" stroke="#17181c" stroke-width="2.8" stroke-linejoin="round"/>
   </g>
+
+  <pattern id="turfdots" width="15" height="15" patternUnits="userSpaceOnUse">
+    <circle cx="7.5" cy="7.5" r="1.7" fill="#ffffff" opacity=".14"/>
+  </pattern>
+  <marker id="arrowBall" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0 1l9 4-9 4z" fill="#e0432a"/>
+  </marker>
+  <marker id="arrowRun" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0 1l9 4-9 4z" fill="#17181c"/>
+  </marker>
 </defs></svg>
 
 <!-- ===== sticky status bar ===== -->
@@ -314,19 +344,24 @@ footer b{color:#4a4c56}
       <p class="brief" id="qBrief"></p>
 
       <div class="stage">
+        <div class="variants" id="variants">
+          <button class="vbtn on" type="button" data-view="full">🗺️ Full pitch</button>
+          <button class="vbtn" type="button" data-view="close">🔍 Close-up on the line</button>
+        </div>
         <div id="sceneMount"></div>
         <div class="stage-bar" id="stageBar">
           <button class="btn" id="playBtn" type="button" aria-pressed="false">▶ Play</button>
+          <button class="btn ghost" id="replayBtn" type="button">↻ Replay</button>
           <input class="scrub" id="scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="Scrub through the passage of play">
         </div>
         <div class="motion-note" id="motionNote" hidden>Motion reduced — showing the frozen moment the ball is played.</div>
-        <div class="caption" id="caption" aria-hidden="true"></div>
+        <div class="caption" aria-hidden="true"><span class="step-n" id="stepN">1/1</span><span id="caption"></span></div>
         <div class="legend">
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
           <span><i class="sw" style="background:#6fc25a"></i>Keeper</span>
           <span><i class="dash"></i>Offside line (2nd-last opponent)</span>
-          <span>⚽ Ball</span>
+          <span><i class="ball-line"></i>Ball path</span>
         </div>
       </div>
 
@@ -399,27 +434,56 @@ const HALF_X=40;
 
 function drawPitch(svg){
   const g=E('g',{},svg);
-  E('rect',{x:0,y:0,width:PW,height:PH,fill:'#5fae4e'},g);
+  E('rect',{x:0,y:0,width:PW,height:PH,fill:'#57a747'},g);
   for(let i=0;i<7;i++){
-    if(i%2) E('rect',{x:8+i*78,y:8,width:78,height:PH-16,fill:'#67b955'},g);
+    if(i%2) E('rect',{x:8+i*78,y:8,width:78,height:PH-16,fill:'#63b453'},g);
   }
+  E('rect',{x:BOX18.x,y:BOX18.y0,width:GOAL_X-BOX18.x,height:BOX18.y1-BOX18.y0,fill:'#6cbc5b'},g);
+  E('rect',{x:8,y:8,width:PW-16,height:PH-16,fill:'url(#turfdots)'},g);
   const L={fill:'none',stroke:'#f2f9ff','stroke-width':2.6,'stroke-opacity':.92};
   E('rect',Object.assign({x:8,y:8,width:PW-16,height:PH-16},L),g);
   E('path',Object.assign({d:'M'+HALF_X+' 8V'+(PH-8),'stroke-dasharray':'8 7'},L),g);
-  halo(g,HALF_X+3,24,'halfway',{size:9,anchor:'start',opacity:.8,hw:3});
+  halo(g,HALF_X,PH/2,'halfway',{size:9,rot:-90,hw:3});
   E('rect',Object.assign({x:BOX18.x,y:BOX18.y0,width:GOAL_X-BOX18.x,height:BOX18.y1-BOX18.y0},L),g);
   E('rect',Object.assign({x:BOX6.x,y:BOX6.y0,width:GOAL_X-BOX6.x,height:BOX6.y1-BOX6.y0},L),g);
   E('circle',{cx:458,cy:180,r:2.6,fill:'#f2f9ff'},g);
   E('path',Object.assign({d:'M420 141a45 45 0 0 0 0 78'},L),g);
   E('path',Object.assign({d:'M'+GOAL_X+' 8V'+(PH-8),'stroke-width':3},L),g);
-  E('rect',{x:GOAL_X,y:GY0,width:13,height:GY1-GY0,fill:'rgba(255,255,255,.28)',stroke:'#fffaf0','stroke-width':3},g);
+  E('rect',{x:GOAL_X,y:GY0,width:13,height:GY1-GY0,fill:'rgba(255,255,255,.3)',stroke:'#fffaf0','stroke-width':3},g);
   return g;
 }
 
-/* second-last opponent x, and the ball x, at a given time */
-function defLineX(sc,t){
-  const xs=sc.actors.filter(a=>a.team==='red').map(a=>lerpTrack(a.track,t)[0]).sort((p,q)=>q-p);
-  return xs.length>1?xs[1]:xs[0];
+/* a chunky bean, drawn facing right; mirrored for the defending side */
+const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d']};
+function bean(team,dir){
+  const c=TEAMCOL[team]||TEAMCOL.red;
+  const g=E('g',{});
+  const m=E('g',{transform:'scale('+(dir||1)+',1)'},g);
+  E('rect',{x:-8,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
+  E('rect',{x:1,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
+  E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
+  E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
+    fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
+  E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
+    fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+  return g;
+}
+
+/* second-last opponent: x, and which actor it is, at a given time */
+function defLineX(sc,t){return secondLast(sc,t).x;}
+function secondLast(sc,t){
+  const rs=sc.actors.filter(a=>a.team==='red'||a.team==='gk')
+    .map(a=>({id:a.id,x:lerpTrack(a.track,t)[0]})).sort((p,q)=>q.x-p.x);
+  return rs.length>1?rs[1]:rs[0];
+}
+/* the ball's travelled path, sampled from its own keyframes so it matches exactly */
+function ballPathD(sc,t){
+  const n=48,out=[];
+  for(let i=0;i<=n;i++){
+    const v=t*i/n,p=lerpTrack(sc.ball.track,v);
+    out.push((i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1));
+  }
+  return out.join('');
 }
 
 /* ================= scenarios ================= */
@@ -609,35 +673,72 @@ function buildScene(mount,sc){
     'aria-label':sc.title+'. '+sc.brief},mount);
   drawPitch(svg);
 
+  const judged=sc.judged||'A9';
+  const slId=secondLast(sc,sc.freezeT).id;
+
+  /* the gap between the offside line and the attacker — neutral until answered */
+  const band=E('rect',{y:8,height:PH-16,opacity:0,fill:'#17181c','fill-opacity':.16},svg);
+
   const lineG=E('g',{opacity:0},svg);
-  E('line',{x1:0,x2:0,y1:8,y2:PH-8,stroke:'#ffd44d','stroke-width':3,'stroke-dasharray':'11 8'},lineG);
-  const lineLab=halo(lineG,0,PH-14,'2nd-last opponent',{size:10,hw:3.5});
+  E('line',{class:'ann',x1:0,x2:0,y1:8,y2:PH-8,stroke:'#ffd44d','stroke-width':3.4,'stroke-dasharray':'11 8'},lineG);
+  const lineLab=halo(lineG,0,52,'OFFSIDE LINE',{size:10,hw:4});
+
+  const attG=E('g',{opacity:0},svg);
+  E('line',{class:'ann',x1:0,x2:0,y1:8,y2:PH-8,stroke:'#4aa3ff','stroke-width':3,'stroke-dasharray':'6 6'},attG);
+  const attLab=halo(attG,0,PH-16,'his line',{size:10,hw:3.5});
 
   const ballLineG=E('g',{opacity:0},svg);
-  E('line',{x1:0,x2:0,y1:8,y2:PH-8,stroke:'#4aa3ff','stroke-width':3,'stroke-dasharray':'5 6'},ballLineG);
-  const ballLab=halo(ballLineG,0,24,'the ball',{size:10,hw:3.5});
+  E('line',{class:'ann',x1:0,x2:0,y1:8,y2:PH-8,stroke:'#fffaf0','stroke-width':3,'stroke-dasharray':'4 6'},ballLineG);
+  const ballLab=halo(ballLineG,0,26,'the ball',{size:10,hw:3.5});
+
+  const traj=E('path',{class:'ann',fill:'none',stroke:'#e0432a','stroke-width':3.2,'stroke-linecap':'round',
+    'marker-end':'url(#arrowBall)',opacity:0},svg);
+  const run=E('path',{class:'ann',fill:'none',stroke:'#17181c','stroke-width':2.6,'stroke-dasharray':'7 6',
+    'marker-end':'url(#arrowRun)',opacity:0},svg);
+
+  const spot={};
+  [judged,slId].forEach((id,i)=>{
+    spot[id]=E('rect',{class:'spot',x:-20,y:-24,width:40,height:52,rx:12,fill:'#ffd44d','fill-opacity':i?0:.18,
+      stroke:i?'#fffaf0':'#ffd44d','stroke-width':2.6,'stroke-dasharray':'6 5',opacity:0},svg);
+  });
 
   const els={};
   sc.actors.forEach(a=>{
     const g=E('g',{},svg);
-    const fill=a.team==='blue'?'#4aa3ff':a.team==='gk'?'#6fc25a':'#f4795b';
-    E('circle',{cx:0,cy:0,r:13,fill:fill,stroke:'#17181c','stroke-width':3},g);
-    const t=E('text',{x:0,y:4.5,'font-size':a.team==='gk'?9:12,'font-weight':900,
-      fill:'#17181c','text-anchor':'middle'},g);
-    t.textContent=a.n;
+    const dir=a.team==='blue'?1:-1;
+    g.appendChild(bean(a.team,dir));
+    let txt=String(a.n);
+    if(a.id===judged)txt='the '+a.n;
+    else if(a.id===slId)txt=(a.team==='gk'?'GK · ':'')+'2nd-last';
+    else if(a.team==='gk')txt='GK';
+    halo(g,0,34,txt,{size:10.5,hw:3.5});
     els[a.id]=g;
   });
 
   const ball=E('g',{},svg);
-  E('circle',{cx:0,cy:0,r:7,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.6},ball);
-  E('path',{d:'M0 -4.4l3.4 2.5-1.3 4.1h-4.2l-1.3-4.1z',fill:'#17181c'},ball);
+  E('circle',{cx:0,cy:0,r:7.5,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.6},ball);
+  E('path',{d:'M0 -4.6l3.6 2.6-1.4 4.3h-4.4l-1.4-4.3z',fill:'#17181c'},ball);
 
   const badge=E('g',{opacity:0},svg);
   const bRect=E('rect',{x:0,y:0,width:0,height:24,rx:12,fill:'#17181c'},badge);
-  const bText=E('text',{x:0,y:16,'font-size':11.5,'font-weight':900,fill:'#fffaf0','text-anchor':'middle'},badge);
+  const bText=E('text',{class:'badge-t',x:0,y:16,'font-size':11.5,'font-weight':900,fill:'#fffaf0','text-anchor':'middle'},badge);
 
-  return {svg,els,ball,lineG,lineLab,ballLineG,ballLab,badge,bRect,bText};
+  const h={svg,els,ball,band,lineG,lineLab,attG,attLab,ballLineG,ballLab,
+    traj,run,spot,badge,bRect,bText,judged,slId,verdict:null,view:'full'};
+  h.setView=function(mode){
+    h.view=mode;
+    svg.classList.toggle('close',mode==='close');
+    if(mode==='full'){svg.setAttribute('viewBox','0 0 '+PW+' '+PH);return;}
+    const dx=defLineX(sc,sc.freezeT),ax=lerpTrack(actorOf(sc,judged).track,sc.freezeT)[0];
+    const ay=lerpTrack(actorOf(sc,judged).track,sc.freezeT)[1];
+    const w=280,ht=180;
+    let x=Math.min(Math.max((dx+ax)/2-w/2,0),PW-w);
+    let y=Math.min(Math.max(ay-ht/2,0),PH-ht);
+    svg.setAttribute('viewBox',x+' '+y+' '+w+' '+ht);
+  };
+  return h;
 }
+function actorOf(sc,id){return sc.actors.find(a=>a.id===id);}
 
 function updateScene(h,sc,t){
   sc.actors.forEach(a=>{
@@ -649,15 +750,35 @@ function updateScene(h,sc,t){
 
   const frozen=t>=sc.freezeT-1e-6;
   const dx=defLineX(sc,sc.freezeT);
+  const ap=lerpTrack(actorOf(sc,h.judged).track,sc.freezeT);
+  const ax=ap[0];
   const bx=lerpTrack(sc.ball.track,sc.freezeT)[0];
-
-  // scenario 10: the deliberate play wipes the offside line out
   const reset=sc.resetT!=null&&t>=sc.resetT;
-  h.lineG.setAttribute('opacity',frozen?(reset?.22:1):0);
-  h.lineG.firstChild.setAttribute('x1',dx);
-  h.lineG.firstChild.setAttribute('x2',dx);
-  h.lineLab.setAttribute('x',Math.min(Math.max(dx,62),PW-62));
 
+  /* travelled ball path — hidden until the ball has actually gone somewhere */
+  const b0=lerpTrack(sc.ball.track,0);
+  const moved=Math.abs(b[0]-b0[0])+Math.abs(b[1]-b0[1]);
+  h.traj.setAttribute('opacity',moved>16?.95:0);
+  if(moved>16)h.traj.setAttribute('d',ballPathD(sc,t));
+
+  /* offside line + the attacker's line + the gap between them.
+     Rotated halo labels carry their rotation origin in the transform, so both move. */
+  h.lineG.setAttribute('opacity',frozen?(reset?.25:1):0);
+  h.lineG.firstChild.setAttribute('x1',dx);h.lineG.firstChild.setAttribute('x2',dx);
+  h.lineLab.setAttribute('x',Math.min(Math.max(dx,46),PW-46));
+
+  h.attG.setAttribute('opacity',frozen?(reset?.25:1):0);
+  h.attG.firstChild.setAttribute('x1',ax);h.attG.firstChild.setAttribute('x2',ax);
+  h.attLab.setAttribute('x',Math.min(Math.max(ax,34),PW-34));
+
+  const lo=Math.min(dx,ax),hi=Math.max(dx,ax);
+  h.band.setAttribute('x',lo);
+  h.band.setAttribute('width',Math.max(hi-lo,0));
+  h.band.setAttribute('opacity',frozen&&!reset?1:0);
+  h.band.setAttribute('fill',h.verdict==null?'#17181c':(h.verdict?'#4e9a3d':'#e0432a'));
+  h.band.setAttribute('fill-opacity',h.verdict==null?.16:.34);
+
+  /* the ball's own line matters when it is further upfield than the defence */
   const showBall=frozen&&bx>dx+8;
   h.ballLineG.setAttribute('opacity',showBall?1:0);
   if(showBall){
@@ -666,14 +787,30 @@ function updateScene(h,sc,t){
     h.ballLab.setAttribute('x',Math.min(Math.max(bx,40),PW-40));
   }
 
-  // caption-driven badge for the key moment
+  /* spotlights on the two players the decision is actually about */
+  for(const id in h.spot){
+    const p=lerpTrack(actorOf(sc,id).track,t);
+    h.spot[id].setAttribute('transform','translate('+p[0]+','+p[1]+')');
+    h.spot[id].setAttribute('opacity',frozen?1:0);
+  }
+
+  /* the run onto the ball, revealed only once the call has been made */
+  if(h.showRun&&t>sc.freezeT+.01){
+    const s=lerpTrack(actorOf(sc,h.judged).track,sc.freezeT);
+    const e=lerpTrack(actorOf(sc,h.judged).track,t);
+    if(Math.abs(e[0]-s[0])+Math.abs(e[1]-s[1])>14){
+      h.run.setAttribute('opacity',.85);
+      h.run.setAttribute('d','M'+s[0]+' '+(s[1]-26)+'L'+e[0]+' '+(e[1]-26));
+    }else h.run.setAttribute('opacity',0);
+  }else h.run.setAttribute('opacity',0);
+
   let lab=null;
   if(frozen&&t<sc.freezeT+.02) lab='⚽ BALL PLAYED';
   else if(reset) lab='🦵 DELIBERATE PLAY — offside wiped';
   if(lab){
     const w=lab.length*6.6+22;
     h.badge.setAttribute('opacity',1);
-    h.badge.setAttribute('transform','translate('+(PW/2-w/2)+',14)');
+    h.badge.setAttribute('transform','translate(16,14)');
     h.bRect.setAttribute('width',w);
     h.bText.setAttribute('x',w/2);
     h.bText.textContent=lab;
@@ -687,10 +824,14 @@ function createPlayer(sc,h,els){
 
   function apply(v){
     t=v;updateScene(h,sc,v);
-    let c='';for(const k of sc.caps){if(v>=k[0])c=k[1];}
+    let c='',n=0;
+    sc.caps.forEach((k,i)=>{if(v>=k[0]){c=k[1];n=i+1;}});
     els.caption.innerHTML=c;
-    els.scrub.max=String(Math.round(cap()*1000));
+    els.step.textContent=n+'/'+sc.caps.length;
+    const mx=cap();
+    els.scrub.max=String(Math.round(mx*1000));
     els.scrub.value=String(Math.round(v*1000));
+    els.scrub.style.setProperty('--fill',(mx?v/mx*100:0).toFixed(1)+'%');
   }
   function stop(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;
     els.play.textContent='▶ Play';els.play.setAttribute('aria-pressed','false');}
@@ -699,7 +840,7 @@ function createPlayer(sc,h,els){
     if(frame.start==null)frame.start=ts-t*DUR;
     const v=Math.min((ts-frame.start)/DUR,cap());
     apply(v);
-    if(v>=cap()){stop();els.play.textContent='▶ Replay';return;}
+    if(v>=cap()){stop();return;}
     raf=requestAnimationFrame(frame);
   }
   function play(){
@@ -715,14 +856,16 @@ function createPlayer(sc,h,els){
   return {
     play,stop,seek,
     toggle(){playing?stop():play();},
+    replay(){stop();t=(phase==='pre')?0:sc.freezeT;if(REDUCED){apply(cap());}else play();},
     freeze(){stop();apply(sc.freezeT);},
-    epilogue(){phase='epilogue';if(REDUCED){apply(1);}else{t=sc.freezeT;play();}}
+    redraw(){apply(t);},
+    epilogue(){phase='epilogue';h.showRun=true;if(REDUCED){apply(1);}else{t=sc.freezeT;play();}}
   };
 }
 
 /* ================= quiz ================= */
 const $=id=>document.getElementById(id);
-const state={i:0,correct:0,wrong:0,answers:[],player:null,stageKey:null};
+const state={i:0,correct:0,wrong:0,answers:[],player:null,scene:null,stageKey:null};
 
 function updateStatus(){
   const st=stageFor(state.correct);
@@ -741,6 +884,15 @@ function updateStatus(){
 
 function show(screen){
   ['screen-intro','screen-quiz','screen-results'].forEach(s=>$(s).hidden=(s!==screen));
+}
+
+function setView(mode){
+  if(state.scene)state.scene.setView(mode);
+  $('variants').querySelectorAll('.vbtn').forEach(b=>{
+    const on=b.dataset.view===mode;
+    b.classList.toggle('on',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+  });
 }
 
 function renderQuestion(){
@@ -764,7 +916,10 @@ function renderQuestion(){
   $('stageBar').hidden=REDUCED;
 
   const h=buildScene($('sceneMount'),sc);
-  state.player=createPlayer(sc,h,{caption:$('caption'),scrub:$('scrub'),play:$('playBtn')});
+  state.scene=h;
+  setView('full');
+  state.player=createPlayer(sc,h,
+    {caption:$('caption'),scrub:$('scrub'),play:$('playBtn'),step:$('stepN')});
   if(!REDUCED)state.player.play();
 
   updateStatus();
@@ -777,6 +932,8 @@ function answer(choice){
   state.player.freeze();
 
   const ok=choice===sc.answer;
+  /* the gap band is neutral while the call is open; now it takes the verdict's colour */
+  if(state.scene){state.scene.verdict=(sc.answer==='onside');state.player.redraw();}
   state.answers[state.i]={ok:ok,choice:choice};
   const before=stageFor(state.correct).name;
   ok?state.correct++:state.wrong++;
@@ -835,7 +992,11 @@ $('startBtn').addEventListener('click',()=>{show('screen-quiz');renderQuestion()
 $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
 $('playBtn').addEventListener('click',()=>state.player&&state.player.toggle());
+$('replayBtn').addEventListener('click',()=>state.player&&state.player.replay());
 $('scrub').addEventListener('input',e=>state.player&&state.player.seek(Number(e.target.value)/1000));
+$('variants').addEventListener('click',e=>{
+  const b=e.target.closest('.vbtn');if(b)setView(b.dataset.view);
+});
 $('nextBtn').addEventListener('click',()=>{
   if(state.i===SCENARIOS.length-1){renderResults();}
   else{state.i++;renderQuestion();}
