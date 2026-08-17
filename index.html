@@ -168,6 +168,7 @@ svg.pitch.close .spot{stroke-width:1.3}
 .legend{display:flex;flex-wrap:wrap;gap:5px 14px;padding:7px 11px;background:#f4f1e6;border-top:3px dashed #c9c4b2;font-size:11.5px;font-weight:700;color:#5c5e69;align-items:center}
 .legend span{white-space:nowrap}
 .legend .sw{display:inline-block;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);vertical-align:-2px;margin-right:5px}
+.legend .arflag{display:inline-block;width:15px;height:11px;border:2.5px solid var(--ink);vertical-align:-1px;margin-right:5px;background:linear-gradient(135deg,var(--yellow) 50%,var(--red) 50%)}
 .legend .dash{display:inline-block;width:24px;height:0;border-top:3px dashed #d9a800;vertical-align:4px;margin-right:5px}
 .legend .ball-line{display:inline-block;width:24px;height:0;border-top:3px solid #e0432a;vertical-align:4px;margin-right:5px}
 .legend .att-line{display:inline-block;width:24px;height:0;border-top:3px dashed #4aa3ff;vertical-align:4px;margin-right:5px}
@@ -474,7 +475,7 @@ footer b{color:#4a4c56}
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
           <span><i class="sw" style="background:#6fc25a"></i>Keeper</span>
-          <span><i class="sw" style="background:#ffd44d"></i>AR — stands on the offside line</span>
+          <span><i class="arflag"></i>AR’s flag — travels along the offside line</span>
           <span><i class="dash"></i>Offside line (2nd-last opponent)</span>
           <span><i class="att-line"></i>The judged attacker</span>
           <span><i class="ball-line"></i>Ball path</span>
@@ -646,8 +647,7 @@ function fitBox(sc){
 
 /* a chunky bean, drawn facing right; mirrored for the defending side */
 const BEAN_S=1.34;
-const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d'],
-  ar:['#ffd44d','#d9a800']};
+const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d']};
 function bean(team,dir,pose){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
@@ -668,10 +668,6 @@ function bean(team,dir,pose){
   E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
   E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
     fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
-  /* the officials wear pinstripes, so they read as officials at a glance */
-  if(team==='ar'){
-    [-6.5,-1.5,3.5].forEach(x=>E('rect',{x:x,y:-7.5,width:2.4,height:23,fill:'#17181c','fill-opacity':.82},m));
-  }
   E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
     fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
   return g;
@@ -1123,16 +1119,18 @@ function buildScene(mount,sc){
   E('path',{d:'M0 -9.4V-5.1M6.9 -6.9L4.85 -1.58M5.8 7.6L3 4.13M-5.8 7.6L-3 4.13M-6.9 -6.9L-4.85 -1.58',
     stroke:'#17181c','stroke-width':2,'stroke-linecap':'round'},bs);
 
-  /* The assistant referee, on the touchline. Law 11's guidelines put them in line
-     with the second-last defender — or the ball, when the ball is nearer the goal
-     line — so the AR literally walks the offside line. */
+  /* The assistant referee is drawn as their flag alone. A whole figure on the
+     touchline crowded the diagram without adding anything the flag doesn't say,
+     and the flag is what actually carries the information: where the AR is
+     standing, and whether it is up. Law 11's guidelines put them in line with the
+     second-last defender — or the ball, when the ball is nearer the goal line —
+     so the flag literally travels along the offside line. */
   const arG=E('g',{},svg);
-  const arBean=bean('ar',-1);
-  arBean.setAttribute('transform','scale('+(BEAN_S*0.86)+')');
-  arG.appendChild(arBean);
-  const arFlag=E('g',{},arG);
-  E('path',{d:'M0 4V-26',stroke:'#17181c','stroke-width':2.6,'stroke-linecap':'round'},arFlag);
-  E('path',{d:'M0 -26l15 6-15 6z',fill:'#ffd44d',stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},arFlag);
+  const arFlag=E('g',{class:'arflag'},arG);   /* transform set per frame: rotation + scale */
+  E('path',{d:'M0 13V-27',stroke:'#17181c','stroke-width':3.4,'stroke-linecap':'round'},arFlag);
+  E('rect',{x:1.5,y:-27,width:17,height:13,fill:'#ffd44d',stroke:'#17181c','stroke-width':2.6,'stroke-linejoin':'round'},arFlag);
+  E('path',{d:'M10 -27h8.5v6.5H10zM1.5 -20.5H10V-14H1.5z',fill:'#f4795b'},arFlag);
+  E('rect',{x:1.5,y:-27,width:17,height:13,fill:'none',stroke:'#17181c','stroke-width':2.6,'stroke-linejoin':'round'},arFlag);
 
   /* Plane labels ride in a top layer so the figures never cover them. In portrait
      the frame is cropped tight, so they anchor to an edge rather than centring —
@@ -1237,7 +1235,7 @@ function updateScene(h,sc,t){
   /* the flag stays down while the call is still open — raising it would answer
      the question. It only goes up in the epilogue, and only when it should. */
   const flagUp=h.revealed&&sc.answer==='offside'&&t>sc.freezeT+.01;
-  h.arFlag.setAttribute('transform','rotate('+(flagUp?0:118)+')');
+  h.arFlag.setAttribute('transform','rotate('+(flagUp?0:132)+') scale('+BEAN_S+')');
 
   /* spotlights on the two players the decision is actually about */
   for(const id in h.spot){
