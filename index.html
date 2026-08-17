@@ -120,7 +120,7 @@ svg.pitch.close .spot{stroke-width:1.3}
 .vbtn{border:3px solid var(--ink);border-radius:999px;background:#fff;font-family:var(--font);font-weight:800;font-size:12.5px;padding:6px 13px;box-shadow:0 3px 0 var(--ink);cursor:pointer;color:var(--ink)}
 .vbtn:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
 .vbtn.on{background:var(--blue);color:#fff}
-.stage-bar{display:flex;align-items:center;gap:9px;background:var(--ink);padding:9px 12px}
+.stage-bar{display:flex;align-items:center;gap:9px;background:var(--ink);padding:8px 12px 2px}
 .stage-bar .btn{font-size:13px;padding:7px 15px;box-shadow:none;border-width:2.5px;white-space:nowrap}
 .stage-bar .btn:hover{transform:none}
 .stage-bar .btn.ghost{color:var(--blue)}
@@ -149,14 +149,27 @@ body.fs #stage{position:fixed;inset:0;z-index:60;margin:0;border:0;border-radius
 body.fs #sceneMount{flex:1;min-height:0;background:#57a747}
 body.fs #sceneMount svg.pitch{width:100%;height:100%}
 body.fs .legend{display:none}
-body.fs #answers{position:fixed;left:0;right:0;bottom:0;z-index:61;margin:0;
-  padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:10px;
-  background:rgba(23,24,28,.93);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-body.fs #answers .btn{padding:13px 10px;font-size:16px}
+body.fs #answers{padding:10px 12px calc(11px + env(safe-area-inset-bottom))}
+body.fs #answers .btn{padding:15px 10px;font-size:17px}
 
-/* ---------- answers ---------- */
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 0}
-.answers .btn{font-size:17px;padding:16px 10px;width:100%}
+/* ---------- answers ----------
+   These live inside the stage, directly under the transport, so the call can be
+   made without scrolling past the caption and legend to find them. */
+.answers{display:grid;grid-template-columns:auto 1fr 1fr;gap:9px;padding:0 11px 11px;background:var(--ink)}
+.answers #playBtn{font-size:13.5px;padding:13px 14px;color:var(--blue);white-space:nowrap}
+.answers:has(#playBtn[hidden]){grid-template-columns:1fr 1fr}
+.answers .btn{font-size:16px;padding:13px 8px;width:100%;box-shadow:none}
+.answers .btn:hover{transform:none}
+/* While the call is still open it is pinned to the bottom of the screen, so it is
+   reachable however tall the diagram is — the diagram is the point and should not
+   have to shrink for it. Constrained to the card's width so it reads as part of
+   the card rather than a banner. Once answered it drops back into flow, where it
+   cannot cover the explanation. */
+body.answering #answers{position:fixed;left:0;right:0;bottom:0;z-index:45;
+  max-width:940px;margin:0 auto;border-radius:14px 14px 0 0;
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom));
+  box-shadow:0 -4px 0 rgba(23,24,28,.28)}
+body.answering .wrap{padding-bottom:104px}
 .answers .btn.off{background:var(--red)}
 .answers .btn.on{background:var(--green)}
 .answers .btn.picked{outline:4px solid var(--ink);outline-offset:3px}
@@ -197,18 +210,30 @@ footer{text-align:center;color:var(--grey);font-size:13px;font-weight:600;margin
 footer b{color:#4a4c56}
 
 @media (max-width:560px){
-  .answers{grid-template-columns:1fr}
-  .statusbar .inner{gap:8px;padding:7px 12px}
-  .dots li{width:11px;height:11px}
-  /* the pitch is only ~310px wide here, so scale the annotation up to stay
-     readable and give the scrubber its own row instead of a sliver */
-  .stage-bar{flex-wrap:wrap}
-  .scrub{flex:1 0 100%;order:3}
+  /* Every row above the answers is squeezed so the call is reachable without
+     scrolling. The pitch itself is deliberately left alone — it is the point. */
+  .statusbar .inner{gap:7px;padding:5px 11px}
+  .statusbar .av{width:36px;height:36px;border-radius:11px}
+  .rankwrap .lab{display:none}
+  .rankwrap .name{font-size:13px}
+  .dots{gap:3px}
+  .dots li{width:9px;height:9px;border-width:2px}
+  .chip.sm{font-size:10.5px;padding:2px 7px}
+  .variants{padding:6px 9px;gap:6px}
+  .vbtn{font-size:11.5px;padding:5px 10px}
+  .stage-bar{padding:7px 10px 2px}
+  .answers #playBtn{font-size:12px;padding:11px 9px}
+  .answers{padding:0 9px 9px;gap:8px}
+  .answers .btn{font-size:15px;padding:11px 6px}
+  body.answering #answers{padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+    border-radius:0}
+  body.answering .wrap{padding-bottom:96px}
+  .caption{font-size:12.5px;padding:7px 10px;min-height:0}
   .legend{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:0 13px}
   .legend::-webkit-scrollbar{display:none}
-  .brief{font-size:14px;margin-bottom:10px}
-  .q-title{margin-bottom:4px}
-  .card{padding:15px 13px}
+  .brief{font-size:13.5px;margin-bottom:9px}
+  .q-title{margin:0 0 3px}
+  .card{padding:12px}
   svg.pitch.close text:not(.badge-t){font-size:7px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -355,9 +380,12 @@ footer b{color:#4a4c56}
         </div>
         <div id="sceneMount"></div>
         <div class="stage-bar" id="stageBar">
-          <button class="btn" id="playBtn" type="button" aria-pressed="false">▶ Play</button>
-          <button class="btn ghost" id="replayBtn" type="button">↻ Replay</button>
           <input class="scrub" id="scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="Scrub through the passage of play">
+        </div>
+        <div class="answers" id="answers">
+          <button class="btn ghost" id="playBtn" type="button" aria-pressed="false">↻ Replay</button>
+          <button class="btn off" id="btnOffside" type="button">🚩 OFFSIDE</button>
+          <button class="btn on" id="btnOnside" type="button">✅ ONSIDE</button>
         </div>
         <div class="motion-note" id="motionNote" hidden>Motion reduced — showing the frozen moment the ball is played.</div>
         <div class="caption" aria-hidden="true"><span class="step-n" id="stepN">1/1</span><span id="caption"></span></div>
@@ -370,11 +398,6 @@ footer b{color:#4a4c56}
           <span><i class="att-line"></i>The judged attacker</span>
           <span><i class="ball-line"></i>Ball path</span>
         </div>
-      </div>
-
-      <div class="answers" id="answers">
-        <button class="btn off" id="btnOffside" type="button">🚩 OFFSIDE</button>
-        <button class="btn on" id="btnOnside" type="button">✅ ONSIDE</button>
       </div>
 
       <div id="feedbackMount" aria-live="polite" aria-atomic="true"></div>
@@ -1010,8 +1033,14 @@ function createPlayer(sc,h,els){
     els.scrub.value=String(Math.round(v*1000));
     els.scrub.style.setProperty('--fill',(mx?v/mx*100:0).toFixed(1)+'%');
   }
-  function stop(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;
-    els.play.textContent='▶ Play';els.play.setAttribute('aria-pressed','false');}
+  /* One control covers all three states: it pauses while running, resumes if you
+     stopped it midway, and replays from the top once the passage has finished. */
+  function setBtn(){
+    els.play.textContent=playing?'‖ Pause':(t>=cap()-1e-6?'↻ Replay':'▶ Play');
+    els.play.setAttribute('aria-pressed',playing?'true':'false');
+  }
+  function halt(){playing=false;if(raf)cancelAnimationFrame(raf);raf=null;}
+  function stop(){halt();setBtn();}
   function frame(ts){
     if(!playing)return;
     if(frame.start==null)frame.start=ts-t*DUR;
@@ -1021,21 +1050,21 @@ function createPlayer(sc,h,els){
     raf=requestAnimationFrame(frame);
   }
   function play(){
-    if(REDUCED){apply(cap());return;}
-    if(t>=cap())t=(phase==='pre')?0:sc.freezeT;
+    if(REDUCED){apply(cap());setBtn();return;}
+    if(t>=cap()-1e-6)t=(phase==='pre')?0:sc.freezeT;
     playing=true;frame.start=null;
-    els.play.textContent='‖ Pause';els.play.setAttribute('aria-pressed','true');
+    setBtn();
     raf=requestAnimationFrame(frame);
   }
-  function seek(v){stop();apply(Math.min(Math.max(v,0),cap()));}
+  function seek(v){halt();apply(Math.min(Math.max(v,0),cap()));setBtn();}
 
   apply(REDUCED?sc.freezeT:0);
+  setBtn();
   return {
     play,stop,seek,
     time(){return t;},
     unlockPhase(){phase='epilogue';},
     toggle(){playing?stop():play();},
-    replay(){stop();t=(phase==='pre')?0:sc.freezeT;if(REDUCED){apply(cap());}else play();},
     freeze(){stop();apply(sc.freezeT);},
     redraw(){apply(t);},
     epilogue(){phase='epilogue';h.showRun=true;if(REDUCED){apply(1);}else{t=sc.freezeT;play();}}
@@ -1115,7 +1144,9 @@ function renderQuestion(){
 
   $('motionNote').hidden=!REDUCED;
   $('stageBar').hidden=REDUCED;
+  $('playBtn').hidden=REDUCED;
 
+  document.body.classList.add('answering');
   ORIENT=pickOrient();
   buildCurrentScene();
   if(!REDUCED)state.player.play();
@@ -1146,6 +1177,7 @@ function answer(choice){
   if($('btnOffside').disabled)return;
   /* the explanation lives outside the overlay, so drop out of full screen to read it */
   if(state.fs)setFs(false);
+  document.body.classList.remove('answering');
   state.player.freeze();
 
   const ok=choice===sc.answer;
@@ -1182,6 +1214,7 @@ function answer(choice){
 }
 
 function renderResults(){
+  document.body.classList.remove('answering');
   show('screen-results');
   const st=stageFor(state.correct);
   renderAvatar($('resultAv'),st);
@@ -1209,7 +1242,6 @@ $('startBtn').addEventListener('click',()=>{show('screen-quiz');renderQuestion()
 $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
 $('playBtn').addEventListener('click',()=>state.player&&state.player.toggle());
-$('replayBtn').addEventListener('click',()=>state.player&&state.player.replay());
 $('scrub').addEventListener('input',e=>state.player&&state.player.seek(Number(e.target.value)/1000));
 $('variants').addEventListener('click',e=>{
   const b=e.target.closest('.vbtn[data-view]');if(b)setView(b.dataset.view);
