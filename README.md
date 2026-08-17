@@ -1,6 +1,7 @@
 # is-it-offsides
 
-**Is It Offside?** — a thirteen-scenario soccer offside quiz. Each scenario animates a passage
+**Is It Offside?** — a graphical walkthrough of the whole offside law, plus a
+thirteen-scenario quiz. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
@@ -25,6 +26,19 @@ A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
 ranked categories.
+
+## The tutorial
+
+The landing page walks through **all 17 rules of Law 11**, in the four parts the law
+itself uses — where you are, why being there is legal, what happens when the ball comes
+off an opponent, and timing/exceptions/restart. Every rule gets its own diagram, resting
+on the decisive frame with the offside line and the verdict already drawn, and every rule
+quotes what the book actually says. There is a contents grid to jump around, and the quiz
+is one button away at any point, before or after reading.
+
+Most tutorial diagrams are derived from a quiz scenario's geometry by id rather than drawn
+again, so the pictures cannot drift from the scenarios they teach; only four situations
+needed drawing from scratch (own half, arms, players off the field, and the restart).
 
 ## Running it locally
 
