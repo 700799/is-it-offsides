@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
-<title>Is It Offside? — Ten Calls, Two Buttons</title>
-<meta name="description" content="Ten offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
+<title>Is It Offside? — Eleven Calls, Two Buttons</title>
+<meta name="description" content="Eleven offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -93,6 +93,18 @@ svg text{font-family:var(--font)}
 .hero h1 em{font-style:normal;color:var(--blue);-webkit-text-stroke:2px var(--ink)}
 .lead{max-width:660px;margin:14px auto 18px;color:#3d3f49;font-size:clamp(15px,2.5vw,18px);font-weight:600}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+
+/* ---------- key points list (reference's card body style) ---------- */
+.keys{display:grid;gap:10px;list-style:none;margin:14px 2px 4px}
+.keys li{display:flex;gap:10px;align-items:flex-start;color:#3d3f49;font-size:14.5px;font-weight:600}
+.keys b{color:var(--ink)}
+.dot{display:inline-block;flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:3px solid var(--ink);background:var(--green);margin-top:2px}
+.dot.r{background:var(--red)}
+.dot.y{background:var(--yellow)}
+.dot.b{background:var(--blue)}
+.dot.p{background:var(--purple)}
+.tip{margin-top:16px;border:3px dashed var(--ink);border-radius:14px;background:#fff8e0;padding:11px 14px;font-size:14px;color:#3d3f49;font-weight:600}
+.tip::before{content:"🧢 Coach tip — ";font-weight:900;color:var(--green-dk)}
 
 /* ---------- quiz card ---------- */
 .q-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
@@ -310,13 +322,13 @@ footer b{color:#4a4c56}
         <svg viewBox="-45 -58 90 100"><use href="#char-body"/><use href="#gear-jersey-plain"/><use href="#gear-shorts"/><use href="#gear-cleats"/><use href="#gear-headband"/></svg>
         <svg viewBox="-45 -58 90 100"><use href="#char-body"/><use href="#gear-jersey-soccer"/><use href="#gear-shorts"/><use href="#gear-socks"/><use href="#gear-boots-gold"/><use href="#gear-armband"/><use href="#hand-ball-soccer"/><use href="#gear-headband"/></svg>
       </div>
-      <div class="kicker">Ten calls · Two buttons · One very confused American</div>
+      <div class="kicker">Eleven calls · Two buttons · One very confused American</div>
       <h1>Is It <em>Offside</em>?</h1>
-      <p class="lead">You've been handed a flag. Ten scenarios, easy to genuinely brutal. Watch each one freeze at <b>the moment the ball is played</b>, make the call, and find out exactly what Law 11 has to say about it.</p>
+      <p class="lead">You've been handed a flag. Eleven scenarios, easy to genuinely brutal. Watch each one freeze at <b>the moment the ball is played</b>, make the call, and find out exactly what Law 11 has to say about it.</p>
       <div class="badge-row">
-        <span class="chip b">10 scenarios</span>
+        <span class="chip b">11 scenarios</span>
         <span class="chip y">Easy → Very hard</span>
-        <span class="chip g">Real Law 11</span>
+        <span class="chip g">Laws of the Game 2026/27</span>
         <span class="chip">No offside trap, promise</span>
       </div>
     </header>
@@ -330,6 +342,19 @@ footer b{color:#4a4c56}
         <span class="chip sm">🏈 Starts as: Gridiron Rookie</span>
         <span class="chip sm y">🏆 Ends as: Offside Whisperer (maybe)</span>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">Watch the yellow one</div>
+      <h2 class="q-title">Meet the assistant referee</h2>
+      <p class="brief">There is a fourth colour on every pitch in this quiz: a yellow figure jogging the touchline with a flag. That is the <b>assistant referee</b>, and where they stand is not a matter of taste.</p>
+      <ul class="keys">
+        <li><i class="dot y"></i><span><b>They stand on the offside line.</b> The guidelines put the AR level with the <b>second-last defender</b> — or level with <b>the ball</b>, once the ball is nearer the goal line than the defence. Watch them slide up and down as the defence pushes out. In scenario 5 you will see them abandon the defenders and follow the ball instead. That is why: the offside line is whichever of the two is further forward.</span></li>
+        <li><i class="dot b"></i><span><b>Square-on, not from behind.</b> Standing level means judging the line at ninety degrees. From any other angle, a flat back four looks staggered — which is exactly why the view from your sofa disagrees with the flag.</span></li>
+        <li><i class="dot r"></i><span><b>The flag is sometimes late on purpose.</b> On a tight call with a likely goalscoring chance, the AR uses the <b>wait-and-see technique</b>: flag stays down, the move plays out, and only then does it go up. A wrong flag kills a legitimate attack forever; a late flag costs nothing. Clear offsides are still flagged immediately. Scenario 11 is built on this.</span></li>
+        <li><i class="dot p"></i><span><b>And now there is help.</b> Under the <b>2026/27 Laws</b>, competitions are permitted to use technology — including <b>semi-automated offside technology</b> — to help the referee make or change an offside decision. It changes who draws the line, not where the line is. Every answer in this quiz is the same with or without it.</span></li>
+      </ul>
+      <p class="tip">In this quiz the flag always stays down while the call is yours. It only goes up once you have answered — no spoilers.</p>
       <div style="margin-top:20px;text-align:center">
         <button class="btn big" id="startBtn">▶ Start the quiz</button>
       </div>
@@ -360,6 +385,7 @@ footer b{color:#4a4c56}
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
           <span><i class="sw" style="background:#6fc25a"></i>Keeper</span>
+          <span><i class="sw" style="background:#ffd44d"></i>AR — stands on the offside line</span>
           <span><i class="dash"></i>Offside line (2nd-last opponent)</span>
           <span><i class="ball-line"></i>Ball path</span>
         </div>
@@ -392,9 +418,10 @@ footer b{color:#4a4c56}
   </section>
 
   <footer>
-    <p><b>Built for the flag arm.</b> Scenarios follow the IFAB Laws of the Game, Law 11 — Offside.
-    Original cartoon characters, no licensed marks, no real clubs or players.<br>
-    Real matches have assistant referees, semi-automated tracking and a lot more arguing.</p>
+    <p><b>Built for the flag arm.</b> Scenarios follow the <b>IFAB Laws of the Game 2026/27</b>, Law 11 — Offside,
+    together with the Practical Guidelines for Match Officials. Original cartoon characters, no licensed marks,
+    no real clubs or players.<br>
+    Real matches have three officials, semi-automated offside technology and a great deal more arguing.</p>
   </footer>
 </div>
 
@@ -454,7 +481,8 @@ function drawPitch(svg){
 }
 
 /* a chunky bean, drawn facing right; mirrored for the defending side */
-const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d']};
+const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d'],
+  ar:['#ffd44d','#d9a800']};
 function bean(team,dir){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
@@ -638,6 +666,21 @@ const SCENARIOS=[
   ball:{track:[[0,240,180],[.4,290,176],[.62,452,168],[.82,470,206],[1,536,192]]},
   caps:[[0,'A hopeful ball forward…'],[.4,'⚽ BALL PLAYED — and yes, the 9 is in an offside position here.'],[.64,'🦵 But the 4 steps across and heads it deliberately. Slate wiped.'],[.86,'It drops to the 9. He finishes.']],
   why:['Start where you must: at the pass, the 9 <b>was</b> in an offside position. So far, identical to the last one.','But then an opponent <b>deliberately played</b> the ball. Law 11 defines that as a player having control of the ball with the possibility of passing it to a teammate, gaining possession of it, or clearing it — and an inaccurate or unsuccessful clearance still counts as deliberate play.','A deliberate play by an opponent <b>starts a new phase</b> and cancels the earlier offside position. Only a deliberate <b>save</b> is excluded — and a controlled header back is not a save. Goal stands. Play on.']
+},
+{
+  id:11,diff:'Very hard',title:'The Flag That Never Came',
+  brief:'A ball over the top, and it is desperately tight — a shoulder in it. The assistant referee’s flag stays down. The 9 races clear, rounds the keeper and rolls it in. Only then does the flag go up.',
+  answer:'offside',freezeT:.42,
+  law:['Law 11.1 — Offside position','Guidelines — the AR’s delayed flag'],
+  actors:[
+    {id:'P8',team:'blue',n:8,track:[[0,200,190],[.42,250,186],[1,264,186]]},
+    {id:'A9',team:'blue',n:9,track:[[0,352,150],[.42,368,150],[.72,452,158],[1,506,176]]},
+    {id:'D4',team:'red',n:4,track:[[0,356,112],[.42,360,112],[1,380,118]]},
+    {id:'D5',team:'red',n:5,track:[[0,352,250],[.42,358,250],[1,378,246]]},
+    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[.7,516,180],[.84,498,170],[1,494,188]]}],
+  ball:{track:[[0,200,190],[.42,250,186],[.62,400,154],[.78,454,158],[.9,494,174],[1,536,188]]},
+  caps:[[0,'A ball is clipped over the top…'],[.42,'⚽ BALL PLAYED — and it is desperately close. Shoulder for shoulder.'],[.62,'The flag stays DOWN. The AR has seen it, and is waiting.'],[.86,'He rounds the keeper and rolls it in…'],[.95,'🚩 …and only NOW does the flag go up.']],
+  why:['At the moment the pass was played, the 9 had a shoulder beyond the second-last opponent. That is an offside position — and he went on to play the ball, so the offence was complete the instant the pass left his teammate’s boot.','So why did the flag stay down? Because the guidelines tell the assistant referee to do exactly that. On a tight call where an immediate goalscoring opportunity is likely, the AR uses the <b>wait-and-see technique</b>: keep the flag down, let the passage of play finish, then signal. It means a mistaken flag can never kill a legitimate attack — and if the attacking team scores, the AR <i>must</i> raise the flag.','A late flag is not a changed mind. The goal is disallowed and the restart is an indirect free kick to the defending side. Clear-cut offsides are still flagged immediately; the delay is only for the tight ones.','Notice where the AR has been standing all along: level with the second-last defender, or with the ball when the ball is nearer the goal line. That is their required position — the AR walks the offside line so they can judge it square-on.']
 }
 ];
 
@@ -648,7 +691,7 @@ const STAGES=[
  {min:3,max:4,  name:'Pads Down',         blurb:'Starting to see the line.',                gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
  {min:5,max:6,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',           gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
  {min:7,max:8,  name:'Proper Baller',     blurb:'Reads the game. Mostly.',                  gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
- {min:9,max:10, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
+ {min:9,max:11, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
 ];
 const stageFor=n=>STAGES.find(s=>n>=s.min&&n<=s.max)||STAGES[STAGES.length-1];
 function renderAvatar(el,stage){
@@ -661,8 +704,8 @@ function renderAvatar(el,stage){
 const CATEGORIES=[
  {min:0,max:3, name:'🏈 Gridiron Lifer',            css:'',  blurb:'You brought a helmet to a football match and the flag never came down. In your defence, the offside law has confused entire nations for a century.'},
  {min:4,max:6, name:'🤔 Offside-Curious',           css:'',  blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
- {min:7,max:8, name:'🚩 Assistant Referee (Prov.)', css:'',  blurb:'Steady flag arm. You understand that it is judged at the moment the ball is played, which already puts you ahead of most of the stadium.'},
- {min:9,max:10,name:'🛰️ Semi-Automated Overlord',   css:'',  blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
+ {min:7,max:9, name:'🚩 Assistant Referee (Prov.)', css:'',  blurb:'Steady flag arm. You understand that it is judged at the moment the ball is played, which already puts you ahead of most of the stadium.'},
+ {min:10,max:11,name:'🛰️ Semi-Automated Overlord',   css:'',  blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
 ];
 const catFor=n=>CATEGORIES.find(c=>n>=c.min&&n<=c.max);
 
@@ -689,7 +732,7 @@ function buildScene(mount,sc){
 
   const ballLineG=E('g',{opacity:0},svg);
   E('line',{class:'ann',x1:0,x2:0,y1:8,y2:PH-8,stroke:'#fffaf0','stroke-width':3,'stroke-dasharray':'4 6'},ballLineG);
-  const ballLab=halo(ballLineG,0,26,'the ball',{size:10,hw:3.5});
+  const ballLab=halo(ballLineG,0,PH-42,'the ball',{size:10,hw:3.5});
 
   const traj=E('path',{class:'ann',fill:'none',stroke:'#e0432a','stroke-width':3.2,'stroke-linecap':'round',
     'marker-end':'url(#arrowBall)',opacity:0},svg);
@@ -719,12 +762,23 @@ function buildScene(mount,sc){
   E('circle',{cx:0,cy:0,r:7.5,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.6},ball);
   E('path',{d:'M0 -4.6l3.6 2.6-1.4 4.3h-4.4l-1.4-4.3z',fill:'#17181c'},ball);
 
+  /* The assistant referee, on the touchline. Law 11's guidelines put them in line
+     with the second-last defender — or the ball, when the ball is nearer the goal
+     line — so the AR literally walks the offside line. */
+  const arG=E('g',{},svg);
+  const arBean=bean('ar',-1);
+  arBean.setAttribute('transform','scale(.82)');
+  arG.appendChild(arBean);
+  const arFlag=E('g',{},arG);
+  E('path',{d:'M0 4V-26',stroke:'#17181c','stroke-width':2.6,'stroke-linecap':'round'},arFlag);
+  E('path',{d:'M0 -26l15 6-15 6z',fill:'#ffd44d',stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},arFlag);
+
   const badge=E('g',{opacity:0},svg);
   const bRect=E('rect',{x:0,y:0,width:0,height:24,rx:12,fill:'#17181c'},badge);
   const bText=E('text',{class:'badge-t',x:0,y:16,'font-size':11.5,'font-weight':900,fill:'#fffaf0','text-anchor':'middle'},badge);
 
   const h={svg,els,ball,band,lineG,lineLab,attG,attLab,ballLineG,ballLab,
-    traj,run,spot,badge,bRect,bText,judged,slId,verdict:null,view:'full'};
+    traj,run,spot,badge,bRect,bText,arG,arFlag,judged,slId,verdict:null,view:'full'};
   h.setView=function(mode){
     h.view=mode;
     svg.classList.toggle('close',mode==='close');
@@ -786,6 +840,15 @@ function updateScene(h,sc,t){
     h.ballLineG.firstChild.setAttribute('x2',bx);
     h.ballLab.setAttribute('x',Math.min(Math.max(bx,40),PW-40));
   }
+
+  /* the AR holds the line live: level with the second-last defender, or with the
+     ball once the ball is nearer the goal line than the defence */
+  const arX=Math.min(Math.max(Math.max(defLineX(sc,t),b[0]),26),PW-26);
+  h.arG.setAttribute('transform','translate('+arX+',26)');
+  /* the flag stays down while the call is still open — raising it would answer
+     the question. It only goes up in the epilogue, and only when it should. */
+  const flagUp=h.showRun&&sc.answer==='offside'&&t>sc.freezeT+.01;
+  h.arFlag.setAttribute('transform','rotate('+(flagUp?0:118)+')');
 
   /* spotlights on the two players the decision is actually about */
   for(const id in h.spot){
@@ -900,7 +963,7 @@ function renderQuestion(){
   if(state.player)state.player.stop();
 
   $('qHead').innerHTML=
-    '<span class="chip sm b">Scenario '+(state.i+1)+' of 10</span>'+
+    '<span class="chip sm b">Scenario '+(state.i+1)+' of '+SCENARIOS.length+'</span>'+
     '<span class="chip sm '+(sc.diff==='Easy'?'g':sc.diff==='Medium'?'y':sc.diff==='Hard'?'r':'p')+'">'+sc.diff+'</span>';
   $('qTitle').textContent=sc.title;
   $('qBrief').textContent=sc.brief;
@@ -968,10 +1031,10 @@ function renderResults(){
   show('screen-results');
   const st=stageFor(state.correct);
   renderAvatar($('resultAv'),st);
-  $('resultScore').innerHTML=state.correct+'<span>/10</span>';
+  $('resultScore').innerHTML=state.correct+'<span>/'+SCENARIOS.length+'</span>';
   const c=catFor(state.correct);
   $('resultCat').textContent=c.name;
-  $('resultCat').style.background=state.correct>=9?'#6fc25a':state.correct>=7?'#ffd44d':state.correct>=4?'#bfe3ff':'#f4795b';
+  $('resultCat').style.background=state.correct>=10?'#6fc25a':state.correct>=7?'#ffd44d':state.correct>=4?'#bfe3ff':'#f4795b';
   $('resultBlurb').textContent=c.blurb;
 
   const ul=$('resultReview');ul.innerHTML='';
