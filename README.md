@@ -29,12 +29,21 @@ ranked categories.
 
 ## The tutorial
 
-The landing page walks through **all 17 rules of Law 11**, in the four parts the law
-itself uses — where you are, why being there is legal, what happens when the ball comes
-off an opponent, and timing/exceptions/restart. Every rule gets its own diagram, resting
-on the decisive frame with the offside line and the verdict already drawn, and every rule
-quotes what the book actually says. There is a contents grid to jump around, and the quiz
-is one button away at any point, before or after reading.
+The landing page covers the offside law in **seven chapters**, holding **17 diagrams**
+between them:
+
+1. Where you have to be — the two position tests, and who defines the line
+2. The margins — level is onside, arms do not count
+3. Being there is not the offence
+4. The three ways to get involved — plays it, blocks an opponent, gains an advantage
+5. The instant it is judged
+6. When it comes off an opponent — deliberate play, a save, a deflection
+7. Exceptions and the restart
+
+Each chapter carries one diagram per point, selectable inside the card, each resting on
+the decisive frame with the offside line and the verdict already drawn, plus a quote of
+what the book actually says. There is a contents list to jump around, and the quiz is one
+button away at any point, before or after reading.
 
 Most tutorial diagrams are derived from a quiz scenario's geometry by id rather than drawn
 again, so the pictures cannot drift from the scenarios they teach; only four situations
