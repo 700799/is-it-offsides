@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
-<title>Is It Offside? — Thirteen Calls, Two Buttons</title>
-<meta name="description" content="Thirteen offside scenarios, easy to brutal. Call each one Offside or Onside, watch the moment the ball is played, and find out exactly what Law 11 says. You start as an American football player. Get calls right and you might end up an actual footballer.">
+<title>Is It Offside? — The Offside Challenge</title>
+<meta name="description" content="Review the rules for offside, then take the Offside Challenge: thirteen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -89,8 +89,35 @@ svg text{font-family:var(--font)}
 .lead{max-width:660px;margin:14px auto 18px;color:#3d3f49;font-size:clamp(15px,2.5vw,18px);font-weight:600}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
+/* ---------- landing menu ---------- */
+.kicker{font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px}
+.statline{max-width:620px;margin:2px auto 0;font-size:clamp(14px,2.3vw,16.5px);font-weight:700;color:#3d3f49}
+.statline b{font-size:1.55em;letter-spacing:-1px;color:var(--ink);-webkit-text-stroke:0}
+.quotebox{position:relative;background:var(--cream-2);border:4px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 18px 14px;margin:22px auto 0;max-width:620px;transform:rotate(-.7deg)}
+.quotebox .q{font-size:clamp(16px,3.1vw,21px);font-weight:900;line-height:1.32;letter-spacing:-.4px}
+.quotebox .q em{font-style:italic;background:linear-gradient(transparent 56%,var(--yellow) 56%)}
+.quotebox .beat{font-size:13px;font-weight:700;color:var(--grey);margin:7px 0}
+.quotebox .q + .q{margin-top:0}
+.quotebox .by{font-size:12px;font-weight:700;color:var(--grey);margin-top:11px;line-height:1.45}
+.menurow{display:grid;gap:14px;margin:24px 0 0;grid-template-columns:1fr 1fr}
+@media (max-width:640px){.menurow{grid-template-columns:1fr}}
+.opt{display:block;text-align:left;background:#fff;border:4px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 17px;cursor:pointer;font-family:var(--font);color:var(--ink);
+  transition:transform .07s}
+.opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
+.opt .oi{font-size:28px;line-height:1;display:block;margin-bottom:8px}
+.opt .ot{display:block;font-size:clamp(17px,3.2vw,21px);font-weight:900;letter-spacing:-.5px;line-height:1.15}
+.opt .od{display:block;font-size:13px;font-weight:700;color:#5c5e69;margin-top:6px;line-height:1.4}
+.opt.learn{background:var(--sky)}
+.opt.quiz{background:var(--yellow)}
+.foot-note{max-width:620px;margin:18px auto 34px;font-size:11.5px;font-weight:700;color:var(--grey);line-height:1.5;text-align:center}
+body.menu .statusbar{display:none}
+.chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
+
 /* ---------- the law walkthrough ---------- */
-.learntop{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.learntop{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.learntop .btn{font-size:15px;padding:11px 20px}
 .toc{background:var(--cream-2);border:4px solid var(--ink);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:14px;margin:0 0 22px}
 .toc h3{font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;
@@ -104,7 +131,10 @@ svg text{font-family:var(--font)}
 .toc button.on{background:var(--yellow)}
 .toc button b{flex:0 0 auto;font-weight:900;color:var(--grey)}
 .rtabs{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 10px}
-.rpoint{margin:12px 2px 0;font-size:14.5px;font-weight:600;color:#3d3f49;line-height:1.55}
+.rpoint{margin:12px 2px 0;font-size:15.5px;font-weight:700;color:#2c2e38;line-height:1.5}
+.morerow{margin:13px 0 0;display:flex;justify-content:center}
+.hero h1.small{font-size:clamp(26px,5.6vw,40px)}
+.hero:has(h1.small){padding:18px 4px 10px}
 .rpoint .vchip{margin-right:6px;vertical-align:1px}
 .toc button span{display:flex;flex-direction:column;gap:2px}
 .toc button i{font-style:normal;font-size:11.5px;font-weight:700;color:var(--grey)}
@@ -132,7 +162,7 @@ body.learning .step-n{display:none}
 .tip{margin-top:16px;border:3px dashed var(--ink);border-radius:14px;background:#fff8e0;padding:11px 14px;font-size:14px;color:#3d3f49;font-weight:600}
 .tip::before{content:"🧢 Coach tip — ";font-weight:900;color:var(--green-dk)}
 
-/* ---------- quiz card ---------- */
+/* ---------- challenge card ---------- */
 .q-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 .q-title{font-size:clamp(21px,4vw,30px);letter-spacing:-.6px;line-height:1.12;margin:2px 0 6px}
 .brief{color:#4a4c56;font-weight:600;margin:0 2px 14px;font-size:15px}
@@ -168,6 +198,7 @@ svg.pitch.close .spot{stroke-width:1.3}
 .legend{display:flex;flex-wrap:wrap;gap:5px 14px;padding:7px 11px;background:#f4f1e6;border-top:3px dashed #c9c4b2;font-size:11.5px;font-weight:700;color:#5c5e69;align-items:center}
 .legend span{white-space:nowrap}
 .legend .sw{display:inline-block;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);vertical-align:-2px;margin-right:5px}
+.legend .glove{display:inline-block;width:13px;height:13px;border-radius:4px 6px 6px 4px;border:2.5px solid var(--ink);background:var(--cream-2);vertical-align:-2px;margin-right:5px}
 .legend .arflag{display:inline-block;width:15px;height:11px;border:2.5px solid var(--ink);vertical-align:-1px;margin-right:5px;background:linear-gradient(135deg,var(--yellow) 50%,var(--red) 50%)}
 .legend .dash{display:inline-block;width:24px;height:0;border-top:3px dashed #d9a800;vertical-align:4px;margin-right:5px}
 .legend .ball-line{display:inline-block;width:24px;height:0;border-top:3px solid #e0432a;vertical-align:4px;margin-right:5px}
@@ -410,20 +441,60 @@ footer b{color:#4a4c56}
       <span class="chip sm r" id="statusBad">❌ 0</span>
     </div>
     <ul class="dots" id="statusDots" aria-label="Question progress"></ul>
+    <button class="chip sm home" id="homeBtn" type="button" title="Back to the main page">🏠 Main</button>
   </div>
 </div>
 
 <div class="wrap">
 
-  <!-- ===== the law, as a walkthrough (this is the landing page) ===== -->
-  <section id="screen-learn">
+  <!-- ===== landing menu: two doors, rules or challenge ===== -->
+  <section id="screen-menu">
     <header class="hero">
-      <div class="kicker">The offside law · seven chapters</div>
-      <h1>How <em>Offside</em> Works</h1>
-      <p class="lead">Everything offside, in seven chapters with a diagram for every point. Read it through, jump around, or go straight to the quiz.</p>
+      <div class="kicker">The line nobody can see</div>
+      <h1>Is It <em>Offside?</em></h1>
+      <p class="lead">Offside is the most controversial enigma in sport. One invisible line, drawn
+      by a defender who isn’t looking, judged in the frame nobody agrees on — and then argued
+      about for the rest of the season.</p>
+      <p class="statline"><b>85%*</b> of fans and parents on the touchline will admit, if you ask
+      them nicely, that they don’t actually know what offside is.</p>
+    </header>
+
+    <div class="quotebox">
+      <p class="q">“How is that <em>offside?</em> Tell me. Go on — how is that offside.”</p>
+      <p class="beat">— the referee, wisely saying nothing —</p>
+      <p class="q">“No, seriously. <em>Tell me.</em> I genuinely don’t know what the rule is.”</p>
+      <p class="by">Every coach, every touchline, every weekend. At least the American gaffer in
+      the football show about the football team was honest enough to say the second part out loud.
+      This is that second part, answered.</p>
+    </div>
+
+    <div class="menurow">
+      <button class="opt learn" id="menuLearn" type="button">
+        <span class="oi" aria-hidden="true">📖</span>
+        <span class="ot">Review the rules for offside</span>
+        <span class="od">Seven chapters, seventeen diagrams. The whole of Law 11, drawn and
+        animated — position, involvement, the margins, the exceptions.</span>
+      </button>
+      <button class="opt quiz" id="menuQuiz" type="button">
+        <span class="oi" aria-hidden="true">🚩</span>
+        <span class="ot">Take the Offside Challenge</span>
+        <span class="od">Thirteen calls, easy to brutal. Watch the passage, then press one of two
+        buttons. No replay booth, no hiding.</span>
+      </button>
+    </div>
+
+    <p class="foot-note">* Not a real study — nobody has surveyed it, and we are not going to
+    pretend otherwise. Ask around at your next match and see whether it holds up.</p>
+  </section>
+
+  <!-- ===== the law, as a walkthrough ===== -->
+  <section id="screen-learn" hidden>
+    <header class="hero">
+      <h1 class="small">How <em>Offside</em> Works</h1>
       <div class="learntop">
-        <button class="btn big" id="startBtn">▶ Take the quiz</button>
+        <button class="btn big" id="startBtn">🚩 Take the Challenge</button>
         <button class="btn big ghost" id="tocBtn" type="button">☰ Contents</button>
+        <button class="btn big ghost" id="learnHome" type="button">🏠 Main page</button>
       </div>
     </header>
 
@@ -432,11 +503,10 @@ footer b{color:#4a4c56}
     <div class="card">
       <div class="q-head" id="rHead"></div>
       <h2 class="q-title" id="rTitle"></h2>
-      <p class="brief" id="rText"></p>
       <div class="rtabs" id="rTabs"></div>
       <div id="learnStageSlot"></div>
       <p class="rpoint" id="rPoint"></p>
-      <p class="tip book" id="rBook"></p>
+      <div class="morerow"><button class="btn ghost" id="moreBtn" type="button">📖 More detail</button></div>
     </div>
 
     <div class="learnnav">
@@ -446,7 +516,7 @@ footer b{color:#4a4c56}
     </div>
   </section>
 
-  <!-- ===== quiz ===== -->
+  <!-- ===== the offside challenge ===== -->
   <section id="screen-quiz" hidden>
     <div class="card">
       <div class="q-head" id="qHead"></div>
@@ -474,7 +544,7 @@ footer b{color:#4a4c56}
         <div class="legend">
           <span><i class="sw" style="background:#4aa3ff"></i>Attacking</span>
           <span><i class="sw" style="background:#f4795b"></i>Defending</span>
-          <span><i class="sw" style="background:#6fc25a"></i>Keeper</span>
+          <span><i class="glove"></i>Keeper — same shirt, gloves</span>
           <span><i class="arflag"></i>AR’s flag — travels along the offside line</span>
           <span><i class="dash"></i>Offside line (2nd-last opponent)</span>
           <span><i class="att-line"></i>The judged attacker</span>
@@ -513,8 +583,9 @@ footer b{color:#4a4c56}
       </div>
       <ul class="review" id="resultReview"></ul>
       <div class="again">
-        <button class="btn big" id="againBtn" type="button">↻ Play again</button>
+        <button class="btn big" id="againBtn" type="button">↻ Take it again</button>
         <button class="btn big ghost" id="learnBtn" type="button">📖 Back to the rules</button>
+        <button class="btn big ghost" id="resultHome" type="button">🏠 Main page</button>
       </div>
     </div>
   </section>
@@ -527,7 +598,7 @@ footer b{color:#4a4c56}
   </footer>
 </div>
 
-<noscript><p style="text-align:center;font-weight:700;padding:20px">This quiz draws its moving pitches with JavaScript — enable it to play.</p></noscript>
+<noscript><p style="text-align:center;font-weight:700;padding:20px">This site draws its moving pitches with JavaScript — enable it to play.</p></noscript>
 
 <script>
 'use strict';
@@ -602,8 +673,6 @@ function drawPitch(svg){
   R(BOX6.x,BOX6.y0,GOAL_X,BOX6.y1,L);
   const half=E('line',Object.assign({'stroke-dasharray':'8 7'},L),g);
   planeLine(half,HALF_X);
-  const hl=mapPt(HALF_X,PH/2);
-  halo(g,hl[0],hl[1],'halfway',{size:9,rot:isPort()?0:-90,hw:3});
   const spot=mapPt(458,180);
   E('circle',{cx:spot[0],cy:spot[1],r:2.6,fill:'#f2f9ff'},g);
   /* penalty arc: a half-circle bulging away from the goal, drawn in display space */
@@ -623,7 +692,6 @@ function drawPitch(svg){
 /* Frame each scenario on its own action rather than always showing the whole
    pitch. The short axis is always shown in full so it still reads as a pitch and
    the AR on the touchline is always in view; only the long axis is cropped. */
-const AR_Y=()=>isPort()?42:PH-42;
 function sceneBounds(sc){
   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
   const see=p=>{x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1]);};
@@ -632,10 +700,14 @@ function sceneBounds(sc){
     sc.actors.forEach(a=>see(lerpTrack(a.track,t)));
     see(lerpTrack(sc.ball.track,t));
   }
-  see([x0,AR_Y()]);                   // the AR on the touchline is always in frame
+  /* The flag gets a lane of its own on one side, so it is always clear of the play:
+     the left in portrait, the bottom in landscape — whichever side the plane labels
+     are not using. */
+  const LANE=44;
   return {
-    x:[Math.max(x0-44,0),Math.min(x1+52,PW+GOAL_D+5)],
-    y:[Math.max(y0-46,-42),Math.min(y1+74,PH+16)]
+    x:[Math.max(x0-40,0),Math.min(x1+48,PW+GOAL_D+5)],
+    y:[Math.max(y0-40,-46)-(isPort()?LANE:0),
+       Math.min(y1+58,PH+46)+(isPort()?0:LANE)]
   };
 }
 function fitBox(sc){
@@ -647,7 +719,9 @@ function fitBox(sc){
 
 /* a chunky bean, drawn facing right; mirrored for the defending side */
 const BEAN_S=1.34;
-const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#6fc25a','#4e9a3d']};
+/* the keeper wears his own side's shirt — gloves are what tell him apart, exactly as
+   on a real pitch, where the offside line does not care who is in goal */
+const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#f4795b','#cf5335']};
 function bean(team,dir,pose){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
@@ -665,11 +739,22 @@ function bean(team,dir,pose){
   }
   E('rect',{x:-8,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
   E('rect',{x:1,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
+  if(team==='gk'){
+    /* Both arms out, pale mitts on the ends. The keeper wears his own side's shirt —
+       the offside line never cared who was in goal — so the gloves are the only
+       thing that tells him apart. */
+    E('path',{d:'M10 -4c6 0 7.5 3 7.5 6.5s-1.5 6.5-7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
+  }
   E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
   E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
     fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
   E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
     fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+  if(team==='gk'){
+    /* the mitts sit on the ends of both arms, only just wider than the figure already was */
+    E('rect',{x:-19.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+    E('rect',{x:10.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+  }
   return g;
 }
 
@@ -897,132 +982,167 @@ const SCENARIOS=[
 ];
 
 /* ================= the law, as a walkthrough =================
-   Seventeen rules in the four parts Law 11 itself uses. Most diagrams reuse a quiz
-   scenario's geometry by id, so the pictures cannot drift from the scenarios they
-   teach; only four situations needed drawing from scratch. `verdict` is revealed
-   here — this is the tutorial, not the test. */
+   Every diagram carries the smallest cast that can make its point: one passer, one
+   attacker being judged, the second-last defender, and the keeper. Nothing else, so
+   there is nothing to read past. With only those two opponents the second-last is
+   unambiguous, which is exactly what the offside line needs.
 
-/* the four situations that had no quiz scenario to borrow from */
-const OWN_HALF={
-  freezeT:.4,
-  actors:[
-    {id:'P8',team:'blue',n:8,track:[[0,20,250],[.4,34,244],[1,44,244]]},
-    {id:'A9',team:'blue',n:9,track:[[0,64,150],[.4,78,150],[1,150,152]]},
-    {id:'D4',team:'red',n:4,track:[[0,58,96],[.4,62,96],[1,74,102]]},
-    {id:'D5',team:'red',n:5,track:[[0,56,214],[.4,60,214],[1,72,216]]},
-    {id:'GK',team:'gk',n:'GK',track:[[0,196,180],[1,204,182]]}],
-  ball:{track:[[0,20,250],[.4,34,244],[.8,120,150],[1,152,152]]},
-  caps:[[0,'Red have pushed right up the pitch…'],[.4,'⚽ BALL PLAYED — the 9 is ahead of them, but still behind halfway.']]
-};
-const ARMS={
-  freezeT:.4,
-  actors:[
-    {id:'P8',team:'blue',n:8,track:[[0,200,250],[.4,232,248],[1,242,248]]},
-    {id:'A9',team:'blue',n:9,pose:'reach',track:[[0,330,158],[.4,340,158],[1,430,166]]},
-    {id:'D4',team:'red',n:4,track:[[0,338,104],[.4,340,104],[1,352,108]]},
-    {id:'D5',team:'red',n:5,track:[[0,336,242],[.4,339,242],[1,350,240]]},
-    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,512,180]]}],
-  ball:{track:[[0,200,250],[.4,232,248],[.82,352,160],[1,432,166]]},
-  caps:[[0,'The 9 stretches out an arm as the pass comes…'],[.4,'⚽ BALL PLAYED — his arm is past the line. His feet and body are level.']]
-};
-const OFF_FIELD={
-  freezeT:.4,
-  actors:[
-    {id:'P8',team:'blue',n:8,track:[[0,250,250],[.4,286,246],[1,296,246]]},
-    {id:'A9',team:'blue',n:9,track:[[0,462,168],[.4,470,168],[1,514,176]]},
-    {id:'D5',team:'red',n:5,track:[[0,556,150],[1,560,146]]},
-    {id:'D4',team:'red',n:4,track:[[0,430,250],[1,442,252]]},
-    {id:'GK',team:'gk',n:'GK',track:[[0,500,186],[1,506,184]]}],
-  ball:{track:[[0,250,250],[.4,286,246],[.84,472,170],[1,516,176]]},
-  caps:[[0,'A red defender has run off past the goal line…'],[.4,'⚽ BALL PLAYED — count him anyway. He is still one of the two.']]
-};
-const RESTART={
-  freezeT:.45,
-  actors:[
-    {id:'P8',team:'blue',n:8,track:[[0,180,250],[.45,214,246],[1,224,246]]},
-    {id:'A9',team:'blue',n:9,track:[[0,392,150],[.45,404,150],[1,470,162]]},
-    {id:'D4',team:'red',n:4,track:[[0,352,100],[.45,356,100],[1,368,106]]},
-    {id:'D5',team:'red',n:5,track:[[0,350,244],[.45,354,244],[1,366,242]]},
-    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,514,182]]}],
-  ball:{track:[[0,180,250],[.45,214,246],[.84,406,154],[1,472,162]]},
-  caps:[[0,'A pass in behind, and the 9 is beyond the line…'],[.45,'⚽ BALL PLAYED — offside. Note exactly where he was standing.']],
-  mark:{at:'A9',label:'indirect free kick here'}
-};
+   Cards show a title and one short line. Everything longer lives in the drawer. */
+function mini(o){
+  return {freezeT:o.f,
+    actors:[
+      {id:'P8',team:'blue',n:8,pose:o.pose,track:o.p},
+      {id:'A9',team:'blue',n:9,pose:o.apose,track:o.a},
+      {id:'D5',team:'red',n:5,track:o.d},
+      {id:'GK',team:'gk',n:'GK',track:o.g}],
+    ball:{track:o.b},caps:o.caps,impact:o.impact,resetT:o.reset};
+}
+const GKHOME=[[0,516,180],[1,514,182]];
 
-/* Seven chapters, each holding the diagrams that belong together, so the whole of
-   Law 11 is covered without seventeen separate pages to click through. */
 const LEARN=[
 {n:1,title:'Where you have to be',ref:'Law 11.1 — Offside position',
- intro:'Offside is a <b>position</b> before it is anything else, and the position has two tests. You have to fail both of them to even be in an offside position — and if you are not in one, nothing else in the law can touch you.',
+ detail:'Offside is a <b>position</b> before it is anything else, and the position has two tests. You have to fail both to even be in an offside position — and if you are not in one, nothing else in the law can touch you.',
  book:'A player is in an offside position if any part of the head, body or feet is in the opponents’ half (excluding the halfway line) <b>and</b> is nearer to the opponents’ goal line than both the ball and the second-last opponent.',
  shots:[
-  {label:'Own half',verdict:'onside',scene:'OWN_HALF',
-   point:'The law only exists in the opponents’ half. Red have pushed right up the pitch and the 9 is ahead of all of them — but he is behind the halfway line, so there is no offside position at all. Standing <i>on</i> the line still counts as your own half.'},
-  {label:'The second-last',verdict:'offside',from:1,
-   point:'Count the opponents nearer their own goal line than you are. Fewer than two, and you are in an offside position. Measured from your head, body or feet — whichever part is furthest forward.'},
-  {label:'The ball too',verdict:'onside',from:5,
-   point:'Two tests, not one. Here the 9 is well beyond the defence, but his teammate has taken the ball nearer the goal line than he is — so the pass comes backwards and no offside position exists. This is why a cut-back is unstoppable.'},
-  {label:'The keeper',verdict:'offside',from:6,
-   point:'Nothing says the goalkeeper is one of the two you count. It is the second-last <i>opponent</i>, whoever that happens to be. With the keeper stranded upfield he becomes the second-last himself, and one defender alone cannot play anybody onside.'}]},
+  {label:'Own half',verdict:'onside',point:'Ahead of the defender, but behind halfway.',
+   detail:'The law only exists in the opponents’ half. Red have pushed right up the pitch and the 9 is ahead of them — but he is behind the halfway line, so there is no offside position at all. Standing <i>on</i> the line still counts as your own half.',
+   scene:mini({f:.42,p:[[0,22,254],[.42,36,250],[1,46,250]],a:[[0,62,140],[.42,78,140],[1,150,146]],
+     d:[[0,56,206],[.42,60,206],[1,72,208]],g:[[0,196,180],[1,204,182]],
+     b:[[0,22,254],[.42,36,250],[.82,120,142],[1,152,146]],
+     caps:[[0,'Red push up the pitch…'],[.42,'⚽ Ball played — he is behind halfway.']]})},
+  {label:'The second-last',verdict:'offside',point:'Past the last defender when the pass is struck.',
+   detail:'Count the opponents nearer their own goal line than you are. Fewer than two, and you are in an offside position. It is measured from your head, body or feet — whichever part is furthest forward.',
+   scene:mini({f:.42,p:[[0,200,252],[.42,232,248],[1,242,248]],a:[[0,364,140],[.42,378,140],[1,478,158]],
+     d:[[0,336,204],[.42,340,204],[1,356,208]],g:GKHOME,
+     b:[[0,200,252],[.42,232,248],[.82,392,144],[1,480,158]],
+     caps:[[0,'The 9 sits on the shoulder…'],[.42,'⚽ Ball played — he is beyond the line.']]})},
+  {label:'The ball too',verdict:'onside',point:'Beyond the defender, but behind the ball.',
+   detail:'Two tests, not one. The 9 is beyond the defence, but his teammate has taken the ball nearer the goal line than he is — so the pass comes backwards and no offside position exists. This is why a cut-back is unstoppable.',
+   scene:mini({f:.55,p:[[0,430,76],[.55,496,84],[1,498,88]],a:[[0,404,208],[.55,430,200],[1,452,196]],
+     d:[[0,392,252],[.55,400,250],[1,412,246]],g:[[0,516,180],[1,510,170]],
+     b:[[0,430,76],[.55,496,84],[.86,454,198],[1,454,198]],
+     caps:[[0,'The 8 gets to the byline…'],[.55,'⚽ Ball played — behind him, so he is fine.']]})},
+  {label:'The keeper',verdict:'offside',point:'The keeper is the second-last opponent here.',
+   detail:'Nothing says the goalkeeper is one of the two you count. It is the second-last <i>opponent</i>, whoever that happens to be. With the keeper stranded upfield he becomes the second-last himself, and one defender alone cannot play anybody onside.',
+   scene:mini({f:.45,p:[[0,120,254],[.45,140,250],[1,150,250]],a:[[0,300,206],[.45,320,206],[1,440,194]],
+     d:[[0,470,168],[.45,476,168],[1,486,176]],g:[[0,250,178],[1,262,186]],
+     b:[[0,120,254],[.45,140,250],[.82,334,204],[1,442,194]],
+     caps:[[0,'The keeper has come up and stayed up…'],[.45,'⚽ Ball played — count the reds.']]})}]},
 
 {n:2,title:'The margins',ref:'Law 11.1 — the tie-breakers',
- intro:'Two details decide every desperately tight call, and both of them favour the attacker.',
+ detail:'Two details decide every desperately tight call, and both of them favour the attacker.',
  book:'A player level with the second-last opponent, or level with the last two opponents, is not in an offside position. The hands and arms of all players, including goalkeepers, are not considered — the upper boundary of the arm is in line with the bottom of the armpit.',
  shots:[
-  {label:'Level is onside',verdict:'onside',from:2,
-   point:'The word in the law is <i>nearer</i>. Dead level is not nearer, so it is onside — and so is being level with the last two. Every genuinely too-close-to-call moment goes to the attacker.'},
-  {label:'Arms don’t count',verdict:'onside',scene:'ARMS',
-   point:'You can only be offside by a part of you that could legally score. The 9’s arm is clearly past the line and it is irrelevant — his feet and body are level, so he is onside.'}]},
+  {label:'Level is onside',verdict:'onside',point:'Dead level. The law says <i>nearer</i>.',
+   detail:'The word in the law is <i>nearer</i>. Dead level is not nearer, so it is onside — and so is being level with the last two. Every genuinely too-close-to-call moment goes to the attacker.',
+   scene:mini({f:.45,p:[[0,190,252],[.45,220,248],[1,230,248]],a:[[0,320,140],[.45,340,140],[1,452,156]],
+     d:[[0,338,206],[.45,340,206],[1,352,208]],g:GKHOME,
+     b:[[0,190,252],[.45,220,248],[.84,368,146],[1,454,156]],
+     caps:[[0,'He holds his run…'],[.45,'⚽ Ball played — shoulder for shoulder.']]})},
+  {label:'Arms don’t count',verdict:'onside',point:'His arm is past the line. Only feet, body and head count.',
+   detail:'You can only be offside by a part of you that could legally score. The 9’s arm is clearly past the line and it is irrelevant — his feet and body are level, so he is onside.',
+   scene:mini({f:.45,apose:'reach',p:[[0,190,252],[.45,220,248],[1,230,248]],a:[[0,326,142],[.45,340,142],[1,440,156]],
+     d:[[0,338,208],[.45,340,208],[1,352,210]],g:GKHOME,
+     b:[[0,190,252],[.45,220,248],[.84,366,148],[1,442,156]],
+     caps:[[0,'He stretches out an arm…'],[.45,'⚽ Ball played — arm over, body level.']]})}]},
 
 {n:3,title:'Being there is not the offence',ref:'Law 11.2 — Offside offence',
- intro:'This is the sentence the whole law hangs on, and the one most often missed. You are allowed to stand in an offside position all afternoon. It only becomes an <b>offence</b> if you get involved at the moment the ball is played.',
+ detail:'This is the sentence the whole law hangs on, and the one most often missed. You are allowed to stand in an offside position all afternoon. It only becomes an <b>offence</b> if you get involved at the moment the ball is played.',
  book:'Being in an offside position is not an offence in itself.',
  shots:[
-  {label:'Not involved',verdict:'onside',from:7,
-   point:'The 9 is a long way beyond the line — and it does not matter. The pass goes to the far side, he never touches it, challenges nobody and blocks nobody’s view. No involvement, no offence, no flag.'}]},
+  {label:'Not involved',verdict:'onside',point:'Offside, but the ball goes nowhere near him.',
+   detail:'The 9 is a long way beyond the line — and it does not matter. The 8 knocks it into the far channel and chases it himself. The 9 never touches it, challenges nobody and blocks nobody’s view. No involvement, no offence, no flag.',
+   scene:mini({f:.42,p:[[0,286,250],[.42,312,252],[1,452,258]],a:[[0,418,86],[1,422,90]],
+     d:[[0,372,182],[.42,378,182],[1,392,196]],g:GKHOME,
+     b:[[0,286,250],[.42,312,252],[.84,420,256],[1,458,258]],
+     caps:[[0,'The 9 drifts out and stops…'],[.42,'⚽ Ball played — the other way entirely.']]})}]},
 
 {n:4,title:'The three ways to get involved',ref:'Law 11.2 — Involvement in active play',
- intro:'There are exactly three routes from an offside position to an offside offence. Only the first one needs you to touch the ball at all.',
+ detail:'There are exactly three routes from an offside position to an offside offence. Only the first needs you to touch the ball at all.',
  book:'<b>Interfering with play</b> — playing or touching a ball passed or touched by a team-mate. <b>Interfering with an opponent</b> — clearly obstructing their line of vision, challenging for the ball, clearly attempting to play a ball which is close when this impacts an opponent, or any obvious action which clearly impacts an opponent’s ability to play the ball. <b>Gaining an advantage</b> — playing a ball that rebounded or deflected off the goalpost, crossbar, a match official or an opponent, or that came from a deliberate save.',
  shots:[
-  {label:'1 · Plays it',verdict:'offside',from:1,
-   point:'The simplest route: he touches it. This is the same picture as chapter 1’s second diagram — the position was always there, and playing the ball is what turns it into an offence.'},
-  {label:'2 · Blocks an opponent',verdict:'offside',from:8,
-   point:'No touch required. Standing in an offside position in the goalkeeper’s sightline is enough on its own, and so is challenging for the ball or any obvious action that affects an opponent’s ability to play it.'},
-  {label:'3 · Gains an advantage',verdict:'offside',from:9,
-   point:'The ball comes to him off the frame of the goal. Woodwork, a match official or an opponent — none of them wipe out the offside position, so playing the rebound is the offence.'}]},
+  {label:'1 · Plays it',verdict:'offside',point:'He touches it. That is the offence.',
+   detail:'The simplest route. Same position as chapter 1’s second diagram — playing the ball is what turns that position into an offence.',
+   scene:mini({f:.42,p:[[0,200,252],[.42,232,248],[1,242,248]],a:[[0,364,140],[.42,378,140],[1,486,158]],
+     d:[[0,336,204],[.42,340,204],[1,356,208]],g:GKHOME,
+     b:[[0,200,252],[.42,232,248],[.8,392,144],[1,488,158]],
+     caps:[[0,'In behind again…'],[.42,'⚽ Ball played — and he runs on to it.']]})},
+  {label:'2 · Blocks',verdict:'offside',point:'Never touches it — but the keeper cannot see.',
+   detail:'No touch required. Standing in an offside position in the goalkeeper’s sightline is enough on its own, and so is challenging for the ball or any obvious action that affects an opponent’s ability to play it.',
+   scene:mini({f:.4,p:[[0,300,180],[.4,332,180],[1,344,180]],a:[[0,492,176],[1,492,176]],
+     d:[[0,424,254],[1,432,250]],g:[[0,516,180],[.62,516,180],[.78,512,200],[1,512,200]],
+     b:[[0,300,180],[.4,332,180],[.88,534,192],[1,534,192]],
+     caps:[[0,'A shot from range…'],[.4,'⚽ Shot struck — he is in the keeper’s window.']],
+     impact:[[.7,'👀 KEEPER UNSIGHTED']]})},
+  {label:'3 · Gains',verdict:'offside',point:'Off the post, and he taps it in.',
+   detail:'The ball comes to him off the frame of the goal. Woodwork, a match official or an opponent — none of them wipe out the offside position, so playing the rebound is the offence.',
+   scene:mini({f:.4,p:[[0,300,236],[.4,332,230],[1,344,230]],a:[[0,468,150],[.4,476,150],[.78,482,150],[1,508,166]],
+     d:[[0,430,254],[1,440,250]],g:[[0,516,182],[.6,516,182],[.72,518,150],[1,518,150]],
+     b:[[0,300,236],[.4,332,230],[.66,528,120],[.8,486,150],[1,536,172]],
+     caps:[[0,'He lets fly…'],[.4,'⚽ Shot struck — the 9 is offside here.']],
+     impact:[[.66,'🥅 OFF THE POST']]})}]},
 
 {n:5,title:'The instant it is judged',ref:'Law 11.1 — the decisive moment',
- intro:'Not when the ball arrives — when it <b>leaves</b>. Everything freezes at the moment a teammate plays or touches it, and nothing that happens afterwards can make you offside.',
+ detail:'Not when the ball arrives — when it <b>leaves</b>. Everything freezes at the moment a teammate plays or touches it, and nothing that happens afterwards can make you offside.',
  book:'Judged at the moment the ball is played or touched by a team-mate.',
  shots:[
-  {label:'Timing',verdict:'onside',from:4,
-   point:'At the instant the pass is struck the 9 is behind the second-last opponent, so he was never in an offside position. He then sprints through the line and collects it ten yards clear, which is completely legal. This is the single most misjudged thing in the law.'}]},
+  {label:'Timing',verdict:'onside',point:'Behind the line when it is struck. He runs on after.',
+   detail:'At the instant the pass is struck the 9 is behind the second-last opponent, so he was never in an offside position. He then sprints through the line and collects it ten yards clear, which is completely legal. This is the single most misjudged thing in the law.',
+   scene:mini({f:.4,p:[[0,200,254],[.4,226,250],[1,236,250]],a:[[0,300,140],[.4,326,140],[1,486,158]],
+     d:[[0,344,206],[.4,350,206],[1,368,210]],g:GKHOME,
+     b:[[0,200,254],[.4,226,250],[.82,398,146],[1,488,158]],
+     caps:[[0,'He checks his run…'],[.4,'⚽ Ball played — he is BEHIND the line.'],[.7,'Now he goes.']]})}]},
 
 {n:6,title:'When it comes off an opponent',ref:'Law 11.2 — reset, or not',
- intro:'The hardest part of the law, and where the real arguments live. An opponent touching the ball sometimes wipes your offside position out and sometimes does not. The test is <b>control</b>.',
+ detail:'The hardest part of the law, and where the real arguments live. An opponent touching the ball sometimes wipes your offside position out and sometimes does not. The test is <b>control</b>.',
  book:'A player in an offside position receiving the ball from an opponent who <b>deliberately played</b> it has not gained an advantage — unless it was a <b>deliberate save</b>. Deliberate play is having control of the ball with the possibility of passing to a team-mate, gaining possession, or clearing it; an inaccurate or unsuccessful attempt still counts. A <b>deflection</b> is not deliberate play: weigh whether the ball came from distance with a clear view, whether it was moving quickly or in an unexpected direction, and whether the player had time to coordinate their body rather than stretching instinctively.',
  shots:[
-  {label:'Deliberate play',verdict:'onside',from:11,
-   point:'A new phase begins and the earlier offside position is wiped out. The defender has time, sees it all the way, and heads it — that is deliberate play, even though the outcome was a disaster for him.'},
-  {label:'A save',verdict:'offside',from:10,
-   point:'A save is carved out by name. However deliberate it was, parrying a shot is not playing the ball, so the offside position survives and the rebound is an offence.'},
-  {label:'A deflection',verdict:'offside',from:12,
-   point:'Drilled at a defender from a few yards and met with an instinctive leg: contact without control. No new phase, no reset. Time, clear sight and control are what separate this from the first diagram.'}]},
+  {label:'Deliberate play',verdict:'onside',point:'A controlled header back. The slate is wiped.',
+   detail:'A new phase begins and the earlier offside position is wiped out. The defender has time, sees it all the way, and heads it — that is deliberate play, even though the outcome was a disaster for him.',
+   scene:mini({f:.4,reset:.62,p:[[0,240,254],[.4,290,250],[1,302,250]],a:[[0,468,214],[.4,478,214],[.86,470,206],[1,506,190]],
+     d:[[0,428,150],[.4,438,152],[.62,452,168],[1,456,176]],g:GKHOME,
+     b:[[0,240,254],[.4,290,250],[.62,452,168],[.82,470,206],[1,536,192]],
+     caps:[[0,'A hopeful ball forward…'],[.4,'⚽ Ball played — the 9 is offside here.'],[.64,'But the 5 heads it deliberately.']],
+     impact:[[.62,'🦵 DELIBERATE PLAY — controlled']]})},
+  {label:'A save',verdict:'offside',point:'A parry is a save, not a play. Nothing resets.',
+   detail:'A save is carved out by name. However deliberate it was, parrying a shot is not playing the ball, so the offside position survives and the rebound is an offence.',
+   scene:mini({f:.4,p:[[0,290,180],[.4,326,180],[1,338,180]],a:[[0,466,216],[.4,472,216],[.8,478,212],[1,502,200]],
+     d:[[0,432,256],[1,440,252]],g:[[0,516,180],[.56,516,180],[.68,506,168],[1,504,172]],
+     b:[[0,290,180],[.4,326,180],[.66,504,170],[.84,478,212],[1,536,196]],
+     caps:[[0,'Another effort from range…'],[.4,'⚽ Shot struck — remember where he is.'],[.68,'A strong hand — that is a save.']],
+     impact:[[.66,'🧤 SAVED — parried, not cleared']]})},
+  {label:'A deflection',verdict:'offside',point:'Instinctive leg, no control. Nothing resets.',
+   detail:'Drilled at a defender from a few yards and met with an instinctive leg: contact without control. No new phase, no reset. Time, clear sight and control are what separate this from the first diagram.',
+   scene:mini({f:.4,p:[[0,250,254],[.4,296,250],[1,310,250]],a:[[0,466,214],[.4,474,214],[.84,468,204],[1,504,192]],
+     d:[[0,396,192],[.4,404,188],[.58,412,186],[1,418,194]],g:GKHOME,
+     b:[[0,250,254],[.4,296,250],[.58,412,186],[.76,470,206],[1,536,196]],
+     caps:[[0,'Drilled hard from close range…'],[.4,'⚽ Ball played — the 9 is offside here.'],[.6,'Off the shin. He never had a chance.']],
+     impact:[[.58,'🦴 DEFLECTION — no control']]})}]},
 
 {n:7,title:'Exceptions and the restart',ref:'Law 11.3 / 11.4',
- intro:'Three restarts are exempt entirely, players who have left the pitch still count, and the free kick is taken where the <i>offence</i> happened.',
+ detail:'Three restarts are exempt entirely, players who have left the pitch still count, and the free kick is taken where the <i>offence</i> happened.',
  book:'There is no offside offence if a player receives the ball directly from a goal kick, a throw-in, or a corner kick. A defending player who leaves the field without permission is considered to be on the goal line or touchline for offside until the next stoppage, or until their team has played the ball towards the halfway line and outside its penalty area; if they left deliberately they are cautioned at the next stoppage. An attacking player may step off the field to avoid being involved. The restart is an indirect free kick where the offence occurred, including in the player’s own half.',
  shots:[
-  {label:'Throw-in',verdict:'onside',from:3,
-   point:'You cannot be offside directly from a throw-in, a goal kick or a corner. The 9 is miles beyond everybody and his position is simply irrelevant.'},
-  {label:'Off the field',verdict:'onside',scene:'OFF_FIELD',
-   point:'A defender who has run off past the goal line does not stop being one of your two — he is treated as standing on the line, which keeps the 9 onside here.'},
-  {label:'The restart',verdict:'offside',scene:'RESTART',
-   point:'An indirect free kick where the <i>offence</i> happened — where the offside player was, not where the pass came from. That can be a long way back, and it can be inside his own half.'}]}
+  {label:'Throw-in',verdict:'onside',point:'Direct from a throw-in. Position is irrelevant.',
+   detail:'You cannot be offside directly from a throw-in, a goal kick or a corner. The 9 is miles beyond everybody and his position simply does not matter.',
+   scene:mini({f:.45,pose:'throw',p:[[0,300,-14],[.45,300,-14],[1,306,-8]],a:[[0,428,140],[.45,440,146],[1,470,164]],
+     d:[[0,378,236],[.45,384,236],[1,398,232]],g:[[0,516,180],[1,508,178]],
+     b:[[0,300,-26],[.45,300,-26],[.84,442,148],[1,472,164]],
+     caps:[[0,'A quick throw down the line…'],[.45,'⚽ Thrown — and it does not matter.']]})},
+  {label:'Off the field',verdict:'onside',point:'The defender ran off. He still counts.',
+   detail:'A defender who has run off past the goal line does not stop being one of your two — he is treated as standing on the line until play stops, which keeps the 9 onside here.',
+   scene:mini({f:.42,p:[[0,250,254],[.42,286,250],[1,296,250]],a:[[0,462,168],[.42,470,168],[1,512,176]],
+     d:[[0,556,150],[1,560,146]],g:[[0,500,186],[1,506,184]],
+     b:[[0,250,254],[.42,286,250],[.84,472,170],[1,514,176]],
+     caps:[[0,'A red has run off past the goal line…'],[.42,'⚽ Ball played — count him anyway.']]})},
+  {label:'The restart',verdict:'offside',point:'Indirect free kick where he was standing.',
+   detail:'An indirect free kick where the <i>offence</i> happened — where the offside player was, not where the pass came from. That can be a long way back, and it can be inside his own half.',
+   scene:mini({f:.45,p:[[0,180,254],[.45,214,250],[1,224,250]],a:[[0,392,140],[.45,404,140],[1,470,158]],
+     d:[[0,348,208],[.45,354,208],[1,366,212]],g:GKHOME,
+     b:[[0,180,254],[.45,214,250],[.84,406,144],[1,472,158]],
+     caps:[[0,'A pass in behind…'],[.45,'⚽ Ball played — offside. Mark the spot.']]})}]}
 ];
-const CUSTOM={OWN_HALF,ARMS,OFF_FIELD,RESTART};
-const shotScene=sh=>sh.scene?CUSTOM[sh.scene]:SCENARIOS.find(s=>s.id===sh.from);
+const shotScene=sh=>sh.scene;
 const LEARN_SHOTS=LEARN.reduce((n,c)=>n+c.shots.length,0);
 
 /* ================= character morph ================= */
@@ -1060,6 +1180,12 @@ function buildScene(mount,sc){
   const judged=sc.judged||'A9';
   const slId=secondLast(sc,sc.freezeT).id;
   const bb=sceneBounds(sc);          // visible bounds: labels are clamped inside these
+  /* label the halfway line only when it is actually in shot, and put it in the flag's
+     lane where nothing else competes for the space */
+  if(HALF_X>=bb.x[0]&&HALF_X<=bb.x[1]){
+    const hp=isPort()?[bb.y[0]+17,PW-HALF_X-6]:[HALF_X,bb.y[0]+16];
+    halo(svg,hp[0],hp[1],'halfway',{size:9.5,hw:3.5});
+  }
 
   /* the gap between the offside line and the attacker — neutral until answered */
   const band=E('rect',{class:'band',opacity:0,fill:'#17181c','fill-opacity':.16},svg);
@@ -1083,7 +1209,12 @@ function buildScene(mount,sc){
   });
 
   const els={};
-  sc.actors.forEach((a,ai)=>{
+  /* Paint the judged attacker last so he is never buried under a defender who happens
+     to finish in the same spot — he is the one the whole frame is about. Labels still
+     stagger by the actor's own index, so nothing else moves. */
+  const order=sc.actors.slice().sort((p,q)=>(p.id===judged?1:0)-(q.id===judged?1:0));
+  order.forEach(a=>{
+    const ai=sc.actors.indexOf(a);
     const g=E('g',{},svg);
     const dir=a.team==='blue'?1:-1;
     const bg=bean(a.team,dir,a.pose);
@@ -1231,7 +1362,8 @@ function updateScene(h,sc,t){
   /* the AR holds the line live: level with the second-last defender, or with the
      ball once the ball is nearer the goal line than the defence */
   const arX=Math.min(Math.max(Math.max(defLineX(sc,t),b[0]),26),PW-26);
-  put(h.arG,arX,AR_Y());
+  /* pinned to the frame's edge — the side the plane labels do not use */
+  put(h.arG,arX,isPort()?h.bb.y[0]+17:h.bb.y[1]-17);
   /* the flag stays down while the call is still open — raising it would answer
      the question. It only goes up in the epilogue, and only when it should. */
   const flagUp=h.revealed&&sc.answer==='offside'&&t>sc.freezeT+.01;
@@ -1335,9 +1467,9 @@ function createPlayer(sc,h,els){
   };
 }
 
-/* ================= quiz ================= */
+/* ================= the offside challenge ================= */
 const $=id=>document.getElementById(id);
-const state={i:0,r:0,s:0,correct:0,wrong:0,answers:[],player:null,scene:null,view:'fit',fs:false};
+const state={i:0,r:0,s:0,mode:'learn',correct:0,wrong:0,answers:[],player:null,scene:null,view:'fit',fs:false};
 
 function updateStatus(){
   const st=stageFor(state.correct);
@@ -1355,12 +1487,26 @@ function updateStatus(){
 }
 
 function show(screen){
-  ['screen-learn','screen-quiz','screen-results'].forEach(s=>$(s).hidden=(s!==screen));
+  ['screen-menu','screen-learn','screen-quiz','screen-results'].forEach(s=>$(s).hidden=(s!==screen));
   /* One stage element, reparented — so every bit of scene, player, view and
      full-screen wiring keeps working without being duplicated. */
-  const slot=screen==='screen-learn'?$('learnStageSlot'):$('quizStageSlot');
+  const slot=screen==='screen-learn'?$('learnStageSlot'):screen==='screen-quiz'?$('quizStageSlot'):null;
   if(slot&&$('stage').parentNode!==slot)slot.appendChild($('stage'));
   document.body.classList.toggle('learning',screen==='screen-learn');
+  document.body.classList.toggle('menu',screen==='screen-menu');
+}
+
+/* the main page: two doors, the rules or the challenge */
+function renderMenu(){
+  state.mode='menu';
+  if(state.player)state.player.stop();
+  setDrawer(false);setFs(false);
+  show('screen-menu');
+  window.scrollTo({top:0,behavior:'auto'});
+}
+function startChallenge(){
+  state.i=0;state.correct=0;state.wrong=0;state.answers=[];
+  show('screen-quiz');renderQuestion();
 }
 
 function setView(mode){
@@ -1399,6 +1545,7 @@ function renderRule(){
   const c=LEARN[state.r];
   state.s=Math.min(state.s||0,c.shots.length-1);
   const sh=c.shots[state.s],sc=shotScene(sh);
+  state.mode='learn';
   show('screen-learn');
   if(state.player)state.player.stop();
 
@@ -1406,13 +1553,10 @@ function renderRule(){
     '<span class="chip sm b">Chapter '+c.n+' of '+LEARN.length+'</span>'+
     '<span class="chip sm">'+c.ref+'</span>';
   $('rTitle').textContent=c.n+'. '+c.title;
-  $('rText').innerHTML=c.intro;
-  $('rBook').innerHTML=c.book;
   $('rCount').textContent='Chapter '+c.n+' of '+LEARN.length;
   $('rPrev').disabled=state.r===0;
-  $('rNext').textContent=(state.r===LEARN.length-1)?'▶ Take the quiz':'Next chapter ▶';
+  $('rNext').textContent=(state.r===LEARN.length-1)?'🚩 Take the Challenge':'Next chapter ▶';
 
-  /* one chip per diagram in this chapter */
   const tabs=$('rTabs');tabs.innerHTML='';
   tabs.hidden=c.shots.length<2;
   c.shots.forEach((x,k)=>{
@@ -1420,6 +1564,7 @@ function renderRule(){
     btn.type='button';
     btn.addEventListener('click',()=>{state.s=k;renderRule();});
   });
+  /* one line on the card — the rest is behind More detail */
   $('rPoint').innerHTML=
     '<span class="vchip '+(sh.verdict==='offside'?'off':'on')+'">'+
       (sh.verdict==='offside'?'🚩 OFFSIDE':'✅ ONSIDE')+'</span> '+sh.point;
@@ -1437,12 +1582,24 @@ function renderRule(){
   state.player=createPlayer(sc,h,
     {caption:$('caption'),scrub:$('scrub'),play:$('playBtn'),step:$('stepN')});
   setView(state.view||'fit');
-  /* A reference should rest on the decisive frame, with the lines and the verdict
-     already drawn — not mid-move. Play still runs the whole passage. */
-  state.player.seek(sc.freezeT);
+  if(REDUCED)state.player.seek(sc.freezeT); else state.player.play();
 
   renderToc();
   window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'});
+}
+
+/* the long version, on demand */
+function openDetail(){
+  const c=LEARN[state.r],sh=c.shots[state.s];
+  const m=$('feedbackMount');m.innerHTML='';
+  const fb=D('div','feedback '+(sh.verdict==='onside'?'ok':'bad'),m);
+  D('div','verdict',fb,(sh.verdict==='offside'?'🚩 OFFSIDE — ':'✅ ONSIDE — ')+sh.label)
+    .id='drawerTitle';
+  const body=D('div','body',fb);
+  D('p','',body,sh.detail);
+  D('p','',body,c.detail);
+  D('p','tip book',body,c.book);
+  setDrawer(true);
 }
 
 function renderToc(){
@@ -1459,6 +1616,7 @@ function renderToc(){
 }
 
 function renderQuestion(){
+  state.mode='quiz';
   const sc=SCENARIOS[state.i];
   if(state.player)state.player.stop();
 
@@ -1575,15 +1733,18 @@ function renderResults(){
 }
 
 /* ================= wiring ================= */
-$('startBtn').addEventListener('click',()=>{state.i=0;state.correct=0;state.wrong=0;
-  state.answers=[];show('screen-quiz');renderQuestion();});
+$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;renderRule();});
+$('menuQuiz').addEventListener('click',startChallenge);
+['homeBtn','learnHome','resultHome'].forEach(id=>$(id).addEventListener('click',renderMenu));
+$('startBtn').addEventListener('click',startChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});
 $('rNext').addEventListener('click',()=>{
   if(state.r<LEARN.length-1){state.r++;state.s=0;renderRule();}
-  else{state.i=0;state.correct=0;state.wrong=0;state.answers=[];show('screen-quiz');renderQuestion();}
+  else startChallenge();
 });
 $('learnBtn').addEventListener('click',()=>renderRule());
+$('moreBtn').addEventListener('click',openDetail);
 $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
 $('playBtn').addEventListener('click',()=>state.player&&state.player.toggle());
@@ -1596,6 +1757,8 @@ $('variants').addEventListener('click',e=>{
    and can be re-read against the explanation. Dismissing it leaves a Why? button. */
 function setDrawer(on){
   const dr=$('drawer'),sc=$('scrim');
+  $('drawerNext').textContent=state.mode==='learn'?'Got it':
+    (state.i===SCENARIOS.length-1?'See my result ▶':'Next scenario ▶');
   if(on){dr.hidden=false;sc.hidden=false;requestAnimationFrame(()=>document.body.classList.add('drawer'));
     setTimeout(()=>$('drawerNext').focus(),260);}
   else{document.body.classList.remove('drawer');
@@ -1627,14 +1790,13 @@ function advance(){
   else{state.i++;renderQuestion();}
 }
 $('nextBtn').addEventListener('click',advance);
-$('drawerNext').addEventListener('click',advance);
-$('againBtn').addEventListener('click',()=>{
-  state.i=0;state.correct=0;state.wrong=0;state.answers=[];
-  show('screen-quiz');renderQuestion();
+$('drawerNext').addEventListener('click',()=>{
+  if(state.mode==='learn')setDrawer(false); else advance();
 });
+$('againBtn').addEventListener('click',startChallenge);
 
 updateStatus();
-renderRule();
+renderMenu();
 </script>
 </body>
 </html>
