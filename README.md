@@ -6,7 +6,7 @@ of play on a pitch and freezes at the moment the ball is played, with a dashed o
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
 
-The landing page is a main page with two doors — *review the rules* or *take the
+The landing page is a title and two big buttons — *study the rules* or *take the
 challenge* — and every screen keeps a route back to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
@@ -86,9 +86,5 @@ Vercel treat this as a Node project and attempt an install/build it does not nee
 - The 2026/27 Laws permit competitions to use semi-automated offside technology; that changes
   who draws the line, not where it is, so every answer here is unaffected.
 - All characters are original cartoon figures. No licensed marks, real clubs, or real players.
-- The "85%" on the main page is a joke, not a finding, and the page says so in a footnote
-  directly underneath it. Nobody has surveyed this.
-- The angry-coach exchange on the main page is written for this site. It nods at a certain
-  television manager's honesty about not knowing the rule; it does not quote him.
 - Respects `prefers-reduced-motion`: scenes render as the frozen freeze-frame with the
   transport controls removed rather than animating.

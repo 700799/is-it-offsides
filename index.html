@@ -86,32 +86,19 @@ svg text{font-family:var(--font)}
 .hero{padding:32px 4px 18px;text-align:center}
 .hero h1{font-size:clamp(34px,7vw,66px);text-transform:uppercase;letter-spacing:-1.5px;line-height:1.02;text-shadow:2px 3px 0 #fff,4px 5px 0 rgba(23,24,28,.12)}
 .hero h1 em{font-style:normal;color:var(--blue);-webkit-text-stroke:2px var(--ink)}
-.lead{max-width:660px;margin:14px auto 18px;color:#3d3f49;font-size:clamp(15px,2.5vw,18px);font-weight:600}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
 /* ---------- landing menu ---------- */
-.kicker{font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase;color:var(--grey);margin-bottom:10px}
-.statline{max-width:620px;margin:2px auto 0;font-size:clamp(14px,2.3vw,16.5px);font-weight:700;color:#3d3f49}
-.statline b{font-size:1.55em;letter-spacing:-1px;color:var(--ink);-webkit-text-stroke:0}
-.quotebox{position:relative;background:var(--cream-2);border:4px solid var(--ink);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:16px 18px 14px;margin:22px auto 0;max-width:620px;transform:rotate(-.7deg)}
-.quotebox .q{font-size:clamp(16px,3.1vw,21px);font-weight:900;line-height:1.32;letter-spacing:-.4px}
-.quotebox .q em{font-style:italic;background:linear-gradient(transparent 56%,var(--yellow) 56%)}
-.quotebox .beat{font-size:13px;font-weight:700;color:var(--grey);margin:7px 0}
-.quotebox .q + .q{margin-top:0}
-.quotebox .by{font-size:12px;font-weight:700;color:var(--grey);margin-top:11px;line-height:1.45}
-.menurow{display:grid;gap:14px;margin:24px 0 0;grid-template-columns:1fr 1fr}
+.menurow{display:grid;gap:14px;margin:28px 0 0;grid-template-columns:1fr 1fr;max-width:560px;margin-left:auto;margin-right:auto}
 @media (max-width:640px){.menurow{grid-template-columns:1fr}}
-.opt{display:block;text-align:left;background:#fff;border:4px solid var(--ink);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:16px 17px;cursor:pointer;font-family:var(--font);color:var(--ink);
-  transition:transform .07s}
+.opt{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:#fff;
+  border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 17px;
+  cursor:pointer;font-family:var(--font);color:var(--ink);transition:transform .07s}
 .opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-.opt .oi{font-size:28px;line-height:1;display:block;margin-bottom:8px}
-.opt .ot{display:block;font-size:clamp(17px,3.2vw,21px);font-weight:900;letter-spacing:-.5px;line-height:1.15}
-.opt .od{display:block;font-size:13px;font-weight:700;color:#5c5e69;margin-top:6px;line-height:1.4}
+.opt .oi{font-size:36px;line-height:1}
+.opt .ot{font-size:clamp(18px,3.6vw,23px);font-weight:900;letter-spacing:-.5px;line-height:1.15}
 .opt.learn{background:var(--sky)}
 .opt.quiz{background:var(--yellow)}
-.foot-note{max-width:620px;margin:18px auto 34px;font-size:11.5px;font-weight:700;color:var(--grey);line-height:1.5;text-align:center}
 body.menu .statusbar{display:none}
 .chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
 
@@ -454,39 +441,18 @@ footer b{color:#4a4c56}
     <header class="hero">
       <div class="kicker">The line nobody can see</div>
       <h1>Is It <em>Offside?</em></h1>
-      <p class="lead">Offside is the most controversial enigma in sport. One invisible line, drawn
-      by a defender who isn’t looking, judged in the frame nobody agrees on — and then argued
-      about for the rest of the season.</p>
-      <p class="statline"><b>85%*</b> of fans and parents on the touchline will admit, if you ask
-      them nicely, that they don’t actually know what offside is.</p>
     </header>
-
-    <div class="quotebox">
-      <p class="q">“How is that <em>offside?</em> Tell me. Go on — how is that offside.”</p>
-      <p class="beat">— the referee, wisely saying nothing —</p>
-      <p class="q">“No, seriously. <em>Tell me.</em> I genuinely don’t know what the rule is.”</p>
-      <p class="by">Every coach, every touchline, every weekend. At least the American gaffer in
-      the football show about the football team was honest enough to say the second part out loud.
-      This is that second part, answered.</p>
-    </div>
 
     <div class="menurow">
       <button class="opt learn" id="menuLearn" type="button">
         <span class="oi" aria-hidden="true">📖</span>
-        <span class="ot">Review the rules for offside</span>
-        <span class="od">Seven chapters, seventeen diagrams. The whole of Law 11, drawn and
-        animated — position, involvement, the margins, the exceptions.</span>
+        <span class="ot">Study the Rules</span>
       </button>
       <button class="opt quiz" id="menuQuiz" type="button">
         <span class="oi" aria-hidden="true">🚩</span>
-        <span class="ot">Take the Offside Challenge</span>
-        <span class="od">Thirteen calls, easy to brutal. Watch the passage, then press one of two
-        buttons. No replay booth, no hiding.</span>
+        <span class="ot">Take the Challenge</span>
       </button>
     </div>
-
-    <p class="foot-note">* Not a real study — nobody has surveyed it, and we are not going to
-    pretend otherwise. Ask around at your next match and see whether it holds up.</p>
   </section>
 
   <!-- ===== the law, as a walkthrough ===== -->
