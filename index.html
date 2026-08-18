@@ -80,6 +80,7 @@ svg text{font-family:var(--font)}
 .btn[disabled]{cursor:default;opacity:.55}
 .btn[disabled]:hover{transform:none;box-shadow:0 4px 0 var(--ink)}
 .btn.big{font-size:18px;padding:14px 30px}
+.btn.sm{font-size:12.5px;padding:7px 13px;box-shadow:0 3px 0 var(--ink);border-width:2.5px}
 .btn.ghost{background:#fff}
 
 /* ---------- hero ---------- */
@@ -106,8 +107,7 @@ body.menu .statusbar{display:none}
 .chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
 
 /* ---------- the law walkthrough ---------- */
-.learntop{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.learntop .btn{font-size:15px;padding:11px 20px}
+.learntop{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:12px 0 10px}
 .toc{background:var(--cream-2);border:4px solid var(--ink);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:14px;margin:0 0 22px}
 .toc h3{font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;
@@ -123,13 +123,9 @@ body.menu .statusbar{display:none}
 .rtabs{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 10px}
 .rpoint{margin:12px 2px 0;font-size:15.5px;font-weight:700;color:#2c2e38;line-height:1.5}
 .morerow{margin:13px 0 0;display:flex;justify-content:center}
-.hero h1.small{font-size:clamp(26px,5.6vw,40px)}
-.hero:has(h1.small){padding:18px 4px 10px}
 .rpoint .vchip{margin-right:6px;vertical-align:1px}
 .toc button span{display:flex;flex-direction:column;gap:2px}
 .toc button i{font-style:normal;font-size:11.5px;font-weight:700;color:var(--grey)}
-.learnnav{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:2px 0 30px}
-.learnnav .chip{flex:0 0 auto}
 .tip.book::before{content:"📖 What the book says — ";font-weight:900;color:var(--blue)}
 .vchip{border:3px solid var(--ink);border-radius:999px;padding:4px 11px;font-weight:900;font-size:11.5px;
   box-shadow:0 2px 0 var(--ink);white-space:nowrap}
@@ -160,13 +156,6 @@ body.learning .step-n{display:none}
 /* ---------- stage ---------- */
 .stage{border:4px solid var(--ink);border-radius:18px;overflow:hidden;background:#e8f3fb;margin:6px 0 4px}
 .stage svg.pitch{display:block;width:100%;height:auto;background:#57a747}
-/* the close-up doubles the zoom, so counter-scale the annotation so it stays the
-   same size on screen — the reference does the same with per-view font sizes */
-svg.pitch.close text{font-size:5.4px;stroke-width:2}
-svg.pitch.close .ann{stroke-width:1.7}
-svg.pitch.close .spot{stroke-width:1.3}
-.variants{display:flex;gap:7px;padding:9px 10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;background:#eaf4fd;border-bottom:3px solid var(--ink)}
-.variants::-webkit-scrollbar{display:none}
 .vbtn{flex:0 0 auto}
 .vbtn{border:3px solid var(--ink);border-radius:999px;background:#fff;font-family:var(--font);font-weight:800;font-size:12.5px;padding:6px 13px;box-shadow:0 3px 0 var(--ink);cursor:pointer;color:var(--ink)}
 .vbtn:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
@@ -195,15 +184,56 @@ svg.pitch.close .spot{stroke-width:1.3}
 .legend .att-line{display:inline-block;width:24px;height:0;border-top:3px dashed #4aa3ff;vertical-align:4px;margin-right:5px}
 .motion-note{padding:9px 12px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700}
 
-/* ---------- full-screen pop-out ---------- */
-body.fs{overflow:hidden}
-body.fs #stage{position:fixed;inset:0;z-index:60;margin:0;border:0;border-radius:0;
-  display:flex;flex-direction:column;background:var(--ink)}
-body.fs #sceneMount{flex:1;min-height:0;background:#57a747}
-body.fs #sceneMount svg.pitch{width:100%;height:100%}
-body.fs .legend{display:none}
-body.fs #answers{padding:10px 12px calc(11px + env(safe-area-inset-bottom))}
-body.fs #answers .btn{padding:15px 10px;font-size:17px}
+/* ---------- floating transport (tutorial) ----------
+   Prev / Replay / Next ride at the bottom of the viewport rather than sitting
+   below the card, so the diagram, its one line and More detail all fit on a
+   phone screen without scrolling to reach the navigation. */
+#learnBar{display:none}
+body.learning #learnBar{
+  display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;
+  position:fixed;left:0;right:0;bottom:0;z-index:45;max-width:940px;margin:0 auto;
+  background:var(--ink);border-radius:14px 14px 0 0;
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom));
+  box-shadow:0 -4px 0 rgba(23,24,28,.28)}
+#learnBar .btn{font-size:14px;padding:12px 16px;box-shadow:none;white-space:nowrap}
+#learnBar .btn:hover{transform:none}
+#learnBar #rReplay{color:var(--blue);width:100%}
+
+/* The tutorial is sized to the viewport rather than to its content: the chapter
+   fills exactly the space above the floating bar and the diagram takes whatever
+   is left after the fixed rows, so nothing needs scrolling to. Below the floor
+   the pitch stops shrinking and the page scrolls again, which beats a diagram
+   squeezed to nothing on a very short window. */
+/* a narrower column on the tutorial: its diagrams are near square, so a 940px
+   card just pads them with green, and a short measure reads better anyway */
+body.learning .wrap{padding-bottom:0;max-width:760px}
+body.learning #screen-learn{display:flex;flex-direction:column;height:calc(100vh - 84px);height:calc(100svh - 84px)}
+body.learning #screen-learn .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-bottom:8px}
+body.learning #learnStageSlot{flex:1 1 auto;min-height:0;display:flex}
+body.learning #stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-top:2px}
+body.learning #sceneMount{flex:1 1 auto;min-height:170px;background:#57a747}
+body.learning #sceneMount svg.pitch{width:100%;height:100%}
+body.learning footer{display:none}
+body.learning .toc{max-height:44svh;overflow-y:auto}
+/* every row above the diagram is a row the diagram does not get, so on the
+   tutorial they are all trimmed to their content: the chapter tabs scroll
+   sideways rather than wrapping onto a second line, and the title drops a size */
+body.learning .card{padding:11px 12px 10px}
+body.learning .q-title{font-size:clamp(18px,3.4vw,24px);margin:1px 0 4px}
+body.learning .q-head{margin-bottom:7px}
+/* everything except the diagram keeps its natural height — as flex items they
+   would otherwise shrink, which clipped the chapter tabs mid-letter */
+body.learning .card>.q-head,
+body.learning .card>.q-title,
+body.learning .card>.rtabs,
+body.learning .card>.rpoint,
+body.learning .card>.morerow{flex:0 0 auto}
+body.learning .rtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 0 5px;padding-bottom:5px}
+body.learning .rtabs::-webkit-scrollbar{display:none}
+body.learning .rpoint{margin:9px 2px 0;font-size:14.5px}
+body.learning .morerow{margin:9px 0 0}
+body.learning .morerow .btn{padding:8px 16px;font-size:13.5px}
+body.learning .legend{padding:5px 10px;font-size:11px}
 
 /* ---------- answers ----------
    These live inside the stage, directly under the transport, so the call can be
@@ -299,7 +329,6 @@ footer b{color:#4a4c56}
   .dots{gap:3px}
   .dots li{width:9px;height:9px;border-width:2px}
   .chip.sm{font-size:10.5px;padding:2px 7px}
-  .variants{padding:6px 9px;gap:6px}
   .vbtn{font-size:11.5px;padding:5px 10px}
   .stage-bar{padding:7px 10px 2px}
   .answers #playBtn{font-size:12px;padding:11px 9px}
@@ -314,7 +343,10 @@ footer b{color:#4a4c56}
   .brief{font-size:13.5px;margin-bottom:9px}
   .q-title{margin:0 0 3px}
   .card{padding:12px}
-  svg.pitch.close text:not(.badge-t){font-size:7px}
+  body.learning #learnBar{padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+    border-radius:0;gap:7px}
+  #learnBar .btn{font-size:13px;padding:11px 12px}
+  body.learning #screen-learn{height:calc(100vh - 76px);height:calc(100svh - 76px)}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -545,14 +577,13 @@ footer b{color:#4a4c56}
 
   <!-- ===== the law, as a walkthrough ===== -->
   <section id="screen-learn" hidden>
-    <header class="hero">
-      <h1 class="small">How <em>Offside</em> Works</h1>
-      <div class="learntop">
-        <button class="btn big" id="startBtn">🚩 Take the Challenge</button>
-        <button class="btn big ghost" id="tocBtn" type="button">☰ Contents</button>
-        <button class="btn big ghost" id="learnHome" type="button">🏠 Main page</button>
-      </div>
-    </header>
+    <!-- Kept to a single compact row: on a phone every pixel above the diagram is
+         a pixel the diagram does not get, and the chapter is already named on the card. -->
+    <div class="learntop">
+      <button class="btn sm ghost" id="learnHome" type="button">🏠 Main</button>
+      <button class="btn sm ghost" id="tocBtn" type="button">☰ Contents</button>
+      <button class="btn sm" id="startBtn">🚩 Challenge</button>
+    </div>
 
     <div class="toc" id="toc" hidden></div>
 
@@ -564,13 +595,14 @@ footer b{color:#4a4c56}
       <p class="rpoint" id="rPoint"></p>
       <div class="morerow"><button class="btn ghost" id="moreBtn" type="button">📖 More detail</button></div>
     </div>
-
-    <div class="learnnav">
-      <button class="btn ghost" id="rPrev" type="button">◀ Back</button>
-      <span class="chip sm" id="rCount">Rule 1 of 17</span>
-      <button class="btn" id="rNext" type="button">Next rule ▶</button>
-    </div>
   </section>
+
+  <!-- the tutorial's transport, pinned to the bottom of the viewport -->
+  <div id="learnBar">
+    <button class="btn ghost" id="rPrev" type="button">◀ Prev</button>
+    <button class="btn ghost" id="rReplay" type="button">↻ Replay</button>
+    <button class="btn" id="rNext" type="button">Next ▶</button>
+  </div>
 
   <!-- ===== the offside challenge ===== -->
   <section id="screen-quiz" hidden>
@@ -581,11 +613,6 @@ footer b{color:#4a4c56}
       <div id="quizStageSlot"></div>
 
       <div class="stage" id="stage">
-        <div class="variants" id="variants">
-          <button class="vbtn on" type="button" data-view="fit">⤢ Fit</button>
-          <button class="vbtn" type="button" data-view="close">🔍 Zoom</button>
-          <button class="vbtn" type="button" id="fsBtn">⛶ Full</button>
-        </div>
         <div class="caption" aria-hidden="true"><span class="step-n" id="stepN">1/1</span><span id="caption"></span></div>
         <div id="sceneMount"></div>
         <div class="stage-bar" id="stageBar">
@@ -1348,21 +1375,7 @@ function buildScene(mount,sc){
   const bText=E('text',{class:'badge-t',x:0,y:16,'font-size':11.5,'font-weight':900,fill:'#fffaf0','text-anchor':'middle'},badge);
 
   const h={svg,els,ball,band,lineG,lineLab,attG,attLab,ballLineG,ballLab,
-    traj,run,spot,burst,badge,bRect,bText,arG,arFlag,judged,slId,bb,verdict:null,view:'fit'};
-  h.setView=function(mode){
-    h.view=mode;
-    svg.classList.toggle('close',mode==='close');
-    if(mode!=='close'){svg.setAttribute('viewBox',fitBox(sc));return;}
-    /* zoom on the decision: a half-size window centred between the offside line
-       and the attacker, in whichever orientation is live */
-    const dx=defLineX(sc,sc.freezeT);
-    const ap=lerpTrack(actorOf(sc,judged).track,sc.freezeT);
-    const c=mapPt((dx+ap[0])/2,ap[1]);
-    const w=dW()/2,ht=dH()/2;
-    const x=Math.min(Math.max(c[0]-w/2,0),dW()-w);
-    const y=Math.min(Math.max(c[1]-ht/2,0),dH()-ht);
-    svg.setAttribute('viewBox',x+' '+y+' '+w+' '+ht);
-  };
+    traj,run,spot,burst,badge,bRect,bText,arG,arFlag,judged,slId,bb,verdict:null};
   return h;
 }
 function actorOf(sc,id){return sc.actors.find(a=>a.id===id);}
@@ -1539,7 +1552,7 @@ function createPlayer(sc,h,els){
 
 /* ================= the offside challenge ================= */
 const $=id=>document.getElementById(id);
-const state={i:0,r:0,s:0,mode:'learn',correct:0,wrong:0,answers:[],player:null,scene:null,view:'fit',fs:false};
+const state={i:0,r:0,s:0,mode:'learn',correct:0,wrong:0,answers:[],player:null,scene:null};
 
 function updateStatus(){
   const st=stageFor(state.correct);
@@ -1570,7 +1583,7 @@ function show(screen){
 function renderMenu(){
   state.mode='menu';
   if(state.player)state.player.stop();
-  setDrawer(false);setFs(false);
+  setDrawer(false);
   show('screen-menu');
   window.scrollTo({top:0,behavior:'auto'});
 }
@@ -1579,35 +1592,41 @@ function startChallenge(){
   show('screen-quiz');renderQuestion();
 }
 
-function setView(mode){
-  state.view=mode;
-  if(state.scene)state.scene.setView(mode);
-  $('variants').querySelectorAll('.vbtn[data-view]').forEach(b=>{
-    const on=b.dataset.view===mode;
-    b.classList.toggle('on',on);
-    b.setAttribute('aria-pressed',on?'true':'false');
-  });
-}
-
 /* A landscape pitch can only ever fill a band across a portrait phone, so the
    attack runs up the screen instead when the stage is taller than it is wide. */
 function pickOrient(){
   const el=$('sceneMount');
   const w=(el&&el.clientWidth)||window.innerWidth;
-  const h=state.fs?window.innerHeight:window.innerHeight*0.62;
+  /* On the tutorial the mount is sized by the layout, so measure it. On the quiz
+     it grows to whatever the diagram needs, so its height IS the current
+     orientation's height — measuring there would feed the answer back into
+     itself and the pitch could never flip back. Estimate from the viewport. */
+  const learning=document.body.classList.contains('learning');
+  const h=(learning&&el&&el.clientHeight)||window.innerHeight*0.62;
   return (h/w>0.92)?'port':'land';
 }
-function applyOrient(force){
-  const want=pickOrient();
-  if(want===ORIENT&&!force)return false;
-  ORIENT=want;
+/* Rebuild whichever diagram is live, keeping where playback had got to. Both
+   screens need this: the tutorial's mount is sized by the layout, so its first
+   measurement can predate the settled height. */
+function rebuildLive(){
   if(!$('screen-quiz').hidden&&SCENARIOS[state.i]){
     const at=state.player?state.player.time():0;
     const revealed=state.scene?!!state.scene.revealed:false;
     const verdict=state.scene?state.scene.verdict:null;
     buildCurrentScene({at:at,revealed:revealed,verdict:verdict});
+    return true;
   }
-  return true;
+  if(!$('screen-learn').hidden){
+    buildLearnScene(state.player?state.player.time():0);
+    return true;
+  }
+  return false;
+}
+function applyOrient(force){
+  const want=pickOrient();
+  if(want===ORIENT&&!force)return false;
+  ORIENT=want;
+  return rebuildLive();
 }
 
 /* ================= tutorial ================= */
@@ -1623,9 +1642,8 @@ function renderRule(){
     '<span class="chip sm b">Chapter '+c.n+' of '+LEARN.length+'</span>'+
     '<span class="chip sm">'+c.ref+'</span>';
   $('rTitle').textContent=c.n+'. '+c.title;
-  $('rCount').textContent='Chapter '+c.n+' of '+LEARN.length;
   $('rPrev').disabled=state.r===0;
-  $('rNext').textContent=(state.r===LEARN.length-1)?'🚩 Take the Challenge':'Next chapter ▶';
+  $('rNext').textContent=(state.r===LEARN.length-1)?'🚩 Challenge':'Next ▶';
 
   const tabs=$('rTabs');tabs.innerHTML='';
   tabs.hidden=c.shots.length<2;
@@ -1644,6 +1662,19 @@ function renderRule(){
   $('playBtn').hidden=REDUCED;
 
   ORIENT=pickOrient();
+  buildLearnScene(null);
+  /* the rows above the diagram have only just been filled in, so re-measure once
+     the layout has settled and flip the pitch if that changed the answer */
+  requestAnimationFrame(()=>{if(!$('screen-learn').hidden)applyOrient(false);});
+
+  renderToc();
+  window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'});
+}
+
+/* at==null starts the passage from the top; otherwise it resumes where it was */
+function buildLearnScene(at){
+  const c=LEARN[state.r],sh=c.shots[state.s],sc=shotScene(sh);
+  if(state.player)state.player.stop();
   const h=buildScene($('sceneMount'),sc);
   state.scene=h;
   /* the tutorial teaches rather than tests, so the verdict is shown from the start */
@@ -1651,11 +1682,9 @@ function renderRule(){
   h.revealed=true;
   state.player=createPlayer(sc,h,
     {caption:$('caption'),scrub:$('scrub'),play:$('playBtn'),step:$('stepN')});
-  setView(state.view||'fit');
-  if(REDUCED)state.player.seek(sc.freezeT); else state.player.play();
-
-  renderToc();
-  window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'});
+  if(REDUCED)state.player.seek(sc.freezeT);
+  else if(at!=null)state.player.seek(at);
+  else state.player.play();
 }
 
 /* the long version, on demand */
@@ -1726,7 +1755,6 @@ function buildCurrentScene(restore){
   if(restore){h.revealed=restore.revealed;h.verdict=restore.verdict;}
   state.player=createPlayer(sc,h,
     {caption:$('caption'),scrub:$('scrub'),play:$('playBtn'),step:$('stepN')});
-  setView(state.view||'fit');
   if(restore){
     if(restore.revealed)state.player.unlockPhase();
     state.player.seek(restore.at);
@@ -1736,8 +1764,6 @@ function buildCurrentScene(restore){
 function answer(choice){
   const sc=SCENARIOS[state.i];
   if($('btnOffside').disabled)return;
-  /* the explanation lives outside the overlay, so drop out of full screen to read it */
-  if(state.fs)setFs(false);
   document.body.classList.remove('answering');
   state.player.freeze();
 
@@ -1809,6 +1835,11 @@ $('menuQuiz').addEventListener('click',startChallenge);
 $('startBtn').addEventListener('click',startChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});
+/* an unconditional restart, so one button always does the same thing */
+$('rReplay').addEventListener('click',()=>{
+  if(!state.player)return;
+  state.player.seek(0);state.player.play();
+});
 $('rNext').addEventListener('click',()=>{
   if(state.r<LEARN.length-1){state.r++;state.s=0;renderRule();}
   else startChallenge();
@@ -1819,9 +1850,6 @@ $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
 $('playBtn').addEventListener('click',()=>state.player&&state.player.toggle());
 $('scrub').addEventListener('input',e=>state.player&&state.player.seek(Number(e.target.value)/1000));
-$('variants').addEventListener('click',e=>{
-  const b=e.target.closest('.vbtn[data-view]');if(b)setView(b.dataset.view);
-});
 
 /* The verdict arrives as a drawer sliding up over the page, so the pitch stays put
    and can be re-read against the explanation. Dismissing it leaves a Why? button. */
@@ -1834,19 +1862,6 @@ function setDrawer(on){
   else{document.body.classList.remove('drawer');
     setTimeout(()=>{if(!document.body.classList.contains('drawer')){dr.hidden=true;sc.hidden=true;}},300);}
 }
-
-/* full-screen pop-out: the pitch takes the whole viewport, with the two answer
-   buttons pinned over it so the call can still be made from in there */
-function setFs(on){
-  if(state.fs===on)return;
-  state.fs=on;
-  document.body.classList.toggle('fs',on);
-  $('fsBtn').textContent=on?'✕ Close':'⛶ Full';
-  $('fsBtn').setAttribute('aria-pressed',on?'true':'false');
-  applyOrient(true);
-}
-$('fsBtn').addEventListener('click',()=>setFs(!state.fs));
-addEventListener('keydown',e=>{if(e.key==='Escape'&&state.fs)setFs(false);});
 
 let rzT=null;
 addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>applyOrient(false),160);});

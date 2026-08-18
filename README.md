@@ -20,8 +20,8 @@ It finishes on the assistant referee's delayed flag.
 
 The pitch reframes itself to whatever it is drawn on: on a phone it rotates to portrait so
 the attack runs up the screen and the figures are roughly twice the size, and each scenario
-is framed to its own action rather than always showing the whole half. `⛶ Full` hands the
-diagram the entire viewport with the answer buttons pinned over it.
+is framed to its own action rather than always showing the whole half. There are no view
+controls to choose between — the diagram is always sized to the space it has.
 
 The assistant referee appears on every scenario as their flag, travelling along the
 touchline in the AR's required position: level with the second-last defender, or with the
@@ -58,7 +58,11 @@ it cannot cover anyone.
 
 Anything longer than a line lives behind **More detail**, which opens a drawer with the
 full explanation and a quote of what the book actually says. There is a contents list to
-jump around, and the quiz is one button away at any point, before or after reading.
+jump around, and the challenge is one button away at any point, before or after reading.
+
+A chapter is sized to the viewport rather than to its content: **Prev / Replay / Next**
+ride in a bar pinned to the bottom of the screen, and the diagram takes whatever height is
+left once the fixed rows are placed, so a chapter never has to be scrolled through.
 
 ## Running it locally
 
