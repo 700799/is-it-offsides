@@ -60,9 +60,14 @@ Anything longer than a line lives behind **More detail**, which opens a drawer w
 full explanation and a quote of what the book actually says. There is a contents list to
 jump around, and the challenge is one button away at any point, before or after reading.
 
-A chapter is sized to the viewport rather than to its content: **Prev / Replay / Next**
+Every chapter is sized to the viewport rather than to its content: **Prev / Replay / Next**
 ride in a bar pinned to the bottom of the screen, and the diagram takes whatever height is
-left once the fixed rows are placed, so a chapter never has to be scrolled through.
+left once the fixed rows are placed, so none of the seventeen has to be scrolled through.
+The chapter chips and tabs scroll sideways rather than wrapping, and on a short screen the
+legend is dropped, so every chapter gets much the same diagram regardless of how long its
+title or its one line runs. Below roughly 660px of viewport height there is not enough left
+to be worth it, and the chapter reverts to scrolling rather than showing a diagram squeezed
+to nothing.
 
 ## Running it locally
 

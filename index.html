@@ -206,13 +206,31 @@ body.learning #learnBar{
    squeezed to nothing on a very short window. */
 /* a narrower column on the tutorial: its diagrams are near square, so a 940px
    card just pads them with green, and a short measure reads better anyway */
-body.learning .wrap{padding-bottom:0;max-width:760px}
-body.learning #screen-learn{display:flex;flex-direction:column;height:calc(100vh - 84px);height:calc(100svh - 84px)}
-body.learning #screen-learn .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-bottom:8px}
-body.learning #learnStageSlot{flex:1 1 auto;min-height:0;display:flex}
-body.learning #stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-top:2px}
-body.learning #sceneMount{flex:1 1 auto;min-height:170px;background:#57a747}
-body.learning #sceneMount svg.pitch{width:100%;height:100%}
+body.learning .wrap{padding-bottom:96px;max-width:760px}
+/* The fit needs a definite height to size the diagram against, and it is only
+   worth doing while the diagram still gets a usable share of it. Under that the
+   chapter falls back to normal flow and the page scrolls, which is honest —
+   better than a diagram squeezed to nothing, or rows clipped out of sight. */
+@media (min-height:660px){
+  /* the fit places the bar itself, so the flow padding that clears it goes away */
+  body.learning .wrap{padding-bottom:0}
+  body.learning #screen-learn{display:flex;flex-direction:column;height:calc(100vh - 84px);height:calc(100svh - 84px)}
+  body.learning #screen-learn .card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-bottom:8px}
+  body.learning #learnStageSlot{flex:1 1 auto;min-height:0;display:flex}
+  body.learning #stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;margin-top:2px}
+  /* no floor: the diagram takes exactly what is left, so the stage can never
+     overflow the rounded box it clips to */
+  body.learning #sceneMount{flex:1 1 auto;min-height:0;background:#57a747}
+  body.learning #sceneMount svg.pitch{width:100%;height:100%}
+  /* the stage clips to its corners, so its own rows must never be squeezed
+     into that clip — only the diagram absorbs the difference */
+  body.learning #stage>.caption,
+  body.learning #stage>.stage-bar,
+  body.learning #stage>.legend,
+  body.learning #stage>.motion-note{flex:0 0 auto}
+}
+/* on a short screen the legend is the first thing worth trading for diagram */
+@media (max-height:780px){body.learning .legend{display:none}}
 body.learning footer{display:none}
 body.learning .toc{max-height:44svh;overflow-y:auto}
 /* every row above the diagram is a row the diagram does not get, so on the
@@ -220,7 +238,8 @@ body.learning .toc{max-height:44svh;overflow-y:auto}
    sideways rather than wrapping onto a second line, and the title drops a size */
 body.learning .card{padding:11px 12px 10px}
 body.learning .q-title{font-size:clamp(18px,3.4vw,24px);margin:1px 0 4px}
-body.learning .q-head{margin-bottom:7px}
+body.learning .q-head{margin-bottom:7px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+body.learning .q-head::-webkit-scrollbar{display:none}
 /* everything except the diagram keeps its natural height — as flex items they
    would otherwise shrink, which clipped the chapter tabs mid-letter */
 body.learning .card>.q-head,
@@ -346,8 +365,13 @@ footer b{color:#4a4c56}
   body.learning #learnBar{padding:9px 10px calc(9px + env(safe-area-inset-bottom));
     border-radius:0;gap:7px}
   #learnBar .btn{font-size:13px;padding:11px 12px}
+}
+/* the bar is shorter on a narrow screen, so the chapter gets those pixels back */
+@media (max-width:560px) and (min-height:660px){
   body.learning #screen-learn{height:calc(100vh - 76px);height:calc(100svh - 76px)}
 }
+/* only in the scrolling fallback — when the fit is on, the bar is placed for us */
+@media (max-width:560px) and (max-height:659px){body.learning .wrap{padding-bottom:88px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .btn{transition:none}
