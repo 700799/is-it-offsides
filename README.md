@@ -49,7 +49,8 @@ drawn with the smallest cast that can make its point — one passer, the attacke
 judged, the second-last defender, and the keeper — so there is nothing to read past, and
 with only two opponents the second-last is unambiguous. The keeper wears his own side's
 shirt and is told apart by his gloves, because the offside line has never cared who is
-in goal. The passage plays, the card shows
+in goal. Players are drawn as flat jerseys rather than full figures, so team and role
+read at a glance without competing with the pitch for attention. The passage plays, the card shows
 one short line, and the assistant referee's flag is pinned to the edge of the frame where
 it cannot cover anyone.
 

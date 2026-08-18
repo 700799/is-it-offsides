@@ -338,7 +338,9 @@ footer b{color:#4a4c56}
 <!-- ===== sprite sheet: original cartoon figures, no licensed marks ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 
-  <!-- the same bean as the pitch figures, scaled up: backpack, capsule, feet.
+  <!-- the rank avatar's own body — backpack, capsule, feet. The pitch figures
+       are drawn separately as flat jerseys; this one keeps the fuller cartoon
+       body because the whole point of the rank track is watching it change.
        The visor lives in the head layers so a jersey can recolour the capsule
        without painting over the face, and the helmet can replace it outright. -->
   <g id="char-body">
@@ -717,43 +719,40 @@ function fitBox(sc){
     : [b.x[0],b.y[0],w,h].join(' ');
 }
 
-/* a chunky bean, drawn facing right; mirrored for the defending side */
-const BEAN_S=1.34;
+/* a flat jersey, drawn facing forward — a shirt on the pitch, not a figure.
+   Team is told by shirt colour, role by the label beside it; there is nothing
+   else on the diagram competing for a read. Mirrored for the defending side
+   so the one-armed throw-in pose still points the right way. */
+const BEAN_S=1.08;
 /* the keeper wears his own side's shirt — gloves are what tell him apart, exactly as
    on a real pitch, where the offside line does not care who is in goal */
 const TEAMCOL={blue:['#4aa3ff','#2b7fd4'],red:['#f4795b','#cf5335'],gk:['#f4795b','#cf5335']};
+const JERSEY_D='M-7 -14L-15 -8L-18 -2L-12 2L-12 15Q-12 18-8 18L8 18Q12 18 12 15L12 2L18 -2L15 -8L7 -14Q0 -10-7 -14Z';
 function bean(team,dir,pose){
   const c=TEAMCOL[team]||TEAMCOL.red;
   const g=E('g',{});
   const m=E('g',{transform:'scale('+(dir||1)+',1)'},g);
-  /* both arms up over the head, holding the ball — a legal throw-in */
-  /* The figures are never rotated, so an arm reaching "toward the goal" points
-     right in landscape and up in portrait. */
+  /* both arms up, hands together overhead holding the ball — a legal throw-in.
+     Straight lines from the shoulder read cleanly at this size; a curved arm
+     just turned into a blob. The figures are never rotated, so an arm reaching
+     "toward the goal" points right in landscape and up in portrait. */
   if(pose==='reach'){
-    E('path',{d:isPort()?'M9 -5C15 -15 13 -25 6 -32':'M8 -2C17 -4 24 -3 30 2',
-      stroke:'#17181c','stroke-width':4.8,fill:'none','stroke-linecap':'round'},m);
+    E('path',{d:isPort()?'M7 -14L3 -34':'M15 -8L33 -12',
+      stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
   }
   if(pose==='throw'){
-    E('path',{d:'M-9 -4C-16 -10-17 -20-13 -27',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
-    E('path',{d:'M9 -4C16 -10 17 -20 13 -27',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
+    E('path',{d:'M-7 -14L-4 -32',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
+    E('path',{d:'M7 -14L4 -32',stroke:'#17181c','stroke-width':4.6,fill:'none','stroke-linecap':'round'},m);
+    E('circle',{cx:0,cy:-35,r:4.6,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.2},m);
   }
-  E('rect',{x:-8,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
-  E('rect',{x:1,y:15,width:7,height:6,rx:2.8,fill:'#17181c'},m);
+  E('path',{d:JERSEY_D,fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
+  /* a shaded hem band suggests the fold of real fabric without adding a second outline */
+  E('path',{d:'M-12 9C-6 12 6 12 12 9L12 15Q12 18 8 18L-8 18Q-12 18-12 15Z',fill:c[1],opacity:.9},m);
+  E('path',{d:'M-7 -14Q0 -10 7 -14',fill:'none',stroke:'#17181c','stroke-width':2.2,'stroke-linecap':'round'},m);
   if(team==='gk'){
-    /* Both arms out, pale mitts on the ends. The keeper wears his own side's shirt —
-       the offside line never cared who was in goal — so the gloves are the only
-       thing that tells him apart. */
-    E('path',{d:'M10 -4c6 0 7.5 3 7.5 6.5s-1.5 6.5-7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
-  }
-  E('path',{d:'M-10 -4c-6 0-7.5 3-7.5 6.5s1.5 6.5 7.5 6.5z',fill:c[1],stroke:'#17181c','stroke-width':2.4,'stroke-linejoin':'round'},m);
-  E('path',{d:'M0 -15c7.5 0 11.5 5 11.5 11.5v11c0 4.5-4.5 6.5-11.5 6.5s-11.5-2-11.5-6.5v-11c0-6.5 4-11.5 11.5-11.5z',
-    fill:c[0],stroke:'#17181c','stroke-width':2.8,'stroke-linejoin':'round'},m);
-  E('path',{d:'M2.5 -11c6 0 9 3 9 6.6s-3 6.6-9 6.6c-4.6 0-7.2-3-7.2-6.6s2.6-6.6 7.2-6.6z',
-    fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
-  if(team==='gk'){
-    /* the mitts sit on the ends of both arms, only just wider than the figure already was */
-    E('rect',{x:-19.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
-    E('rect',{x:10.5,y:.5,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+    /* pale mitts at both cuffs — the only thing that marks him out from his own side */
+    E('rect',{x:-19,y:-3,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
+    E('rect',{x:10,y:-3,width:9,height:11,rx:4,fill:'#fffaf0',stroke:'#17181c','stroke-width':2.4},m);
   }
   return g;
 }
@@ -1204,7 +1203,7 @@ function buildScene(mount,sc){
 
   const spot={};
   [judged,slId].forEach((id,i)=>{
-    spot[id]=E('rect',{class:'spot',x:-21*BEAN_S,y:-25*BEAN_S,width:42*BEAN_S,height:54*BEAN_S,rx:13,fill:'#ffd44d','fill-opacity':i?0:.18,
+    spot[id]=E('rect',{class:'spot',x:-23*BEAN_S,y:-36*BEAN_S,width:46*BEAN_S,height:58*BEAN_S,rx:13,fill:'#ffd44d','fill-opacity':i?0:.18,
       stroke:i?'#fffaf0':'#ffd44d','stroke-width':2.6,'stroke-dasharray':'6 5',opacity:0},svg);
   });
 
@@ -1213,8 +1212,26 @@ function buildScene(mount,sc){
      to finish in the same spot — he is the one the whole frame is about. Labels still
      stagger by the actor's own index, so nothing else moves. */
   const order=sc.actors.slice().sort((p,q)=>(p.id===judged?1:0)-(q.id===judged?1:0));
+  /* Two players who end up shoulder to shoulder (the 9 arriving right where the
+     keeper is standing, say) need different label lanes, or the two labels print
+     on top of each other. Cluster by how close they actually land, in pitch
+     coordinates, checked at both the freeze and where the passage ends — the
+     two moments a label has to stay readable — rather than by array position;
+     actors that are never near each other never needed staggering at all. */
+  const laneOf={};
+  sc.actors.forEach(a=>{
+    let lane=0;
+    sc.actors.forEach(b=>{
+      if(b===a||laneOf[b.id]==null)return;
+      const close=[sc.freezeT,1].some(t=>{
+        const p=lerpTrack(a.track,t),q=lerpTrack(b.track,t);
+        return Math.hypot(p[0]-q[0],p[1]-q[1])<55;
+      });
+      if(close&&laneOf[b.id]>=lane)lane=laneOf[b.id]+1;
+    });
+    laneOf[a.id]=lane%3;
+  });
   order.forEach(a=>{
-    const ai=sc.actors.indexOf(a);
     const g=E('g',{},svg);
     const dir=a.team==='blue'?1:-1;
     const bg=bean(a.team,dir,a.pose);
@@ -1226,15 +1243,14 @@ function buildScene(mount,sc){
     else if(a.team==='gk')txt='GK';
     /* In portrait, players separate along the attack axis — which is vertical on
        screen — so a label under the figure lands on whoever is behind. Put it
-       beside the figure instead, on whichever side has room. Either way, stagger
-       alternate labels vertically so two players at the same depth don't collide. */
-    const lane=ai%3;                       // three lanes: two lanes still collide
+       beside the figure instead, on whichever side has room. */
+    const lane=laneOf[a.id];
     if(isPort()){
       const px=lerpTrack(a.track,sc.freezeT)[1];
       const left=px>(bb.y[0]+bb.y[1])/2;
-      halo(g,(left?-1:1)*(20*BEAN_S+9),5+[-17,0,17][lane],txt,
+      halo(g,(left?-1:1)*(21*BEAN_S+9),5+[-22,0,22][lane],txt,
         {size:12,hw:4,anchor:left?'end':'start'});
-    }else halo(g,0,30*BEAN_S+13+[0,13,26][lane],txt,{size:12,hw:4});
+    }else halo(g,0,21*BEAN_S+16+[0,21,42][lane],txt,{size:12,hw:4});
     els[a.id]=g;
   });
 
