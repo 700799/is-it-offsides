@@ -6,8 +6,10 @@ of play on a pitch and freezes at the moment the ball is played, with a dashed o
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
 
-The landing page is a main page with two doors — *review the rules* or *take the
-challenge* — and every screen keeps a route back to it.
+The landing page is a title and two big buttons — *study the rules* or *take the
+challenge* — each fronted by its own Japanese Chin: one in a referee's pinstripes with
+the flag already up, one in a headband striking a ball. Every screen keeps a route back
+to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes
@@ -49,7 +51,8 @@ drawn with the smallest cast that can make its point — one passer, the attacke
 judged, the second-last defender, and the keeper — so there is nothing to read past, and
 with only two opponents the second-last is unambiguous. The keeper wears his own side's
 shirt and is told apart by his gloves, because the offside line has never cared who is
-in goal. The passage plays, the card shows
+in goal. Players are drawn as flat jerseys rather than full figures, so team and role
+read at a glance without competing with the pitch for attention. The passage plays, the card shows
 one short line, and the assistant referee's flag is pinned to the edge of the frame where
 it cannot cover anyone.
 
@@ -85,9 +88,5 @@ Vercel treat this as a Node project and attempt an install/build it does not nee
 - The 2026/27 Laws permit competitions to use semi-automated offside technology; that changes
   who draws the line, not where it is, so every answer here is unaffected.
 - All characters are original cartoon figures. No licensed marks, real clubs, or real players.
-- The "85%" on the main page is a joke, not a finding, and the page says so in a footnote
-  directly underneath it. Nobody has surveyed this.
-- The angry-coach exchange on the main page is written for this site. It nods at a certain
-  television manager's honesty about not knowing the rule; it does not quote him.
 - Respects `prefers-reduced-motion`: scenes render as the frozen freeze-frame with the
   transport controls removed rather than animating.
