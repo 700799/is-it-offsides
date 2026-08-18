@@ -7,7 +7,9 @@ line drawn through the second-last opponent. You call it **Offside** or **Onside
 get the answer explained against IFAB's Law 11.
 
 The landing page is a title and two big buttons — *study the rules* or *take the
-challenge* — and every screen keeps a route back to it.
+challenge* — each fronted by its own Japanese Chin: one in a referee's pinstripes with
+the flag already up, one in a headband striking a ball. Every screen keeps a route back
+to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes
