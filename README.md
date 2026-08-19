@@ -6,12 +6,11 @@ of play on a pitch and freezes at the moment the ball is played, with a dashed o
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
 
-The landing page is a title and two big buttons — *study the rules* or *take the
-challenge* — each fronted by its own dog in kit: a husky coach with a tactics board, and a
-number 9 with both arms up. Both are drawn in ink and greys with a single colour picked
-out — the coach's eyes and his chalk, the striker's number and confetti — so they lead
-into the pitch diagrams rather than compete with them. Every screen keeps a route back
-to it.
+The landing page is a title and two cards, side by side at every width — *study the rules*
+or *take the challenge* — fronted by a husky coach with a tactics board and a number 9 with
+both arms up. Each card takes its artwork's own background colour so the picture bleeds to
+the button's edges, and both are locked to one aspect ratio so the two labels sit on the
+same line. Every screen keeps a route back to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes
@@ -73,8 +72,8 @@ to nothing.
 
 ## Running it locally
 
-The whole site is a single self-contained `index.html` — inline CSS, inline vanilla JS,
-inline SVG, and zero external requests. Open it directly:
+The site is `index.html` — inline CSS, inline vanilla JS, inline SVG — plus the two
+front-page images under `art/`. Nothing is fetched from a third party. Open it directly:
 
 ```
 open index.html
