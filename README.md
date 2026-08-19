@@ -7,8 +7,10 @@ line drawn through the second-last opponent. You call it **Offside** or **Onside
 get the answer explained against IFAB's Law 11.
 
 The landing page is a title and two big buttons — *study the rules* or *take the
-challenge* — each fronted by its own Japanese Chin: one in a referee's pinstripes with
-the flag already up, one in a headband striking a ball. Every screen keeps a route back
+challenge* — each fronted by its own dog in kit: a husky coach with a tactics board, and a
+number 9 with both arms up. Both are drawn in ink and greys with a single colour picked
+out — the coach's eyes and his chalk, the striker's number and confetti — so they lead
+into the pitch diagrams rather than compete with them. Every screen keeps a route back
 to it.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker

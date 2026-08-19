@@ -96,7 +96,7 @@ svg text{font-family:var(--font)}
   border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 17px 22px;
   cursor:pointer;font-family:var(--font);color:var(--ink);transition:transform .07s}
 .opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-.opt .oi{display:block;width:100%;max-width:210px;height:auto;transition:transform .18s}
+.opt .oi{display:block;width:100%;max-width:188px;height:auto;transition:transform .18s}
 /* a small lean towards whatever each of them is doing */
 .opt.learn:hover .oi{transform:rotate(-3deg)}
 .opt.quiz:hover .oi{transform:rotate(3deg)}
@@ -503,96 +503,126 @@ footer b{color:#4a4c56}
     </header>
 
     <div class="menurow">
-      <!-- Two Japanese Chins: the one who knows the law, and the one who has to
-           play under it. Same breed, same drawing — only the kit and the job differ. -->
+      <!-- Two dogs in kit: the one who knows the law, and the one who has to play
+           under it. Drawn almost entirely in ink and greys, each with a single
+           colour picked out — the coach's eyes and his chalk, the striker's
+           number and confetti — so the cards read as a pair rather than
+           competing with the pitch diagrams they lead to. -->
       <button class="opt learn" id="menuLearn" type="button">
-        <svg class="oi" viewBox="0 0 252 212" aria-hidden="true" focusable="false">
-          <defs><clipPath id="refShirtClip">
-            <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z"/>
-          </clipPath></defs>
-          <!-- hind legs and paws -->
-          <path d="M97 158V180M128 158V180" stroke="#17181c" stroke-width="13" stroke-linecap="round"/>
-          <rect x="84" y="177" width="27" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <rect x="115" y="177" width="27" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <!-- the pinstriped shirt -->
-          <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z" fill="#fffaf0"/>
-          <g clip-path="url(#refShirtClip)">
-            <rect x="86" y="98" width="13" height="74" fill="#17181c"/>
-            <rect x="112" y="98" width="13" height="74" fill="#17181c"/>
-            <rect x="138" y="98" width="13" height="74" fill="#17181c"/>
+        <svg class="oi" viewBox="0 0 240 252" aria-hidden="true" focusable="false">
+          <!-- shirt -->
+          <path d="M72 134L52 148L44 166L66 176L66 230Q66 242 80 242L128 242Q142 242 142 230L142 176L164 166L156 148L136 134Q104 146 72 134Z"
+                fill="#9a9da8" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M66 176L66 230Q66 242 80 242L128 242Q142 242 142 230L142 176Z" fill="#7e828e"/>
+          <path d="M72 134Q104 146 136 134" fill="none" stroke="#17181c" stroke-width="3.4" stroke-linecap="round"/>
+          <text x="104" y="216" font-size="42" font-weight="900" fill="#fffaf0" stroke="#17181c"
+                stroke-width="5" paint-order="stroke" text-anchor="middle"
+                font-family="'Trebuchet MS',Verdana,sans-serif">3</text>
+          <path d="M72 134L52 148L44 166L66 176L66 230Q66 242 80 242L128 242Q142 242 142 230L142 176L164 166L156 148L136 134Q104 146 72 134Z"
+                fill="none" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+
+          <g transform="translate(104,92)">
+            <!-- husky ears, upright -->
+            <path d="M-36 -38C-46 -60-47 -78-40 -88C-29 -80-18 -66-11 -53Z" fill="#17181c" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M36 -38C46 -60 47 -78 40 -88C29 -80 18 -66 11 -53Z" fill="#17181c" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M-33 -44C-40 -60-41 -72-37 -79C-30 -73-22 -62-17 -52Z" fill="#fffaf0"/>
+            <path d="M33 -44C40 -60 41 -72 37 -79C30 -73 22 -62 17 -52Z" fill="#fffaf0"/>
+            <!-- skull -->
+            <path d="M-44 -30C-46 -54-30 -68 0 -68C30 -68 46 -54 44 -30C43 -10 36 6 24 16C15 24 8 28 0 28C-8 28-15 24-24 16C-36 6-43 -10-44 -30Z"
+                  fill="#3f424c" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <!-- blaze and muzzle -->
+            <path d="M0 -62C7 -62 11 -55 12 -45C26 -39 36 -22 36 -3C36 16 20 29 0 29C-20 29-36 16-36 -3C-36 -22-26 -39-12 -45C-11 -55-7 -62 0 -62Z"
+                  fill="#fffaf0" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
+            <!-- the one spot of colour on this card, besides his chalk -->
+            <ellipse cx="-19" cy="-26" rx="10" ry="9.5" fill="#4aa3ff" stroke="#17181c" stroke-width="3"/>
+            <ellipse cx="19" cy="-26" rx="10" ry="9.5" fill="#4aa3ff" stroke="#17181c" stroke-width="3"/>
+            <circle cx="-19" cy="-26" r="4.4" fill="#17181c"/>
+            <circle cx="19" cy="-26" r="4.4" fill="#17181c"/>
+            <circle cx="-22" cy="-29" r="1.9" fill="#fffaf0"/>
+            <circle cx="16" cy="-29" r="1.9" fill="#fffaf0"/>
+            <path d="M0 -9C7 -9 11 -5 11 0C11 5 6 9 0 9C-6 9-11 5-11 0C-11 -5-7 -9 0 -9Z" fill="#17181c"/>
+            <path d="M0 9V15" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
+            <path d="M0 15C-5 21-13 21-17 16M0 15C5 21 13 21 17 16" fill="none" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
           </g>
-          <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z" fill="none" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
-          <!-- whistle on its cord -->
-          <path d="M113 104V136" stroke="#17181c" stroke-width="2.6" fill="none"/>
-          <rect x="101" y="135" width="25" height="15" rx="6.5" fill="#ffd44d" stroke="#17181c" stroke-width="2.8"/>
-          <circle cx="120" cy="142.5" r="3" fill="#17181c"/>
-          <g transform="translate(113,60)">
-            <path d="M-38 -20C-64 -24-80 2-76 32C-72 58-58 72-43 68C-31 65-27 51-30 35C-33 15-36 -2-38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M38 -20C64 -24 80 2 76 32C72 58 58 72 43 68C31 65 27 51 30 35C33 15 36 -2 38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M0 -54C27 -54 46 -35 46 -6C46 22 27 40 0 40C-27 40-46 22-46 -6C-46 -35-27 -54 0 -54Z" fill="#22232b" stroke="#17181c" stroke-width="3.4"/>
-            <path d="M0 -52C7 -52 11 -46 12 -36C25 -32 39 -19 39 1C39 23 21 40 0 40C-21 40-39 23-39 1C-39 -19-25 -32-12 -36C-11 -46-7 -52 0 -52Z" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
-            <circle cx="-21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="-24.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <circle cx="17.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <path d="M0 6C6.5 6 10 9 10 13C10 17.5 5.5 20 0 20C-5.5 20-10 17.5-10 13C-10 9-6.5 6 0 6Z" fill="#17181c"/>
-            <path d="M0 20V25" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M0 25C-3.5 30-9.5 30-12.5 26M0 25C3.5 30 9.5 30 12.5 26" fill="none" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
+
+          <!-- the tactics board -->
+          <g transform="rotate(-5 194 174)">
+            <rect x="160" y="128" width="68" height="94" rx="7" fill="#fffaf0" stroke="#17181c" stroke-width="4"/>
+            <rect x="178" y="120" width="32" height="15" rx="5" fill="#9a9da8" stroke="#17181c" stroke-width="3.4"/>
+            <rect x="168" y="142" width="52" height="70" fill="none" stroke="#4aa3ff" stroke-width="2.6"/>
+            <path d="M168 177H220" stroke="#4aa3ff" stroke-width="2.6"/>
+            <circle cx="194" cy="177" r="9" fill="none" stroke="#4aa3ff" stroke-width="2.6"/>
+            <path d="M177 154l7 7M184 154l-7 7M204 194l7 7M211 194l-7 7" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
           </g>
-          <!-- arms last, so neither disappears behind those ears -->
-          <path d="M88 122C70 128 60 142 58 158" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="57" cy="161" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <!-- the flag, up -->
-          <path d="M168 180L210 30" stroke="#17181c" stroke-width="6" stroke-linecap="round"/>
-          <path d="M210 30L246 44L238 78L202 64Z" fill="#ffd44d" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-          <path d="M228 37L246 44L242 61L224 54ZM206 47L224 54L220 71L202 64Z" fill="#f4795b"/>
-          <path d="M210 30L246 44L238 78L202 64Z" fill="none" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-          <path d="M140 126C158 128 170 133 177 138" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="179" cy="140" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
+
+          <!-- arms last, so neither is lost behind the head or the board -->
+          <path d="M62 152C52 142 46 130 43 120" stroke="#17181c" stroke-width="19" fill="none" stroke-linecap="round"/>
+          <path d="M62 152C52 142 46 130 43 120" stroke="#6f7280" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <!-- a paw with one digit out, not a circle on a stick -->
+          <g transform="translate(42,116) rotate(-145) scale(.88)">
+            <path d="M-11 -10C-3 -13 8 -11 14 -7L28 -4C32.5 -3 32.5 3 28 4L14 7C8 11-3 13-11 10C-16.5 8-16.5 -8-11 -10Z"
+                  fill="#fffaf0" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
+          </g>
+          <path d="M148 152C154 160 156 168 157 175" stroke="#17181c" stroke-width="19" fill="none" stroke-linecap="round"/>
+          <path d="M148 152C154 160 156 168 157 175" stroke="#6f7280" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <circle cx="158" cy="178" r="13" fill="#fffaf0" stroke="#17181c" stroke-width="3.4"/>
         </svg>
         <span class="ot">Study the Rules</span>
       </button>
       <button class="opt quiz" id="menuQuiz" type="button">
-        <svg class="oi" viewBox="0 0 252 212" aria-hidden="true" focusable="false">
-          <!-- the ball is already gone -->
-          <path d="M230 148C238 157 238 179 230 188" fill="none" stroke="#17181c" stroke-width="3.6" stroke-linecap="round" opacity=".45"/>
-          <path d="M241 141C250 153 250 183 241 195" fill="none" stroke="#17181c" stroke-width="3.6" stroke-linecap="round" opacity=".28"/>
-          <!-- standing leg -->
-          <path d="M100 150V180" stroke="#17181c" stroke-width="13" stroke-linecap="round"/>
-          <rect x="86" y="177" width="28" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
+        <svg class="oi" viewBox="0 0 240 252" aria-hidden="true" focusable="false">
+          <!-- confetti; three pieces carry this card's one colour -->
+          <path d="M22 40l11 5-5 11-11-5z" fill="#b07df5" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M206 30l11 4-4 11-11-4z" fill="#fffaf0" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M196 78l10 4-4 10-10-4z" fill="#b07df5" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M36 96l10 4-4 10-10-4z" fill="#fffaf0" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M120 16l10 4-4 10-10-4z" fill="#b07df5" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M62 22l9 4-4 9-9-4z" fill="#fffaf0" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M198 140l9 4-4 9-9-4z" fill="#fffaf0" stroke="#17181c" stroke-width="2.6" stroke-linejoin="round"/>
+
           <!-- shirt -->
-          <path d="M80 158C74 130 84 100 113 100C142 100 152 130 146 158Z" fill="#4aa3ff" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
-          <text x="113" y="144" font-size="32" font-weight="900" fill="#fffaf0" stroke="#17181c" stroke-width="4" paint-order="stroke" text-anchor="middle" font-family="'Trebuchet MS',Verdana,sans-serif">9</text>
-          <!-- the kicking leg, swung across the shirt and through the ball -->
-          <path d="M126 148C144 154 160 160 168 164" stroke="#17181c" stroke-width="13" fill="none" stroke-linecap="round"/>
-          <ellipse cx="172" cy="166" rx="12.5" ry="10.5" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <circle cx="200" cy="168" r="25" fill="#fffaf0" stroke="#17181c" stroke-width="3.4"/>
-          <path d="M200 154.4L212.9 163.8L208 179H192L187.1 163.8Z" fill="#17181c"/>
-          <path d="M200 143V154.4M218.4 149.7L212.9 163.8M215.4 188.2L208 179M184.6 188.2L192 179M181.7 149.7L187.1 163.8" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
-          <g transform="translate(113,58)">
-            <path d="M-38 -20C-64 -24-80 2-76 32C-72 58-58 72-43 68C-31 65-27 51-30 35C-33 15-36 -2-38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M38 -20C64 -24 80 2 76 32C72 58 58 72 43 68C31 65 27 51 30 35C33 15 36 -2 38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M0 -54C27 -54 46 -35 46 -6C46 22 27 40 0 40C-27 40-46 22-46 -6C-46 -35-27 -54 0 -54Z" fill="#22232b" stroke="#17181c" stroke-width="3.4"/>
-            <path d="M0 -52C7 -52 11 -46 12 -36C25 -32 39 -19 39 1C39 23 21 40 0 40C-21 40-39 23-39 1C-39 -19-25 -32-12 -36C-11 -46-7 -52 0 -52Z" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
-            <circle cx="-21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="-24.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <circle cx="17.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <path d="M0 6C6.5 6 10 9 10 13C10 17.5 5.5 20 0 20C-5.5 20-10 17.5-10 13C-10 9-6.5 6 0 6Z" fill="#17181c"/>
-            <path d="M0 20V24" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M-12 25C-8 35 8 35 12 25Z" fill="#17181c"/>
-            <path d="M-6 30C-4 34 4 34 6 30Z" fill="#f4795b"/>
-            <!-- the headband, tail flying -->
-            <path d="M40 -22C51 -20 57 -13 59 -4" stroke="#17181c" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M-40 -22Q0 -46 40 -22" stroke="#17181c" stroke-width="16" fill="none" stroke-linecap="round"/>
-            <path d="M40 -22C51 -20 57 -13 59 -4" stroke="#ffd44d" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M-40 -22Q0 -46 40 -22" stroke="#ffd44d" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M88 146L68 160L60 178L82 188L82 232Q82 244 96 244L144 244Q158 244 158 232L158 188L180 178L172 160L152 146Q120 158 88 146Z"
+                fill="#9a9da8" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M82 188L82 232Q82 244 96 244L144 244Q158 244 158 232L158 188Z" fill="#7e828e"/>
+          <path d="M88 146Q120 158 152 146" fill="none" stroke="#17181c" stroke-width="3.4" stroke-linecap="round"/>
+          <text x="120" y="228" font-size="42" font-weight="900" fill="#b07df5" stroke="#17181c"
+                stroke-width="5" paint-order="stroke" text-anchor="middle"
+                font-family="'Trebuchet MS',Verdana,sans-serif">9</text>
+          <path d="M88 146L68 160L60 178L82 188L82 232Q82 244 96 244L144 244Q158 244 158 232L158 188L180 178L172 160L152 146Q120 158 88 146Z"
+                fill="none" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+
+          <g transform="translate(120,104)">
+            <path d="M-38 -34C-49 -56-50 -76-42 -88C-30 -79-18 -64-11 -50Z" fill="#17181c" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M38 -34C49 -56 50 -76 42 -88C30 -79 18 -64 11 -50Z" fill="#17181c" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M-35 -41C-43 -58-44 -71-39 -79C-31 -72-22 -60-17 -49Z" fill="#8b8e99"/>
+            <path d="M35 -41C43 -58 44 -71 39 -79C31 -72 22 -60 17 -49Z" fill="#8b8e99"/>
+            <path d="M-44 -28C-46 -52-30 -66 0 -66C30 -66 46 -52 44 -28C43 -8 36 8 24 18C15 26 8 30 0 30C-8 30-15 26-24 18C-36 8-43 -8-44 -28Z"
+                  fill="#2b2e37" stroke="#17181c" stroke-width="4" stroke-linejoin="round"/>
+            <!-- lighter brows and muzzle: the shepherd's markings, kept to greys -->
+            <ellipse cx="-19" cy="-38" rx="9" ry="5.5" fill="#8b8e99"/>
+            <ellipse cx="19" cy="-38" rx="9" ry="5.5" fill="#8b8e99"/>
+            <path d="M0 -14C18 -14 32 -4 32 8C32 21 18 31 0 31C-18 31-32 21-32 8C-32 -4-18 -14 0 -14Z"
+                  fill="#fffaf0" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
+            <ellipse cx="-19" cy="-24" rx="9.5" ry="9" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
+            <ellipse cx="19" cy="-24" rx="9.5" ry="9" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
+            <circle cx="-19" cy="-24" r="4.4" fill="#17181c"/>
+            <circle cx="19" cy="-24" r="4.4" fill="#17181c"/>
+            <circle cx="-22" cy="-27" r="1.9" fill="#fffaf0"/>
+            <circle cx="16" cy="-27" r="1.9" fill="#fffaf0"/>
+            <path d="M0 -14C7 -14 11 -10 11 -5C11 0 6 4 0 4C-6 4-11 0-11 -5C-11 -10-7 -14 0 -14Z" fill="#17181c"/>
+            <!-- an open, cheering mouth: no teeth in it -->
+            <path d="M0 4V9" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
+            <path d="M-16 9C-12 26 12 26 16 9Z" fill="#17181c" stroke="#17181c" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M-8 16C-8 25-3 28 0 28C3 28 8 25 8 16Z" fill="#fffaf0" stroke="#17181c" stroke-width="2.4" stroke-linejoin="round"/>
           </g>
-          <!-- arms out for balance, over the ears -->
-          <path d="M88 118C70 120 58 130 54 144" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="52" cy="148" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <path d="M140 114C162 104 182 92 192 83" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="196" cy="79" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
+
+          <!-- both arms up -->
+          <path d="M94 158C80 138 68 116 60 96" stroke="#17181c" stroke-width="19" fill="none" stroke-linecap="round"/>
+          <path d="M94 158C80 138 68 116 60 96" stroke="#6f7280" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <circle cx="57" cy="88" r="14" fill="#fffaf0" stroke="#17181c" stroke-width="3.4"/>
+          <path d="M146 158C160 138 172 116 180 96" stroke="#17181c" stroke-width="19" fill="none" stroke-linecap="round"/>
+          <path d="M146 158C160 138 172 116 180 96" stroke="#6f7280" stroke-width="12" fill="none" stroke-linecap="round"/>
+          <circle cx="183" cy="88" r="14" fill="#fffaf0" stroke="#17181c" stroke-width="3.4"/>
         </svg>
         <span class="ot">Take the Challenge</span>
       </button>
