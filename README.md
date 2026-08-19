@@ -10,7 +10,12 @@ The landing page is a title and two cards, side by side at every width — *stud
 or *take the challenge* — fronted by a husky coach with a tactics board and a number 9 with
 both arms up. Each card takes its artwork's own background colour so the picture bleeds to
 the button's edges, and both are locked to one aspect ratio so the two labels sit on the
-same line. Every screen keeps a route back to it.
+same line. Nothing else is on that page but where the rules come from.
+
+There are three screens and from any one of them the other two are one tap away: the main
+page offers both, and the rules and the challenge each offer the main page and each other.
+Leaving a part-finished challenge for the rules and coming back resumes it — only the main
+page and *Play again* start a fresh run.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes

@@ -493,7 +493,9 @@ footer b{color:#4a4c56}
       <span class="chip sm r" id="statusBad">❌ 0</span>
     </div>
     <ul class="dots" id="statusDots" aria-label="Question progress"></ul>
+    <!-- The other two places you can be, from here. Same pair the tutorial shows. -->
     <button class="chip sm home" id="homeBtn" type="button" title="Back to the main page">🏠 Main</button>
+    <button class="chip sm home" id="rulesBtn" type="button" title="Go to the rules">📖 Rules</button>
   </div>
 </div>
 
@@ -502,7 +504,6 @@ footer b{color:#4a4c56}
   <!-- ===== landing menu: two doors, rules or challenge ===== -->
   <section id="screen-menu">
     <header class="hero">
-      <div class="kicker">The line nobody can see</div>
       <h1>Is It <em>Offside?</em></h1>
     </header>
 
@@ -619,11 +620,9 @@ footer b{color:#4a4c56}
     </div>
   </section>
 
+  <!-- Where the rules come from, and nothing else. -->
   <footer>
-    <p><b>Built for the flag arm.</b> Scenarios follow the <b>IFAB Laws of the Game 2026/27</b>, Law 11 — Offside,
-    together with the Practical Guidelines for Match Officials. Original cartoon characters, no licensed marks,
-    no real clubs or players.<br>
-    Real matches have three officials, semi-automated offside technology and a great deal more arguing.</p>
+    <p><b>IFAB Laws of the Game 2026/27</b> · Law 11 — Offside</p>
   </footer>
 </div>
 
@@ -1525,16 +1524,41 @@ function show(screen){
   document.body.classList.toggle('menu',screen==='screen-menu');
 }
 
-/* the main page: two doors, the rules or the challenge */
-function renderMenu(){
-  state.mode='menu';
+/* Three screens, and from any one of them the other two are one tap away:
+   the main page offers both, and the tutorial and the challenge each offer
+   the main page and each other. */
+
+/* Leaving the challenge: the pinned answer bar and the page padding that
+   reserves room for it both key off `answering`, and neither belongs on
+   another screen. */
+function leaveChallenge(){
+  document.body.classList.remove('answering');
   if(state.player)state.player.stop();
   setDrawer(false);
+}
+function renderMenu(){
+  state.mode='menu';
+  leaveChallenge();
   show('screen-menu');
   window.scrollTo({top:0,behavior:'auto'});
 }
+function goRules(){
+  leaveChallenge();
+  renderRule();
+}
+/* A fresh run. Starting over is the main page's job, and Play again's. */
 function startChallenge(){
   state.i=0;state.correct=0;state.wrong=0;state.answers=[];
+  show('screen-quiz');renderQuestion();
+}
+/* Arriving from the tutorial, where a run may already be underway: picking the
+   rules up mid-challenge and coming back should not cost you your answers. */
+function openChallenge(){
+  const answered=state.answers.filter(Boolean).length;
+  if(answered===0||answered>=SCENARIOS.length){startChallenge();return;}
+  /* If the call on the current scenario was already made before they left,
+     resume on the next one — re-offering it would count it twice. */
+  while(state.i<SCENARIOS.length-1&&state.answers[state.i])state.i++;
   show('screen-quiz');renderQuestion();
 }
 
@@ -1775,10 +1799,11 @@ function renderResults(){
 }
 
 /* ================= wiring ================= */
-$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;renderRule();});
+$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;goRules();});
 $('menuQuiz').addEventListener('click',startChallenge);
 ['homeBtn','learnHome','resultHome'].forEach(id=>$(id).addEventListener('click',renderMenu));
-$('startBtn').addEventListener('click',startChallenge);
+$('rulesBtn').addEventListener('click',goRules);
+$('startBtn').addEventListener('click',openChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});
 /* an unconditional restart, so one button always does the same thing */
@@ -1788,9 +1813,9 @@ $('rReplay').addEventListener('click',()=>{
 });
 $('rNext').addEventListener('click',()=>{
   if(state.r<LEARN.length-1){state.r++;state.s=0;renderRule();}
-  else startChallenge();
+  else openChallenge();
 });
-$('learnBtn').addEventListener('click',()=>renderRule());
+$('learnBtn').addEventListener('click',goRules);
 $('moreBtn').addEventListener('click',openDetail);
 $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
