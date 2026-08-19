@@ -90,19 +90,23 @@ svg text{font-family:var(--font)}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
 /* ---------- landing menu ---------- */
-.menurow{display:grid;gap:14px;margin:28px 0 0;grid-template-columns:1fr 1fr;max-width:560px;margin-left:auto;margin-right:auto}
-@media (max-width:640px){.menurow{grid-template-columns:1fr}}
-.opt{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;background:#fff;
-  border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 17px 22px;
-  cursor:pointer;font-family:var(--font);color:var(--ink);transition:transform .07s}
+/* Side by side at every width — two doors read as a choice; stacked they read
+   as a list you scroll past. */
+.menurow{display:grid;gap:12px;margin:24px auto 0;grid-template-columns:1fr 1fr;max-width:560px}
+.opt{display:flex;flex-direction:column;align-items:stretch;text-align:center;
+  border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:0;
+  overflow:hidden;cursor:pointer;font-family:var(--font);color:#fffaf0;transition:transform .12s}
+.opt:hover{transform:translateY(-3px)}
 .opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-.opt .oi{display:block;width:100%;max-width:210px;height:auto;transition:transform .18s}
-/* a small lean towards whatever each of them is doing */
-.opt.learn:hover .oi{transform:rotate(-3deg)}
-.opt.quiz:hover .oi{transform:rotate(3deg)}
-.opt .ot{font-size:clamp(17px,3.4vw,20px);font-weight:900;letter-spacing:-.5px;line-height:1.15}
-.opt.learn{background:var(--sky)}
-.opt.quiz{background:var(--yellow)}
+/* The art bleeds to the card's edges; each button takes that card's own colour
+   behind it, so there is no seam between the picture and the button. */
+/* one ratio for both, so the two labels sit on the same line however the
+   source art was cropped */
+.opt .oi{display:block;width:100%;height:auto;aspect-ratio:5/7;object-fit:cover;object-position:50% 20%}
+.opt .ot{padding:9px 7px 12px;font-size:clamp(14px,3.1vw,18px);font-weight:900;
+  letter-spacing:-.4px;line-height:1.15;text-shadow:0 2px 0 rgba(23,24,28,.35)}
+.opt.learn{background:#426a9b}
+.opt.quiz{background:#7862a0}
 body.menu .statusbar{display:none}
 .chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
 
@@ -503,97 +507,15 @@ footer b{color:#4a4c56}
     </header>
 
     <div class="menurow">
-      <!-- Two Japanese Chins: the one who knows the law, and the one who has to
-           play under it. Same breed, same drawing — only the kit and the job differ. -->
+      <!-- The two supplied cards, cropped to the art: their own captions are gone
+           because the button carries its own, and each button's background is set
+           to that card's colour so the image bleeds into it edge to edge. -->
       <button class="opt learn" id="menuLearn" type="button">
-        <svg class="oi" viewBox="0 0 252 212" aria-hidden="true" focusable="false">
-          <defs><clipPath id="refShirtClip">
-            <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z"/>
-          </clipPath></defs>
-          <!-- hind legs and paws -->
-          <path d="M97 158V180M128 158V180" stroke="#17181c" stroke-width="13" stroke-linecap="round"/>
-          <rect x="84" y="177" width="27" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <rect x="115" y="177" width="27" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <!-- the pinstriped shirt -->
-          <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z" fill="#fffaf0"/>
-          <g clip-path="url(#refShirtClip)">
-            <rect x="86" y="98" width="13" height="74" fill="#17181c"/>
-            <rect x="112" y="98" width="13" height="74" fill="#17181c"/>
-            <rect x="138" y="98" width="13" height="74" fill="#17181c"/>
-          </g>
-          <path d="M80 166C74 136 84 102 113 102C142 102 152 136 146 166Z" fill="none" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
-          <!-- whistle on its cord -->
-          <path d="M113 104V136" stroke="#17181c" stroke-width="2.6" fill="none"/>
-          <rect x="101" y="135" width="25" height="15" rx="6.5" fill="#ffd44d" stroke="#17181c" stroke-width="2.8"/>
-          <circle cx="120" cy="142.5" r="3" fill="#17181c"/>
-          <g transform="translate(113,60)">
-            <path d="M-38 -20C-64 -24-80 2-76 32C-72 58-58 72-43 68C-31 65-27 51-30 35C-33 15-36 -2-38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M38 -20C64 -24 80 2 76 32C72 58 58 72 43 68C31 65 27 51 30 35C33 15 36 -2 38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M0 -54C27 -54 46 -35 46 -6C46 22 27 40 0 40C-27 40-46 22-46 -6C-46 -35-27 -54 0 -54Z" fill="#22232b" stroke="#17181c" stroke-width="3.4"/>
-            <path d="M0 -52C7 -52 11 -46 12 -36C25 -32 39 -19 39 1C39 23 21 40 0 40C-21 40-39 23-39 1C-39 -19-25 -32-12 -36C-11 -46-7 -52 0 -52Z" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
-            <circle cx="-21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="-24.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <circle cx="17.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <path d="M0 6C6.5 6 10 9 10 13C10 17.5 5.5 20 0 20C-5.5 20-10 17.5-10 13C-10 9-6.5 6 0 6Z" fill="#17181c"/>
-            <path d="M0 20V25" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M0 25C-3.5 30-9.5 30-12.5 26M0 25C3.5 30 9.5 30 12.5 26" fill="none" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
-          </g>
-          <!-- arms last, so neither disappears behind those ears -->
-          <path d="M88 122C70 128 60 142 58 158" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="57" cy="161" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <!-- the flag, up -->
-          <path d="M168 180L210 30" stroke="#17181c" stroke-width="6" stroke-linecap="round"/>
-          <path d="M210 30L246 44L238 78L202 64Z" fill="#ffd44d" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-          <path d="M228 37L246 44L242 61L224 54ZM206 47L224 54L220 71L202 64Z" fill="#f4795b"/>
-          <path d="M210 30L246 44L238 78L202 64Z" fill="none" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-          <path d="M140 126C158 128 170 133 177 138" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="179" cy="140" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-        </svg>
+        <img class="oi" src="art/coach.jpg" alt="" width="358" height="502" decoding="async">
         <span class="ot">Study the Rules</span>
       </button>
       <button class="opt quiz" id="menuQuiz" type="button">
-        <svg class="oi" viewBox="0 0 252 212" aria-hidden="true" focusable="false">
-          <!-- the ball is already gone -->
-          <path d="M230 148C238 157 238 179 230 188" fill="none" stroke="#17181c" stroke-width="3.6" stroke-linecap="round" opacity=".45"/>
-          <path d="M241 141C250 153 250 183 241 195" fill="none" stroke="#17181c" stroke-width="3.6" stroke-linecap="round" opacity=".28"/>
-          <!-- standing leg -->
-          <path d="M100 150V180" stroke="#17181c" stroke-width="13" stroke-linecap="round"/>
-          <rect x="86" y="177" width="28" height="20" rx="9" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <!-- shirt -->
-          <path d="M80 158C74 130 84 100 113 100C142 100 152 130 146 158Z" fill="#4aa3ff" stroke="#17181c" stroke-width="3.4" stroke-linejoin="round"/>
-          <text x="113" y="144" font-size="32" font-weight="900" fill="#fffaf0" stroke="#17181c" stroke-width="4" paint-order="stroke" text-anchor="middle" font-family="'Trebuchet MS',Verdana,sans-serif">9</text>
-          <!-- the kicking leg, swung across the shirt and through the ball -->
-          <path d="M126 148C144 154 160 160 168 164" stroke="#17181c" stroke-width="13" fill="none" stroke-linecap="round"/>
-          <ellipse cx="172" cy="166" rx="12.5" ry="10.5" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <circle cx="200" cy="168" r="25" fill="#fffaf0" stroke="#17181c" stroke-width="3.4"/>
-          <path d="M200 154.4L212.9 163.8L208 179H192L187.1 163.8Z" fill="#17181c"/>
-          <path d="M200 143V154.4M218.4 149.7L212.9 163.8M215.4 188.2L208 179M184.6 188.2L192 179M181.7 149.7L187.1 163.8" stroke="#17181c" stroke-width="3" stroke-linecap="round"/>
-          <g transform="translate(113,58)">
-            <path d="M-38 -20C-64 -24-80 2-76 32C-72 58-58 72-43 68C-31 65-27 51-30 35C-33 15-36 -2-38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M38 -20C64 -24 80 2 76 32C72 58 58 72 43 68C31 65 27 51 30 35C33 15 36 -2 38 -20Z" fill="#22232b" stroke="#17181c" stroke-width="3.2" stroke-linejoin="round"/>
-            <path d="M0 -54C27 -54 46 -35 46 -6C46 22 27 40 0 40C-27 40-46 22-46 -6C-46 -35-27 -54 0 -54Z" fill="#22232b" stroke="#17181c" stroke-width="3.4"/>
-            <path d="M0 -52C7 -52 11 -46 12 -36C25 -32 39 -19 39 1C39 23 21 40 0 40C-21 40-39 23-39 1C-39 -19-25 -32-12 -36C-11 -46-7 -52 0 -52Z" fill="#fffaf0" stroke="#17181c" stroke-width="3"/>
-            <circle cx="-21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="21" cy="-6" r="10.5" fill="#17181c"/>
-            <circle cx="-24.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <circle cx="17.5" cy="-9.5" r="3.6" fill="#fffaf0"/>
-            <path d="M0 6C6.5 6 10 9 10 13C10 17.5 5.5 20 0 20C-5.5 20-10 17.5-10 13C-10 9-6.5 6 0 6Z" fill="#17181c"/>
-            <path d="M0 20V24" stroke="#17181c" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M-12 25C-8 35 8 35 12 25Z" fill="#17181c"/>
-            <path d="M-6 30C-4 34 4 34 6 30Z" fill="#f4795b"/>
-            <!-- the headband, tail flying -->
-            <path d="M40 -22C51 -20 57 -13 59 -4" stroke="#17181c" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M-40 -22Q0 -46 40 -22" stroke="#17181c" stroke-width="16" fill="none" stroke-linecap="round"/>
-            <path d="M40 -22C51 -20 57 -13 59 -4" stroke="#ffd44d" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M-40 -22Q0 -46 40 -22" stroke="#ffd44d" stroke-width="10" fill="none" stroke-linecap="round"/>
-          </g>
-          <!-- arms out for balance, over the ears -->
-          <path d="M88 118C70 120 58 130 54 144" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="52" cy="148" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-          <path d="M140 114C162 104 182 92 192 83" stroke="#17181c" stroke-width="12" fill="none" stroke-linecap="round"/>
-          <circle cx="196" cy="79" r="11" fill="#fffaf0" stroke="#17181c" stroke-width="3.2"/>
-        </svg>
+        <img class="oi" src="art/striker.jpg" alt="" width="371" height="507" decoding="async">
         <span class="ot">Take the Challenge</span>
       </button>
     </div>
