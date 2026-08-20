@@ -10,16 +10,20 @@ Every call is put the same way round throughout: **one**, at the moment the ball
 played, was he in an offside position; **two**, did he then become involved in active
 play. Get a no on the first and there is nothing left to judge.
 
-The landing page is a title and two cards, side by side at every width — *study the rules*
-or *take the challenge* — fronted by a husky coach with a tactics board and a number 9 with
-both arms up. Each card takes its artwork's own background colour so the picture bleeds to
-the button's edges, and both are locked to one aspect ratio so the two labels sit on the
-same line. Nothing else is on that page but where the rules come from.
+The site is the challenge. The landing page is a title and one card — a number 9 with both
+arms up, **Take the Challenge** — and under it a slim row fronted by a husky coach with a
+tactics board: **How to spot offside**. That is the help door, for anyone who wants the rule
+before they are tested on it, and it is deliberately a fraction of the size. The card takes
+its artwork's own background colour so the picture bleeds to the button's edges, and the
+whole page lands inside a 360×640 screen without scrolling. Nothing else is on it but where
+the rules come from.
 
 There are three screens and from any one of them the other two are one tap away: the main
 page offers both, and the rules and the challenge each offer the main page and each other.
-Leaving a part-finished challenge for the rules and coming back resumes it — only the main
-page and *Play again* start a fresh run.
+On the challenge the help door is the 📖 chip in the status bar, which keeps its wording
+where there is room and collapses to the book on a phone. Leaving a part-finished challenge
+for the rules and coming back resumes it — only the main page and *Play again* start a
+fresh run.
 
 The scenarios run easy → very hard. They cover the case most people get wrong — an attacker
 past the second-last defender when the ball goes somewhere else entirely, who never becomes
@@ -47,9 +51,9 @@ and your on-screen character starts as an American football player in a helmet a
 morphing towards an actual footballer as you get calls right. You finish in one of four
 ranked categories.
 
-## The tutorial
+## How to spot offside
 
-The rules door covers the offside law in **eight chapters**, holding **21 diagrams**
+The help door covers the offside law in **eight chapters**, holding **21 diagrams**
 between them:
 
 1. Where you have to be — the two position tests, and who defines the line

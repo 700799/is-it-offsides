@@ -90,23 +90,41 @@ svg text{font-family:var(--font)}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
 /* ---------- landing menu ---------- */
-/* Side by side at every width — two doors read as a choice; stacked they read
-   as a list you scroll past. */
-.menurow{display:grid;gap:12px;margin:24px auto 0;grid-template-columns:1fr 1fr;max-width:560px}
-.opt{display:flex;flex-direction:column;align-items:stretch;text-align:center;
+/* Not a choice between two things. The challenge is the site; the rules are help
+   for the people who want them, and the sizes have to say so before the labels do. */
+.menucol{max-width:334px;margin:20px auto 0}
+.opt{display:flex;flex-direction:column;align-items:stretch;text-align:center;width:100%;
   border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:0;
   overflow:hidden;cursor:pointer;font-family:var(--font);color:#fffaf0;transition:transform .12s}
 .opt:hover{transform:translateY(-3px)}
 .opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-/* The art bleeds to the card's edges; each button takes that card's own colour
-   behind it, so there is no seam between the picture and the button. */
-/* one ratio for both, so the two labels sit on the same line however the
-   source art was cropped */
-.opt .oi{display:block;width:100%;height:auto;aspect-ratio:5/7;object-fit:cover;object-position:50% 20%}
-.opt .ot{padding:9px 7px 12px;font-size:clamp(14px,3.1vw,18px);font-weight:900;
-  letter-spacing:-.4px;line-height:1.15;text-shadow:0 2px 0 rgba(23,24,28,.35)}
-.opt.learn{background:#426a9b}
+/* Square rather than the source's portrait, and capped against the viewport, so
+   the whole page still lands inside a short phone screen without scrolling. */
+.opt .oi{display:block;width:100%;aspect-ratio:1/1;max-height:min(44vh,340px);
+  object-fit:cover;object-position:50% 16%}
+.opt .ot{padding:11px 8px 14px;font-size:clamp(20px,5.4vw,26px);font-weight:900;
+  letter-spacing:-.6px;line-height:1.1;text-shadow:0 2px 0 rgba(23,24,28,.35)}
 .opt.quiz{background:#7862a0}
+/* On a desktop the phone-sized card looks stranded in the middle of the window;
+   there is room for the hero to actually be one. */
+@media (min-width:700px) and (min-height:760px){
+  .menucol{max-width:392px}
+  .opt .oi{max-height:min(46vh,400px)}
+}
+@media (max-height:700px){
+  .hero{padding:18px 4px 10px}
+  .menucol{margin-top:14px}
+  .opt .oi{max-height:38vh}
+}
+/* the help door: the coach shrunk to a thumbnail, label alongside */
+.aside{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;padding:0 14px 0 0;
+  border:4px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink);
+  background:#426a9b;color:#fffaf0;overflow:hidden;text-align:left;
+  cursor:pointer;font-family:var(--font);transition:transform .12s}
+.aside:hover{transform:translateY(-2px)}
+.aside:active{transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
+.aside .ai{display:block;width:58px;height:58px;flex:0 0 auto;object-fit:cover;object-position:50% 14%}
+.aside .at{font-size:clamp(15px,4vw,17px);font-weight:900;letter-spacing:-.3px;line-height:1.15}
 body.menu .statusbar{display:none}
 .chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
 
@@ -346,6 +364,7 @@ footer b{color:#4a4c56}
   /* Every row above the answers is squeezed so the call is reachable without
      scrolling. The pitch itself is deliberately left alone — it is the point. */
   .statusbar .inner{gap:7px;padding:5px 11px}
+  .chip.home .lbl{display:none}
   .statusbar .av{width:36px;height:36px;border-radius:11px}
   .rankwrap .lab{display:none}
   .rankwrap .name{font-size:13px}
@@ -495,7 +514,7 @@ footer b{color:#4a4c56}
     <ul class="dots" id="statusDots" aria-label="Question progress"></ul>
     <!-- The other two places you can be, from here. Same pair the tutorial shows. -->
     <button class="chip sm home" id="homeBtn" type="button" title="Back to the main page">🏠 Main</button>
-    <button class="chip sm home" id="rulesBtn" type="button" title="Go to the rules">📖 Rules</button>
+    <button class="chip sm home" id="rulesBtn" type="button" title="How to spot offside">📖<span class="lbl"> How to spot it</span></button>
   </div>
 </div>
 
@@ -507,17 +526,20 @@ footer b{color:#4a4c56}
       <h1>Is It <em>Offside?</em></h1>
     </header>
 
-    <div class="menurow">
-      <!-- The two supplied cards, cropped to the art: their own captions are gone
-           because the button carries its own, and each button's background is set
-           to that card's colour so the image bleeds into it edge to edge. -->
-      <button class="opt learn" id="menuLearn" type="button">
-        <img class="oi" src="art/coach.jpg" alt="" width="358" height="502" decoding="async">
-        <span class="ot">Study the Rules</span>
-      </button>
+    <div class="menucol">
+      <!-- The challenge is what the site is for, so it takes the whole width and
+           the big label. The supplied art is cropped to the button and the button
+           takes that card's own colour, so the picture bleeds to its edges. -->
       <button class="opt quiz" id="menuQuiz" type="button">
         <img class="oi" src="art/striker.jpg" alt="" width="371" height="507" decoding="async">
         <span class="ot">Take the Challenge</span>
+      </button>
+      <!-- The rules are the side door. Same coach, but a row rather than a card:
+           at this size it reads as help you can reach for, not a second thing to
+           choose between. -->
+      <button class="aside learn" id="menuLearn" type="button">
+        <img class="ai" src="art/coach.jpg" alt="" width="358" height="502" decoding="async">
+        <span class="at">How to spot offside</span>
       </button>
     </div>
   </section>
@@ -529,7 +551,7 @@ footer b{color:#4a4c56}
     <div class="learntop">
       <button class="btn sm ghost" id="learnHome" type="button">🏠 Main</button>
       <button class="btn sm ghost" id="tocBtn" type="button">☰ Contents</button>
-      <button class="btn sm" id="startBtn">🚩 Challenge</button>
+      <button class="btn sm" id="startBtn">🚩 To the Challenge</button>
     </div>
 
     <div class="toc" id="toc" hidden></div>
@@ -613,8 +635,8 @@ footer b{color:#4a4c56}
       </div>
       <ul class="review" id="resultReview"></ul>
       <div class="again">
-        <button class="btn big" id="againBtn" type="button">↻ Take it again</button>
-        <button class="btn big ghost" id="learnBtn" type="button">📖 Back to the rules</button>
+        <button class="btn big" id="againBtn" type="button">↻ Take the Challenge again</button>
+        <button class="btn big ghost" id="learnBtn" type="button">📖 How to spot offside</button>
         <button class="btn big ghost" id="resultHome" type="button">🏠 Main page</button>
       </div>
     </div>
