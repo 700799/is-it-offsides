@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
 <title>Is It Offside? — The Offside Challenge</title>
-<meta name="description" content="Review the rules for offside, then take the Offside Challenge: thirteen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
+<meta name="description" content="Review the rules for offside, then take the Offside Challenge: fifteen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -90,23 +90,41 @@ svg text{font-family:var(--font)}
 .badge-row{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
 
 /* ---------- landing menu ---------- */
-/* Side by side at every width — two doors read as a choice; stacked they read
-   as a list you scroll past. */
-.menurow{display:grid;gap:12px;margin:24px auto 0;grid-template-columns:1fr 1fr;max-width:560px}
-.opt{display:flex;flex-direction:column;align-items:stretch;text-align:center;
+/* Not a choice between two things. The challenge is the site; the rules are help
+   for the people who want them, and the sizes have to say so before the labels do. */
+.menucol{max-width:334px;margin:20px auto 0}
+.opt{display:flex;flex-direction:column;align-items:stretch;text-align:center;width:100%;
   border:4px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:0;
   overflow:hidden;cursor:pointer;font-family:var(--font);color:#fffaf0;transition:transform .12s}
 .opt:hover{transform:translateY(-3px)}
 .opt:active{transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
-/* The art bleeds to the card's edges; each button takes that card's own colour
-   behind it, so there is no seam between the picture and the button. */
-/* one ratio for both, so the two labels sit on the same line however the
-   source art was cropped */
-.opt .oi{display:block;width:100%;height:auto;aspect-ratio:5/7;object-fit:cover;object-position:50% 20%}
-.opt .ot{padding:9px 7px 12px;font-size:clamp(14px,3.1vw,18px);font-weight:900;
-  letter-spacing:-.4px;line-height:1.15;text-shadow:0 2px 0 rgba(23,24,28,.35)}
-.opt.learn{background:#426a9b}
+/* Square rather than the source's portrait, and capped against the viewport, so
+   the whole page still lands inside a short phone screen without scrolling. */
+.opt .oi{display:block;width:100%;aspect-ratio:1/1;max-height:min(44vh,340px);
+  object-fit:cover;object-position:50% 16%}
+.opt .ot{padding:11px 8px 14px;font-size:clamp(20px,5.4vw,26px);font-weight:900;
+  letter-spacing:-.6px;line-height:1.1;text-shadow:0 2px 0 rgba(23,24,28,.35)}
 .opt.quiz{background:#7862a0}
+/* On a desktop the phone-sized card looks stranded in the middle of the window;
+   there is room for the hero to actually be one. */
+@media (min-width:700px) and (min-height:760px){
+  .menucol{max-width:392px}
+  .opt .oi{max-height:min(46vh,400px)}
+}
+@media (max-height:700px){
+  .hero{padding:18px 4px 10px}
+  .menucol{margin-top:14px}
+  .opt .oi{max-height:38vh}
+}
+/* the help door: the coach shrunk to a thumbnail, label alongside */
+.aside{display:flex;align-items:center;gap:12px;width:100%;margin-top:12px;padding:0 14px 0 0;
+  border:4px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink);
+  background:#426a9b;color:#fffaf0;overflow:hidden;text-align:left;
+  cursor:pointer;font-family:var(--font);transition:transform .12s}
+.aside:hover{transform:translateY(-2px)}
+.aside:active{transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
+.aside .ai{display:block;width:58px;height:58px;flex:0 0 auto;object-fit:cover;object-position:50% 14%}
+.aside .at{font-size:clamp(15px,4vw,17px);font-weight:900;letter-spacing:-.3px;line-height:1.15}
 body.menu .statusbar{display:none}
 .chip.home{cursor:pointer;font-family:var(--font);border-width:3px}
 
@@ -346,6 +364,7 @@ footer b{color:#4a4c56}
   /* Every row above the answers is squeezed so the call is reachable without
      scrolling. The pitch itself is deliberately left alone — it is the point. */
   .statusbar .inner{gap:7px;padding:5px 11px}
+  .chip.home .lbl{display:none}
   .statusbar .av{width:36px;height:36px;border-radius:11px}
   .rankwrap .lab{display:none}
   .rankwrap .name{font-size:13px}
@@ -493,7 +512,9 @@ footer b{color:#4a4c56}
       <span class="chip sm r" id="statusBad">❌ 0</span>
     </div>
     <ul class="dots" id="statusDots" aria-label="Question progress"></ul>
+    <!-- The other two places you can be, from here. Same pair the tutorial shows. -->
     <button class="chip sm home" id="homeBtn" type="button" title="Back to the main page">🏠 Main</button>
+    <button class="chip sm home" id="rulesBtn" type="button" title="How to spot offside">📖<span class="lbl"> How to spot it</span></button>
   </div>
 </div>
 
@@ -502,21 +523,23 @@ footer b{color:#4a4c56}
   <!-- ===== landing menu: two doors, rules or challenge ===== -->
   <section id="screen-menu">
     <header class="hero">
-      <div class="kicker">The line nobody can see</div>
       <h1>Is It <em>Offside?</em></h1>
     </header>
 
-    <div class="menurow">
-      <!-- The two supplied cards, cropped to the art: their own captions are gone
-           because the button carries its own, and each button's background is set
-           to that card's colour so the image bleeds into it edge to edge. -->
-      <button class="opt learn" id="menuLearn" type="button">
-        <img class="oi" src="art/coach.jpg" alt="" width="358" height="502" decoding="async">
-        <span class="ot">Study the Rules</span>
-      </button>
+    <div class="menucol">
+      <!-- The challenge is what the site is for, so it takes the whole width and
+           the big label. The supplied art is cropped to the button and the button
+           takes that card's own colour, so the picture bleeds to its edges. -->
       <button class="opt quiz" id="menuQuiz" type="button">
         <img class="oi" src="art/striker.jpg" alt="" width="371" height="507" decoding="async">
         <span class="ot">Take the Challenge</span>
+      </button>
+      <!-- The rules are the side door. Same coach, but a row rather than a card:
+           at this size it reads as help you can reach for, not a second thing to
+           choose between. -->
+      <button class="aside learn" id="menuLearn" type="button">
+        <img class="ai" src="art/coach.jpg" alt="" width="358" height="502" decoding="async">
+        <span class="at">How to spot offside</span>
       </button>
     </div>
   </section>
@@ -528,7 +551,7 @@ footer b{color:#4a4c56}
     <div class="learntop">
       <button class="btn sm ghost" id="learnHome" type="button">🏠 Main</button>
       <button class="btn sm ghost" id="tocBtn" type="button">☰ Contents</button>
-      <button class="btn sm" id="startBtn">🚩 Challenge</button>
+      <button class="btn sm" id="startBtn">🚩 To the Challenge</button>
     </div>
 
     <div class="toc" id="toc" hidden></div>
@@ -612,18 +635,16 @@ footer b{color:#4a4c56}
       </div>
       <ul class="review" id="resultReview"></ul>
       <div class="again">
-        <button class="btn big" id="againBtn" type="button">↻ Take it again</button>
-        <button class="btn big ghost" id="learnBtn" type="button">📖 Back to the rules</button>
+        <button class="btn big" id="againBtn" type="button">↻ Take the Challenge again</button>
+        <button class="btn big ghost" id="learnBtn" type="button">📖 How to spot offside</button>
         <button class="btn big ghost" id="resultHome" type="button">🏠 Main page</button>
       </div>
     </div>
   </section>
 
+  <!-- Where the rules come from, and nothing else. -->
   <footer>
-    <p><b>Built for the flag arm.</b> Scenarios follow the <b>IFAB Laws of the Game 2026/27</b>, Law 11 — Offside,
-    together with the Practical Guidelines for Match Officials. Original cartoon characters, no licensed marks,
-    no real clubs or players.<br>
-    Real matches have three officials, semi-automated offside technology and a great deal more arguing.</p>
+    <p><b>IFAB Laws of the Game 2026/27</b> · Law 11 — Offside</p>
   </footer>
 </div>
 
@@ -861,10 +882,25 @@ const SCENARIOS=[
     {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,500,172]]}],
   ball:{track:[[0,200,205],[.45,200,205],[.74,392,152],[1,484,164]]},
   caps:[[0,'The 9 checks his run and stays behind the line…'],[.45,'⚽ BALL PLAYED — he is BEHIND the second-last defender here.'],[.7,'Now he goes. He is past them all by the time he collects it.'],[.9,'Looks offside. Isn’t.']],
-  why:['This is the single most misjudged thing in the whole law. Offside is assessed <b>at the moment the ball is played or touched by a teammate</b> — not when the player receives it.','At that moment he was behind the second-last opponent, so he was never in an offside position at all. What he does after the ball is struck is irrelevant. Perfectly timed run. Play on.']
+  why:['This is the single most misjudged thing in the whole law. Offside is assessed <b>at the moment the ball is played or touched by a teammate</b> — not when the player receives it.','At that moment he was behind the second-last opponent, so he was never in an offside position at all. What he does after the ball is struck is irrelevant. Perfectly timed run. Play on.','The very next scenario is this one run backwards. Same rule, opposite answer.']
 },
 {
-  id:5,diff:'Medium',title:'The Ball Behind Him',
+  id:5,diff:'Medium',title:'The Late Step-Up',
+  brief:'The 9 is clearly beyond the last defender as the pass is struck. The red line then sprints out, and by the time he takes his first touch he is level with them.',
+  answer:'offside',freezeT:.4,
+  law:['Law 11.1 — Judged at the moment the ball is played'],
+  actors:[
+    {id:'P8',team:'blue',n:8,track:[[0,196,205],[.4,224,205],[1,234,205]]},
+    {id:'A9',team:'blue',n:9,track:[[0,340,150],[.4,352,150],[1,424,158]]},
+    {id:'D4',team:'red',n:4,track:[[0,326,108],[.4,332,108],[1,428,112]]},
+    {id:'D5',team:'red',n:5,track:[[0,330,252],[.4,336,252],[1,432,248]]},
+    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,506,176]]}],
+  ball:{track:[[0,196,205],[.4,224,205],[.82,392,152],[1,426,158]]},
+  caps:[[0,'The red line is sitting deep as the 9 sets off…'],[.4,'⚽ BALL PLAYED — freeze it. He is BEYOND the last two here.'],[.72,'Now the defence sprints out…'],[.92,'…and he looks perfectly level as he takes his touch.']],
+  why:['Everything about the finish says onside: as he brings the ball down he is shoulder to shoulder with the defence, and that is the picture the crowd will remember.','It is the wrong picture. Offside is judged <b>at the moment the ball is played by a teammate</b>, and at that moment he was clearly nearer the goal line than the second-last opponent. He then played the ball, so the offence was complete before the defenders had taken a step.','Where the moment itself is disputed, the <b>first point of contact</b> of the kick is what counts — not the follow-through, and not the instant the ball leaves the boot. The one exception is a ball thrown by the goalkeeper, judged at the <i>last</i> point of contact.','The defence stepping up afterwards cannot undo it, exactly as an attacker running through afterwards could not create it. One frame decides it, and it cuts both ways.']
+},
+{
+  id:6,diff:'Medium',title:'The Ball Behind Him',
   brief:'Blue’s 10 has driven to the byline, past everyone. The 9 is beyond the red defenders, but his teammate cuts the ball backwards to him.',
   answer:'onside',freezeT:.55,
   law:['Law 11.1 — Nearer than the ball AND the second-last opponent'],
@@ -879,7 +915,7 @@ const SCENARIOS=[
   why:['To be in an offside position you must be nearer to the goal line than <b>both</b> the second-last opponent <b>and the ball</b>. He fails the second test.','The ball was already closer to the goal line than he was, so the pass came <b>backwards</b> to him. No offside position exists, no matter how far beyond the defenders he is. This is why cut-backs are unstoppable.']
 },
 {
-  id:6,diff:'Medium',title:'Keeper on Walkabout',
+  id:7,diff:'Medium',title:'Keeper on Walkabout',
   brief:'The keeper has charged upfield and is stranded in midfield. Just one red defender is left near his own goal when the pass is played.',
   answer:'offside',freezeT:.5,
   law:['Law 11.1 — It is the second-last OPPONENT, keeper or not'],
@@ -895,7 +931,7 @@ const SCENARIOS=[
   why:['Nothing in Law 11 says the goalkeeper has to be one of the two players you count. The test is simply the <b>second-last opponent</b>, whoever that happens to be.','With the keeper stranded upfield, the second-last opponent <i>is</i> the keeper — and the 9 is well beyond him. One defender on his own cannot play anybody onside. Offside.']
 },
 {
-  id:7,diff:'Medium',title:'Nowhere Near It',
+  id:8,diff:'Medium',title:'Nowhere Near It',
   brief:'The 9 is loitering out on the far touchline, clearly past the last defender. The pass goes the other way entirely — to the 11, who is comfortably onside. The 9 never touches it, challenges nobody, and blocks nobody’s view.',
   answer:'onside',freezeT:.45,
   law:['Law 11.2 — A position is not an offence','Involvement in active play'],
@@ -911,7 +947,7 @@ const SCENARIOS=[
   why:['He is in an offside position, and the diagram is not being coy about it — his line is a long way beyond the offside line.','But <b>an offside position is not an offence.</b> That is the sentence the whole law hangs on. It becomes an offence only if, at the moment the ball is played, he <b>becomes involved in active play</b> — by interfering with play (touching the ball), by interfering with an opponent (challenging them, obstructing their line of vision, or any obvious action that impacts their ability to play it), or by gaining an advantage from a rebound or a save.','He did none of the three. The ball went to the opposite side of the pitch, he never touched it, and no defender had to deal with him. He is entitled to stand out there all afternoon. No offence, no flag, play on.','Compare this with the very next scenario. There, the attacker also never touches the ball — and it <i>is</i> offside. The difference is not the touch. It is whether he interfered with anybody.']
 },
 {
-  id:8,diff:'Hard',title:'In the Keeper’s Eyeline',
+  id:9,diff:'Hard',title:'In the Keeper’s Eyeline',
   brief:'Blue shoot from 25 yards. The 9 is standing in an offside position, right in front of the keeper. He never touches the ball — but the keeper never really sees it.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — Interfering with an opponent','Clearly obstructing the line of vision'],
@@ -927,7 +963,7 @@ const SCENARIOS=[
   why:['A player in an offside position commits an offence not only by touching the ball, but by <b>interfering with an opponent</b> — and that expressly includes <b>clearly obstructing an opponent’s line of vision</b>.','No touch is required. By standing in an offside position directly in the keeper’s sightline and affecting his ability to play the ball, the 9 has committed the offence. Goal disallowed.']
 },
 {
-  id:9,diff:'Hard',title:'Off the Woodwork',
+  id:10,diff:'Hard',title:'Off the Woodwork',
   brief:'The 8 shoots. The 9, in an offside position when the shot was struck, watches it cannon back off the post — and taps in the rebound.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — Gaining an advantage from a rebound'],
@@ -943,7 +979,7 @@ const SCENARIOS=[
   why:['He was in an offside position at the moment his teammate shot. The question is only whether he then became involved.','He did — by <b>gaining an advantage</b>. Law 11 states that a player in an offside position who plays a ball that has <b>rebounded or been deflected off the goalpost</b>, the crossbar, a match official or an opponent has committed an offence. The woodwork does not wipe the slate clean. Disallowed.']
 },
 {
-  id:10,diff:'Very hard',title:'Parried, Not Cleared',
+  id:11,diff:'Very hard',title:'Parried, Not Cleared',
   brief:'Same shot, same offside position — but this time the keeper gets a strong hand to it and parries it out. The 9 slams in the rebound.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — A deliberate SAVE never resets offside'],
@@ -959,7 +995,7 @@ const SCENARIOS=[
   why:['This is the one that splits crowds. He was offside when the shot was hit, and the ball reached him only via the goalkeeper.','Law 11 spells out the carve-out: a player in an offside position <b>is</b> penalised for playing a ball that rebounds or is deflected from a <b>deliberate save by any opponent</b>. A save is expressly excluded from the "deliberate play" reset.','Compare this with the very next scenario — the difference between a <b>save</b> and a <b>deliberate play</b> is the entire ballgame. Disallowed.']
 },
 {
-  id:11,diff:'Very hard',title:'The Defender’s Gift',
+  id:12,diff:'Very hard',title:'The Defender’s Gift',
   brief:'A hopeful ball is played forward with the 9 in an offside position. A red defender has time, sees it all the way, and heads it back towards his keeper — straight to the 9, who scores.',
   answer:'onside',freezeT:.4,resetT:.62,
   law:['Law 11.2 — A deliberate play by an opponent resets it'],
@@ -975,7 +1011,7 @@ const SCENARIOS=[
   why:['Start where you must: at the pass, the 9 <b>was</b> in an offside position. So far, identical to the last one.','But then an opponent <b>deliberately played</b> the ball. Law 11 defines that as a player having control of the ball with the possibility of passing it to a teammate, gaining possession of it, or clearing it — and an inaccurate or unsuccessful clearance still counts as deliberate play.','A deliberate play by an opponent <b>starts a new phase</b> and cancels the earlier offside position. Only a deliberate <b>save</b> is excluded — and a controlled header back is not a save. Goal stands. Play on.']
 },
 {
-  id:12,diff:'Very hard',title:'Off the Shin',
+  id:13,diff:'Very hard',title:'Off the Shin',
   brief:'The 9 is in an offside position again. But this time the pass is drilled hard at a defender only a few yards away, who throws out a leg on instinct. It cannons off his shin and loops straight to the 9, who scores.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — A deflection is not a deliberate play','Gaining an advantage'],
@@ -988,10 +1024,10 @@ const SCENARIOS=[
   ball:{track:[[0,250,182],[.4,296,178],[.58,412,186],[.76,470,206],[1,536,196]]},
   impact:[[.58,'🦴 DEFLECTION — no control']],
   caps:[[0,'Blue lines it up and drills it…'],[.4,'⚽ BALL PLAYED — the 9 is offside at this instant.'],[.58,'🦴 It smashes off the 4’s shin. He never had a chance to control it.'],[.82,'It loops to the 9, who finishes.']],
-  why:['Same starting point as the last one: the 9 was in an offside position when his teammate played the ball. The only question is whether what happened next wiped it out.','It did not, because this was a <b>deflection</b>, not a deliberate play. Law 11 defines deliberate play as a player having <b>control</b> of the ball with the possibility of passing it to a team-mate, gaining possession of it, or clearing it. The 4 had none of that. The ball was drilled at him from a few yards, its direction was unexpected, and he threw out a leg on instinct — a movement that achieved contact but no control.','A deflection off an opponent does not start a new phase. Worse, Law 11 lists playing a ball deflected off an opponent as <b>gaining an advantage</b> from the offside position. Disallowed.','This is the hardest call in the whole law, and the one that decides the arguments. Compare the three ways a ball can reach you off an opponent: a <b>deliberate play</b> resets it (previous scenario, onside), a <b>deliberate save</b> never does (scenario 10, offside), and a <b>deflection</b> never does either (this one, offside). Time, clear sight and control are what separate the first from the last.']
+  why:['Same starting point as the last one: the 9 was in an offside position when his teammate played the ball. The only question is whether what happened next wiped it out.','It did not, because this was a <b>deflection</b>, not a deliberate play. Law 11 defines deliberate play as a player having <b>control</b> of the ball with the possibility of passing it to a team-mate, gaining possession of it, or clearing it. The 4 had none of that. The ball was drilled at him from a few yards, its direction was unexpected, and he threw out a leg on instinct — a movement that achieved contact but no control.','A deflection off an opponent does not start a new phase. Worse, Law 11 lists playing a ball deflected off an opponent as <b>gaining an advantage</b> from the offside position. Disallowed.','This is the hardest call in the whole law, and the one that decides the arguments. Compare the three ways a ball can reach you off an opponent: a <b>deliberate play</b> resets it (previous scenario, onside), a <b>deliberate save</b> never does (the parried shot, offside), and a <b>deflection</b> never does either (this one, offside). Time, clear sight and control are what separate the first from the last.']
 },
 {
-  id:13,diff:'Very hard',title:'The Flag That Never Came',
+  id:14,diff:'Very hard',title:'The Flag That Never Came',
   brief:'A ball over the top, and it is desperately tight — a shoulder in it. The assistant referee’s flag stays down. The 9 races clear, rounds the keeper and rolls it in. Only then does the flag go up.',
   answer:'offside',freezeT:.42,
   law:['Law 11.1 — Offside position','Guidelines — the AR’s delayed flag'],
@@ -1004,6 +1040,22 @@ const SCENARIOS=[
   ball:{track:[[0,200,190],[.42,250,186],[.62,400,154],[.78,454,158],[.9,494,174],[1,536,188]]},
   caps:[[0,'A ball is clipped over the top…'],[.42,'⚽ BALL PLAYED — and it is desperately close. Shoulder for shoulder.'],[.62,'The flag stays DOWN. The AR has seen it, and is waiting.'],[.86,'He rounds the keeper and rolls it in…'],[.95,'🚩 …and only NOW does the flag go up.']],
   why:['At the moment the pass was played, the 9 had a shoulder beyond the second-last opponent. That is an offside position — and he went on to play the ball, so the offence was complete the instant the pass left his teammate’s boot.','So why did the flag stay down? Because the guidelines tell the assistant referee to do exactly that. On a tight call where an immediate goalscoring opportunity is likely, the AR uses the <b>wait-and-see technique</b>: keep the flag down, let the passage of play finish, then signal. It means a mistaken flag can never kill a legitimate attack — and if the attacking team scores, the AR <i>must</i> raise the flag.','A late flag is not a changed mind. The goal is disallowed and the restart is an indirect free kick to the defending side. Clear-cut offsides are still flagged immediately; the delay is only for the tight ones.','Notice where the AR has been standing all along: level with the second-last defender, or with the ball when the ball is nearer the goal line. That is their required position — the AR walks the offside line so they can judge it square-on.']
+},
+{
+  id:15,diff:'Very hard',title:'Advantage, Defence',
+  brief:'A ball over the top to the 9, who is offside and takes a touch. A red defender robs him on the spot and the reds break out with the ball at their feet. The flag never goes up.',
+  answer:'offside',freezeT:.4,flagStaysDown:true,
+  law:['Law 11.2 — Interfering with play','Law 5 — Advantage','Guidelines — the AR holds the flag'],
+  actors:[
+    {id:'P8',team:'blue',n:8,track:[[0,230,254],[.4,276,250],[1,286,250]]},
+    {id:'A9',team:'blue',n:9,track:[[0,462,152],[.4,470,152],[.66,486,166],[1,494,180]]},
+    {id:'D4',team:'red',n:4,track:[[0,440,104],[.4,446,106],[1,404,128]]},
+    {id:'D5',team:'red',n:5,track:[[0,432,206],[.4,438,206],[.7,486,172],[1,392,244]]},
+    {id:'GK',team:'gk',n:'GK',track:[[0,516,180],[1,512,184]]}],
+  ball:{track:[[0,230,254],[.4,276,250],[.64,486,166],[.74,486,172],[1,380,248]]},
+  impact:[[.7,'🛡️ ROBBED — reds break out']],
+  caps:[[0,'A ball clipped over the top…'],[.4,'⚽ BALL PLAYED — the 9 is beyond the last two here.'],[.62,'He takes a touch. That is the offence, complete.'],[.74,'🛡️ But the 5 nicks it straight off him.'],[.92,'🚩 Reds are away, and the flag never comes up.']],
+  why:['Take the two questions in order. At the moment the ball was played he was nearer the goal line than the second-last opponent, so he was in an offside position. He then <b>played the ball</b>, which is interfering with play. The offence is complete, and the answer is offside.','So why is nobody stopping play? Because the flag is a decision about <i>when</i> to penalise, not about whether it happened. The guidelines tell the assistant referee to use the <b>wait-and-see technique</b> and keep the flag down when the team the offence was committed against will benefit from the advantage. Even a flag already raised is held only until the referee acknowledges it <b>or the ball is clearly in the control of the defending team</b> — at which point it comes down.','Blowing up here would take the ball off the defence and hand them a free kick they never wanted. Under Law 5 the referee lets it run, and can still come back and award the indirect free kick if the anticipated advantage does not follow within a few seconds.','Note which way advantage can run: only ever to the <b>non-offending</b> team, never to the attacking side that was offside. And keep this apart from the scenario before it. There the flag went up late because the offence stood and the goal had to be ruled out. Here the offence stands too, and the flag stays down because the defence is better off without it.','One last distinction worth holding on to. If he had never touched the ball, there would have been no offence to play advantage on at all — an offside <i>position</i> that comes to nothing is not an offside.']
 }
 ];
 
@@ -1021,7 +1073,7 @@ function mini(o){
       {id:'A9',team:'blue',n:9,pose:o.apose,track:o.a},
       {id:'D5',team:'red',n:5,track:o.d},
       {id:'GK',team:'gk',n:'GK',track:o.g}],
-    ball:{track:o.b},caps:o.caps,impact:o.impact,resetT:o.reset};
+    ball:{track:o.b},caps:o.caps,impact:o.impact,resetT:o.reset,flagStaysDown:o.noflag};
 }
 const GKHOME=[[0,516,180],[1,514,182]];
 
@@ -1084,7 +1136,7 @@ const LEARN=[
      caps:[[0,'The 9 drifts out and stops…'],[.42,'⚽ Ball played — the other way entirely.']]})}]},
 
 {n:4,title:'The three ways to get involved',ref:'Law 11.2 — Involvement in active play',
- detail:'There are exactly three routes from an offside position to an offside offence. Only the first needs you to touch the ball at all.',
+ detail:'Every call is two questions, in this order. <b>One — at the moment the ball was played, was he in an offside position?</b> If not, stop; there is nothing left to judge. <b>Two — did he then become involved in active play?</b> There are exactly three routes, and only the first needs him to touch the ball at all.',
  book:'<b>Interfering with play</b> — playing or touching a ball passed or touched by a team-mate. <b>Interfering with an opponent</b> — clearly obstructing their line of vision, challenging for the ball, clearly attempting to play a ball which is close when this impacts an opponent, or any obvious action which clearly impacts an opponent’s ability to play the ball. <b>Gaining an advantage</b> — playing a ball that rebounded or deflected off the goalpost, crossbar, a match official or an opponent, or that came from a deliberate save.',
  shots:[
   {label:'1 · Plays it',verdict:'offside',point:'He touches it. That is the offence.',
@@ -1106,18 +1158,30 @@ const LEARN=[
      d:[[0,430,254],[1,440,250]],g:[[0,516,182],[.6,516,182],[.72,518,150],[1,518,150]],
      b:[[0,300,236],[.4,332,230],[.66,528,120],[.8,486,150],[1,536,172]],
      caps:[[0,'He lets fly…'],[.4,'⚽ Shot struck — the 9 is offside here.']],
-     impact:[[.66,'🥅 OFF THE POST']]})}]},
+     impact:[[.66,'🥅 OFF THE POST']]})},
+  {label:'None of the three',verdict:'onside',point:'He lunges and misses. Nobody is affected.',
+   detail:'Going for it is not a fourth route. The law penalises <i>clearly attempting to play a ball which is close</i> only <b>when that attempt impacts an opponent</b>. He never touches it, no defender has to change what they were doing, and the keeper gathers it exactly as he would have anyway. No touch, no impact, no offence.',
+   scene:mini({f:.42,apose:'reach',p:[[0,280,252],[.42,300,248],[1,310,248]],a:[[0,466,152],[.42,470,150],[1,480,150]],
+     d:[[0,424,254],[.42,430,252],[1,442,248]],g:[[0,516,180],[.86,508,178],[1,504,178]],
+     b:[[0,280,252],[.42,300,248],[.74,470,176],[1,506,178]],
+     caps:[[0,'A ball flashed across the face of goal…'],[.42,'⚽ Ball played — he is offside here.'],[.76,'He stretches, and misses. The keeper gathers.']]})}]},
 
-{n:5,title:'The instant it is judged',ref:'Law 11.1 — the decisive moment',
- detail:'Not when the ball arrives — when it <b>leaves</b>. Everything freezes at the moment a teammate plays or touches it, and nothing that happens afterwards can make you offside.',
- book:'Judged at the moment the ball is played or touched by a team-mate.',
+{n:5,title:'The point of the kick',ref:'Law 11.1 — the decisive moment',
+ detail:'Not when the ball arrives — when it <b>leaves</b>. One frame decides it: the moment a teammate plays or touches the ball. And it cuts both ways. Nothing that happens after that frame can make you offside, and nothing that happens after it can save you either.',
+ book:'Judged at the moment the ball is played or touched by a team-mate. Where that moment is disputed, the <b>first point of contact</b> of the play or touch is what counts — not the follow-through, and not the instant the ball leaves the boot. The single exception is a ball thrown by the goalkeeper, where the <b>last</b> point of contact is used instead.',
  shots:[
   {label:'Timing',verdict:'onside',point:'Behind the line when it is struck. He runs on after.',
    detail:'At the instant the pass is struck the 9 is behind the second-last opponent, so he was never in an offside position. He then sprints through the line and collects it ten yards clear, which is completely legal. This is the single most misjudged thing in the law.',
    scene:mini({f:.4,p:[[0,200,254],[.4,226,250],[1,236,250]],a:[[0,300,140],[.4,326,140],[1,486,158]],
      d:[[0,344,206],[.4,350,206],[1,368,210]],g:GKHOME,
      b:[[0,200,254],[.4,226,250],[.82,398,146],[1,488,158]],
-     caps:[[0,'He checks his run…'],[.4,'⚽ Ball played — he is BEHIND the line.'],[.7,'Now he goes.']]})}]},
+     caps:[[0,'He checks his run…'],[.4,'⚽ Ball played — he is BEHIND the line.'],[.7,'Now he goes.']]})},
+  {label:'Too late to step up',verdict:'offside',point:'Beyond the line at the kick. Stepping up afterwards is too late.',
+   detail:'The mirror image of the diagram before it. He is past the second-last opponent when the pass is struck, and that frame is the only one that counts. The defence pushing out afterwards makes him <i>look</i> level by the time he collects it — and it changes nothing, because the offence was complete the instant the ball was played.',
+   scene:mini({f:.4,p:[[0,200,254],[.4,226,250],[1,236,250]],a:[[0,340,140],[.4,352,140],[1,420,150]],
+     d:[[0,330,206],[.4,336,206],[1,430,214]],g:GKHOME,
+     b:[[0,200,254],[.4,226,250],[.82,392,146],[1,422,150]],
+     caps:[[0,'The line is deep as he sets off…'],[.4,'⚽ Ball played — he is BEYOND the line.'],[.74,'Now the defence steps up. Far too late.']]})}]},
 
 {n:6,title:'When it comes off an opponent',ref:'Law 11.2 — reset, or not',
  detail:'The hardest part of the law, and where the real arguments live. An opponent touching the ball sometimes wipes your offside position out and sometimes does not. The test is <b>control</b>.',
@@ -1166,21 +1230,43 @@ const LEARN=[
    scene:mini({f:.45,p:[[0,180,254],[.45,214,250],[1,224,250]],a:[[0,392,140],[.45,404,140],[1,470,158]],
      d:[[0,348,208],[.45,354,208],[1,366,212]],g:GKHOME,
      b:[[0,180,254],[.45,214,250],[.84,406,144],[1,472,158]],
-     caps:[[0,'A pass in behind…'],[.45,'⚽ Ball played — offside. Mark the spot.']]})}]}
+     caps:[[0,'A pass in behind…'],[.45,'⚽ Ball played — offside. Mark the spot.']]})}]},
+
+{n:8,title:'When the defence wins it anyway',ref:'Law 11.2 / Law 5 — Advantage',
+ detail:'The question everybody ends up asking: he was offside, but the defence got the ball. Do you blow up? Usually <b>no</b> — and for two completely different reasons, which are worth keeping apart.',
+ book:'Being in an offside position is not an offence in itself, so a player who never becomes involved in active play has committed nothing to penalise. Where an offence <i>has</i> been committed, the assistant referee uses the wait-and-see technique and does not raise the flag when the team against which the offence was committed will benefit from the advantage. If the flag is raised and the referee does not see it, the assistant holds the signal only until it is acknowledged or <b>the ball is clearly in the control of the defending team</b>. Law 5: the referee allows play to continue when the non-offending team benefits, and penalises the original offence if the anticipated advantage does not follow at that time or within a few seconds.',
+ shots:[
+  {label:'Nothing to call',verdict:'onside',point:'The pass never reached him. There was no offence at all.',
+   detail:'The commonest misunderstanding in the game, and the easier of the two reasons. He was in an offside <b>position</b>, the pass was cut out before it got to him, and he never touched it, challenged anybody or blocked anybody. Question two was never reached, so no offence was ever committed. There is nothing to wave away and nothing to award — the flag simply stays down and play carries on.',
+   scene:mini({f:.42,p:[[0,240,254],[.42,286,250],[1,296,250]],a:[[0,470,150],[.42,478,150],[1,498,158]],
+     d:[[0,400,196],[.42,408,192],[.66,438,178],[1,412,206]],g:GKHOME,
+     b:[[0,240,254],[.42,286,250],[.66,438,178],[1,330,300]],
+     caps:[[0,'A pass aimed in behind…'],[.42,'⚽ Ball played — the 9 is offside here.'],[.68,'🛡️ The 5 reads it and hooks it clear.'],[.9,'No touch, no challenge. Nothing to call.']],
+     impact:[[.66,'🛡️ INTERCEPTED — he never got near it']]})},
+  {label:'Advantage, defence',verdict:'offside',point:'A real offence — and you still play on.',
+   detail:'This time he takes a touch, so the offence <i>is</i> complete. A defender robs him immediately and the reds break out with the ball at their feet. Stopping play now would hand possession straight back, so the assistant keeps the flag down and the referee lets it run. The offence has not been forgiven, only deferred: if the break comes to nothing within a few seconds the referee can still return and give the indirect free kick. Note which way the advantage runs — never to the side that was offside.',
+   noflag:true,
+   scene:mini({f:.4,noflag:true,p:[[0,230,254],[.4,276,250],[1,286,250]],a:[[0,462,152],[.4,470,152],[.66,486,166],[1,494,180]],
+     d:[[0,432,206],[.4,438,206],[.7,486,172],[1,392,244]],g:GKHOME,
+     b:[[0,230,254],[.4,276,250],[.64,486,166],[.74,486,172],[1,380,248]],
+     caps:[[0,'Another ball over the top…'],[.4,'⚽ Ball played — offside, and he takes a touch.'],[.72,'🛡️ The 5 nicks it off him and reds are away.'],[.9,'🚩 Flag stays down. Play on.']],
+     impact:[[.7,'🛡️ ROBBED — reds break out']]})}]}
 ];
 const shotScene=sh=>sh.scene;
 const LEARN_SHOTS=LEARN.reduce((n,c)=>n+c.shots.length,0);
 
 /* ================= character morph ================= */
 const STAGES=[
- {min:0,max:0,  name:'Gridiron Rookie',   blurb:'Thinks offside is a hockey thing.',        gear:['gear-pads','gear-cleats','hand-ball-oval','gear-helmet']},
- {min:1,max:2,  name:'Helmet Off',        blurb:'Fresh air. Dangerous new ideas.',          gear:['gear-pads','gear-cleats','hand-ball-oval','gear-hair']},
- {min:3,max:5,  name:'Pads Down',         blurb:'Starting to see the line.',                gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
- {min:6,max:8,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',           gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
- {min:9,max:10,  name:'Proper Baller',     blurb:'Reads the game. Mostly.',                  gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
- {min:11,max:13, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
+ {min:0,  name:'Gridiron Rookie',   blurb:'Thinks offside is a hockey thing.',   gear:['gear-pads','gear-cleats','hand-ball-oval','gear-helmet']},
+ {min:1,  name:'Helmet Off',        blurb:'Fresh air. Dangerous new ideas.',     gear:['gear-pads','gear-cleats','hand-ball-oval','gear-hair']},
+ {min:3,  name:'Pads Down',         blurb:'Starting to see the line.',           gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
+ {min:6,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
+ {min:10, name:'Proper Baller',     blurb:'Reads the game. Mostly.',             gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
+ {min:13, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.', gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
 ];
-const stageFor=n=>STAGES.find(s=>n>=s.min&&n<=s.max)||STAGES[STAGES.length-1];
+/* the last band the score has reached — open-ended at the top, so the number of
+   scenarios can change without leaving a rank unreachable */
+const stageFor=n=>STAGES.filter(s=>n>=s.min).pop()||STAGES[0];
 function renderAvatar(el,stage){
   el.innerHTML='';
   const svg=E('svg',{viewBox:'-45 -58 90 100'},el);
@@ -1189,12 +1275,12 @@ function renderAvatar(el,stage){
 }
 
 const CATEGORIES=[
- {min:0,max:4, name:'🏈 Gridiron Lifer',            css:'',  blurb:'You brought a helmet to a football match and the flag never came down. In your defence, the offside law has confused entire nations for a century.'},
- {min:5,max:8, name:'🤔 Offside-Curious',           css:'',  blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
- {min:9,max:11, name:'🚩 Assistant Referee (Prov.)', css:'',  blurb:'Steady flag arm. You understand that it is judged at the moment the ball is played, which already puts you ahead of most of the stadium.'},
- {min:12,max:13,name:'🛰️ Semi-Automated Overlord',   css:'',  blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
+ {min:0,  name:'🏈 Gridiron Lifer',            bg:'#f4795b', blurb:'You brought a helmet to a football match and the flag never came down. In your defence, the offside law has confused entire nations for a century.'},
+ {min:5,  name:'🤔 Offside-Curious',           bg:'#bfe3ff', blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
+ {min:10, name:'🚩 Assistant Referee (Prov.)', bg:'#ffd44d', blurb:'Steady flag arm. You know it is judged at the moment the ball is played and that a position on its own is not an offence, which already puts you ahead of most of the stadium.'},
+ {min:14, name:'🛰️ Semi-Automated Overlord',   bg:'#6fc25a', blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
 ];
-const catFor=n=>CATEGORIES.find(c=>n>=c.min&&n<=c.max);
+const catFor=n=>CATEGORIES.filter(c=>n>=c.min).pop()||CATEGORIES[0];
 
 /* ================= scene ================= */
 function buildScene(mount,sc){
@@ -1394,8 +1480,10 @@ function updateScene(h,sc,t){
   /* pinned to the frame's edge — the side the plane labels do not use */
   put(h.arG,arX,isPort()?h.bb.y[0]+17:h.bb.y[1]-17);
   /* the flag stays down while the call is still open — raising it would answer
-     the question. It only goes up in the epilogue, and only when it should. */
-  const flagUp=h.revealed&&sc.answer==='offside'&&t>sc.freezeT+.01;
+     the question. It only goes up in the epilogue, and only when it should.
+     `flagStaysDown` is for the offences that are never flagged: the assistant
+     holds the flag when the defending team is better off playing on. */
+  const flagUp=h.revealed&&sc.answer==='offside'&&!sc.flagStaysDown&&t>sc.freezeT+.01;
   h.arFlag.setAttribute('transform','rotate('+(flagUp?0:132)+') scale('+BEAN_S+')');
 
   /* spotlights on the two players the decision is actually about */
@@ -1525,16 +1613,41 @@ function show(screen){
   document.body.classList.toggle('menu',screen==='screen-menu');
 }
 
-/* the main page: two doors, the rules or the challenge */
-function renderMenu(){
-  state.mode='menu';
+/* Three screens, and from any one of them the other two are one tap away:
+   the main page offers both, and the tutorial and the challenge each offer
+   the main page and each other. */
+
+/* Leaving the challenge: the pinned answer bar and the page padding that
+   reserves room for it both key off `answering`, and neither belongs on
+   another screen. */
+function leaveChallenge(){
+  document.body.classList.remove('answering');
   if(state.player)state.player.stop();
   setDrawer(false);
+}
+function renderMenu(){
+  state.mode='menu';
+  leaveChallenge();
   show('screen-menu');
   window.scrollTo({top:0,behavior:'auto'});
 }
+function goRules(){
+  leaveChallenge();
+  renderRule();
+}
+/* A fresh run. Starting over is the main page's job, and Play again's. */
 function startChallenge(){
   state.i=0;state.correct=0;state.wrong=0;state.answers=[];
+  show('screen-quiz');renderQuestion();
+}
+/* Arriving from the tutorial, where a run may already be underway: picking the
+   rules up mid-challenge and coming back should not cost you your answers. */
+function openChallenge(){
+  const answered=state.answers.filter(Boolean).length;
+  if(answered===0||answered>=SCENARIOS.length){startChallenge();return;}
+  /* If the call on the current scenario was already made before they left,
+     resume on the next one — re-offering it would count it twice. */
+  while(state.i<SCENARIOS.length-1&&state.answers[state.i])state.i++;
   show('screen-quiz');renderQuestion();
 }
 
@@ -1620,6 +1733,7 @@ function renderRule(){
 /* at==null starts the passage from the top; otherwise it resumes where it was */
 function buildLearnScene(at){
   const c=LEARN[state.r],sh=c.shots[state.s],sc=shotScene(sh);
+  sc.answer=sh.verdict;
   if(state.player)state.player.stop();
   const h=buildScene($('sceneMount'),sc);
   state.scene=h;
@@ -1758,7 +1872,7 @@ function renderResults(){
   $('resultScore').innerHTML=state.correct+'<span>/'+SCENARIOS.length+'</span>';
   const c=catFor(state.correct);
   $('resultCat').textContent=c.name;
-  $('resultCat').style.background=state.correct>=12?'#6fc25a':state.correct>=9?'#ffd44d':state.correct>=5?'#bfe3ff':'#f4795b';
+  $('resultCat').style.background=c.bg;
   $('resultBlurb').textContent=c.blurb;
 
   const ul=$('resultReview');ul.innerHTML='';
@@ -1775,10 +1889,11 @@ function renderResults(){
 }
 
 /* ================= wiring ================= */
-$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;renderRule();});
+$('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;goRules();});
 $('menuQuiz').addEventListener('click',startChallenge);
 ['homeBtn','learnHome','resultHome'].forEach(id=>$(id).addEventListener('click',renderMenu));
-$('startBtn').addEventListener('click',startChallenge);
+$('rulesBtn').addEventListener('click',goRules);
+$('startBtn').addEventListener('click',openChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});
 /* an unconditional restart, so one button always does the same thing */
@@ -1788,9 +1903,9 @@ $('rReplay').addEventListener('click',()=>{
 });
 $('rNext').addEventListener('click',()=>{
   if(state.r<LEARN.length-1){state.r++;state.s=0;renderRule();}
-  else startChallenge();
+  else openChallenge();
 });
-$('learnBtn').addEventListener('click',()=>renderRule());
+$('learnBtn').addEventListener('click',goRules);
 $('moreBtn').addEventListener('click',openDetail);
 $('btnOffside').addEventListener('click',()=>answer('offside'));
 $('btnOnside').addEventListener('click',()=>answer('onside'));
