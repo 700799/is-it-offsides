@@ -47,7 +47,7 @@ svg text{font-family:var(--font)}
   background:rgba(253,243,220,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border-bottom:3px solid var(--ink);
 }
-.statusbar .inner{max-width:940px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.statusbar .inner{max-width:940px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:relative}
 .statusbar .av{flex:0 0 auto;width:46px;height:46px;border:3px solid var(--ink);border-radius:14px;background:#fff;box-shadow:0 3px 0 var(--ink);display:grid;place-items:center;overflow:hidden}
 .statusbar .av svg{width:100%;height:100%;display:block}
 .rankwrap{flex:1 1 130px;min-width:0}
@@ -251,6 +251,72 @@ body.learning .wrap{padding-bottom:96px;max-width:760px}
   body.learning #stage>.legend,
   body.learning #stage>.motion-note{flex:0 0 auto}
 }
+/* The challenge gets the same treatment: on a phone the whole field has to be
+   visible at once, because the field is what you are being asked to judge.
+   Below the guard it reverts to scrolling — a pitch squeezed to nothing is
+   worse than a scroll. */
+@media (min-height:640px){
+  /* the fit places the answer bar itself, so the flow padding that clears it
+     goes away — otherwise the page keeps a screen's worth of empty scroll */
+  /* two later rules set this padding for `answering`; the fit places the bar
+     itself, so out-specify them rather than relying on source order */
+  body.quizzing.answering .wrap,
+  body.quizzing .wrap{padding-bottom:0}
+  body.quizzing footer{display:none}
+  body.quizzing #screen-quiz{display:flex;flex-direction:column;
+    height:calc(100vh - var(--sb) - var(--ab));
+    height:calc(100svh - var(--sb) - var(--ab))}
+  body.quizzing #screen-quiz>.card{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  /* show() reparents the one #stage into this slot, so the slot is the card's
+     flex child and has to shrink with it — pinning it holds the stage at its
+     natural height and the pitch overflows */
+  body.quizzing #quizStageSlot{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  body.quizzing #stage{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+  body.quizzing #sceneMount{flex:1 1 auto;min-height:0;background:#57a747}
+  body.quizzing #sceneMount svg.pitch{width:100%;height:100%}
+  /* the stage clips to its corners, so its own rows must never be squeezed into
+     that clip — only the diagram absorbs the difference */
+  body.quizzing .q-head,
+  body.quizzing .q-title,
+  body.quizzing .brief,
+  body.quizzing #stage>.caption,
+  body.quizzing #stage>.stage-bar,
+  body.quizzing #stage>.answers,
+  body.quizzing #stage>.legend,
+  body.quizzing #stage>.motion-note{flex:0 0 auto}
+  /* The brief describes the passage you are being asked to judge, so it is only
+     worth truncating when the screen is genuinely too short to hold both it and
+     a usable pitch. On a normal phone it stays whole. */
+  @media (max-height:760px){
+    body.quizzing .brief{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+      overflow:hidden}
+  }
+}
+/* the two rows the fit has to budget around: the sticky status bar, and the
+   answer bar pinned to the bottom while the call is open */
+:root{--sb:65px;--ab:88px}
+@media (max-width:560px){:root{--sb:52px;--ab:96px}}
+body.quizzing:not(.answering){--ab:8px}
+@media (max-height:820px){body.quizzing .legend{display:none}}
+/* On a short screen every row above the pitch competes with it directly, and the
+   pitch is the thing being judged. Give back whitespace first — same band as the
+   legend, which is already traded away here. */
+@media (max-height:820px){
+  body.quizzing .q-head{margin-bottom:4px}
+  body.quizzing .q-title{margin:2px 0 4px}
+  body.quizzing .brief{margin-bottom:6px}
+  body.quizzing .caption{padding:5px 9px}
+  body.quizzing .stage{margin:3px 0 2px}
+  body.quizzing .stage-bar{padding:5px 9px 1px}
+}
+/* Only when it is genuinely desperate does the type shrink and the brief lose a
+   line — truncating what you are being asked to judge is the last resort. */
+@media (max-height:700px){
+  body.quizzing .q-title{font-size:20px}
+  body.quizzing .brief{font-size:12.5px;-webkit-line-clamp:2}
+  body.quizzing .caption{font-size:12px}
+}
+
 /* on a short screen the legend is the first thing worth trading for diagram */
 @media (max-height:780px){body.learning .legend{display:none}}
 body.learning footer{display:none}
@@ -363,13 +429,16 @@ footer b{color:#4a4c56}
 @media (max-width:560px){
   /* Every row above the answers is squeezed so the call is reachable without
      scrolling. The pitch itself is deliberately left alone — it is the point. */
-  .statusbar .inner{gap:7px;padding:5px 11px}
+  .statusbar .inner{gap:7px;padding:5px 11px 8px;flex-wrap:nowrap}
   .chip.home .lbl{display:none}
   .statusbar .av{width:36px;height:36px;border-radius:11px}
   .rankwrap .lab{display:none}
   .rankwrap .name{font-size:13px}
-  .dots{gap:3px}
-  .dots li{width:9px;height:9px;border-width:2px}
+  /* the run's progress, as a hairline under the row rather than a second row of
+     circles — same green/red per scenario, a fraction of the height */
+  .dots{position:absolute;left:0;right:0;bottom:0;gap:1.5px;flex-wrap:nowrap}
+  .dots li{flex:1 1 0;width:auto;height:4px;border:0;border-radius:0;background:#ded8c6}
+  .dots li.current{box-shadow:none;background:var(--yellow)}
   .chip.sm{font-size:10.5px;padding:2px 7px}
   .vbtn{font-size:11.5px;padding:5px 10px}
   .stage-bar{padding:7px 10px 2px}
@@ -1622,6 +1691,7 @@ function show(screen){
    another screen. */
 function leaveChallenge(){
   document.body.classList.remove('answering');
+  document.body.classList.remove('quizzing');
   if(state.player)state.player.stop();
   setDrawer(false);
 }
@@ -1797,7 +1867,9 @@ function renderQuestion(){
   $('playBtn').hidden=REDUCED;
 
   document.body.classList.add('answering');
+  document.body.classList.add('quizzing');
   ORIENT=pickOrient();
+  syncBars();
   buildCurrentScene();
   if(!REDUCED)state.player.play();
 
@@ -1807,6 +1879,16 @@ function renderQuestion(){
 
 /* Build (or rebuild, on an orientation flip) the scene for the current scenario,
    optionally restoring where playback and the reveal had got to. */
+function syncBars(){
+  const sb=$('statusbar'),ab=$('answers');
+  const r=document.documentElement.style;
+  r.setProperty('--sb',(sb?sb.getBoundingClientRect().height:0).toFixed(1)+'px');
+  /* the answer bar only reserves space while it is pinned; once the call is
+     made it returns to the flow and the pitch can have the room back */
+  const pinned=document.body.classList.contains('answering');
+  r.setProperty('--ab',(pinned&&ab?ab.getBoundingClientRect().height:0).toFixed(1)+'px');
+}
+
 function buildCurrentScene(restore){
   const sc=SCENARIOS[state.i];
   if(state.player)state.player.stop();
@@ -1827,6 +1909,7 @@ function answer(choice){
   document.body.classList.remove('answering');
   state.player.freeze();
 
+  syncBars();
   const ok=choice===sc.answer;
   /* the gap band is neutral while the call is open; now it takes the verdict's colour */
   if(state.scene){state.scene.verdict=(sc.answer==='onside');state.player.redraw();}
@@ -1864,6 +1947,7 @@ function answer(choice){
 
 function renderResults(){
   document.body.classList.remove('answering');
+  document.body.classList.remove('quizzing');
   setDrawer(false);
   $('afterRow').hidden=true;
   show('screen-results');
@@ -1925,7 +2009,7 @@ function setDrawer(on){
 }
 
 let rzT=null;
-addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>applyOrient(false),160);});
+addEventListener('resize',()=>{syncBars();clearTimeout(rzT);rzT=setTimeout(()=>{syncBars();applyOrient(false);},160);});
 $('drawerClose').addEventListener('click',()=>setDrawer(false));
 $('scrim').addEventListener('click',()=>setDrawer(false));
 $('whyBtn').addEventListener('click',()=>setDrawer(true));

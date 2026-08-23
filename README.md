@@ -46,10 +46,18 @@ ball once the ball is nearer the goal line. It stays down while the call is your
 only goes up once you have answered — except on the two passages where the law says it
 should not go up at all, where it stays down and the explanation says why.
 
+On a phone the whole pitch is on screen at once, because the pitch is the thing you are
+being asked to judge: the challenge is sized to the viewport and the diagram takes whatever
+is left once the fixed rows are placed, so nothing is cut off and nothing has to be scrolled
+to. Where the screen is short it gives back whitespace first, and only truncates the brief
+when it is genuinely desperate.
+
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
-ranked categories.
+ranked categories. The bar is a single row: on a phone the fifteen progress dots leave it
+and become a hairline along its bottom edge, still green or red per scenario but costing
+four pixels instead of a second row.
 
 ## How to spot offside
 
