@@ -1,7 +1,7 @@
 # is-it-offsides
 
 **Is It Offside?** — a graphical walkthrough of the whole offside law, plus a
-fifteen-scenario test called **the Offside Challenge**. Each scenario animates a passage
+seventeen-scenario test called **the Offside Challenge**. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
@@ -35,6 +35,25 @@ you off an opponent, back to back, because that is where the real arguments live
 It finishes on the two ways a flag behaves when the offence is real: one that goes up late,
 and one that never goes up at all because the defending team is better off playing on.
 
+Every passage is built as the same three beats, and the replay is broken along them:
+**1 Set-up** — where everyone is before anything happens; **2 The 9** — the run or the
+standing still that the whole call turns on; **3 The pass** — the ball being played, and
+the freeze. The three sit under the pitch as a strip of buttons, each one filling as its
+own beat runs, and each replayable on its own without sitting through the other two, so
+you can watch the movement four times and the pass once. **Play** still runs the passage
+end to end.
+
+Two scenarios exist purely to separate intent from involvement, and they are drawn with
+the *identical* freeze: same ball, same pass, the 9 offside by the same margin, the only
+attacker anywhere near it. In one he is frozen — the ball is coming his way and he simply
+stands there while a defender strolls across and clears — and it is **onside**, because
+being in an offside position is not the offence and nobody is obliged to leave. In the
+other he sprints at it and forces the defender into a stretching hack-away, and it is
+**offside** even though he never gets a touch: making a clear play for the ball, or
+affecting an opponent's ability to play it, is being involved. Between them they answer
+the two questions people actually ask — *does it matter that the pass was meant for him?*
+(no) and *does he have to touch it?* (no).
+
 The pitch reframes itself to whatever it is drawn on: on a phone it rotates to portrait so
 the attack runs up the screen and the figures are roughly twice the size, and each scenario
 is framed to its own action rather than always showing the whole half. There are no view
@@ -55,7 +74,7 @@ when it is genuinely desperate.
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
-ranked categories. The bar is a single row: on a phone the fifteen progress dots leave it
+ranked categories. The bar is a single row: on a phone the seventeen progress dots leave it
 and become a hairline along its bottom edge, still green or red per scenario but costing
 four pixels instead of a second row.
 
@@ -98,7 +117,7 @@ jump around, and the challenge is one button away at any point, before or after 
 
 Every chapter is sized to the viewport rather than to its content: **Prev / Replay / Next**
 ride in a bar pinned to the bottom of the screen, and the diagram takes whatever height is
-left once the fixed rows are placed, so none of the seventeen has to be scrolled through.
+left once the fixed rows are placed, so none of the twenty-one has to be scrolled through.
 The chapter chips and tabs scroll sideways rather than wrapping, and on a short screen the
 legend is dropped, so every chapter gets much the same diagram regardless of how long its
 title or its one line runs. Below roughly 660px of viewport height there is not enough left
