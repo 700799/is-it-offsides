@@ -336,6 +336,33 @@ body.quizzing:not(.answering){--ab:8px}
   body.quizzing .caption{font-size:12px}
 }
 
+/* ---------- rotated phone: ask for portrait rather than build a landscape ----------
+   The viewport fit above is gated at min-height:640px, and every landscape phone
+   falls under it — 375-430px tall, where even the landing menu scrolls. Building a
+   sideways layout is not the answer: after the status and answer bars there is only
+   ~240px left, which the title and brief eat before the pitch gets any.
+
+   All three conditions carry weight:
+     orientation:landscape  this is a rotated device, not merely a short one
+     max-height:639px       one below the fit's gate, so the panel covers exactly the
+                            band where the fit is off — landscape tablets (768-820px
+                            tall) already fit and are left alone
+     pointer:coarse         a desktop window dragged short-and-wide keeps scrolling;
+                            telling someone with a mouse to turn their phone is absurd */
+#rotate{display:none}
+@media (orientation:landscape) and (max-height:639px) and (pointer:coarse){
+  body:not(.rotate-ok) #rotate{
+    display:grid;place-items:center;position:fixed;inset:0;z-index:90;
+    background:var(--cream);padding:18px;text-align:center}
+}
+.rot-in{max-width:520px}
+.rot-icon{font-size:34px;line-height:1}
+#rotate .cat{margin:8px 0 6px}
+#rotate .cat-blurb{font-size:14px}
+#rotate .btn{margin-top:14px}
+/* Deliberately no animation on the glyph: it would need a reduced-motion escape,
+   and a static one says the same thing. */
+
 /* on a short screen the legend is the first thing worth trading for diagram */
 @media (max-height:780px){body.learning .legend{display:none}}
 body.learning footer{display:none}
@@ -736,6 +763,21 @@ footer b{color:#4a4c56}
   <footer>
     <p><b>IFAB Laws of the Game 2026/27</b> · Law 11 — Offside</p>
   </footer>
+</div>
+
+<!-- Rotated phone. Outside .wrap so it covers all four screens and the status bar
+     alike, with no per-screen work. Hidden everywhere except the one band where
+     the viewport fit is off — see the gate in the CSS. -->
+<div id="rotate">
+  <div class="rot-in">
+    <div class="rot-icon" aria-hidden="true">↻📱</div>
+    <div class="cat">Turn your phone upright</div>
+    <p class="cat-blurb">The pitch is the thing you are being asked to judge, and sideways there
+      is not enough height left to show all of it.</p>
+    <!-- Nobody gets trapped: a locked-to-landscape device, or a stand, still has a
+         way through to the scrolling page. -->
+    <button class="btn sm ghost" id="rotateSkip" type="button">Continue anyway →</button>
+  </div>
 </div>
 
 <noscript><p style="text-align:center;font-weight:700;padding:20px">This site draws its moving pitches with JavaScript — enable it to play.</p></noscript>
@@ -2079,6 +2121,10 @@ $('menuLearn').addEventListener('click',()=>{state.r=0;state.s=0;goRules();});
 $('menuQuiz').addEventListener('click',startChallenge);
 ['homeBtn','learnHome','resultHome'].forEach(id=>$(id).addEventListener('click',renderMenu));
 $('rulesBtn').addEventListener('click',goRules);
+/* Dismissed for the session, and it stays dismissed. Re-showing the panel on every
+   rotation back to landscape is exactly the nagging the escape hatch exists to
+   avoid, so nothing ever clears this class. */
+$('rotateSkip').addEventListener('click',()=>{document.body.classList.add('rotate-ok');});
 $('startBtn').addEventListener('click',openChallenge);
 $('tocBtn').addEventListener('click',()=>{const t=$('toc');t.hidden=!t.hidden;if(!t.hidden)renderToc();});
 $('rPrev').addEventListener('click',()=>{if(state.r>0){state.r--;state.s=0;renderRule();}});

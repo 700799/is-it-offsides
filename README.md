@@ -71,6 +71,15 @@ is left once the fixed rows are placed, so nothing is cut off and nothing has to
 to. Where the screen is short it gives back whitespace first, and only truncates the brief
 when it is genuinely desperate.
 
+Turn the phone sideways and it asks for it back. A landscape phone is 375–430px tall, and
+after the status bar and the answer bar that leaves about 240px — which the title and the
+brief eat before the pitch gets any. Rather than build a sideways layout that could only
+show part of the field, a full-screen panel asks you to turn the phone upright. It appears
+only where it is true: landscape, under 640px of height, on a touch device. Landscape
+tablets are taller than that and already fit, so they never see it, and a desktop window
+dragged short and wide is left alone. Anyone whose device is locked to landscape can dismiss
+it with **Continue anyway**, and it stays dismissed.
+
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
