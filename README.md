@@ -75,7 +75,7 @@ Turn the phone sideways and it asks for it back. A landscape phone is 375–430p
 after the status bar and the answer bar that leaves about 240px — which the title and the
 brief eat before the pitch gets any. Rather than build a sideways layout that could only
 show part of the field, a full-screen panel asks you to turn the phone upright. It appears
-only where it is true: landscape, under 640px of height, on a touch device. Landscape
+only where it is true: landscape, under 500px of height, on a touch device. Landscape
 tablets are taller than that and already fit, so they never see it, and a desktop window
 dragged short and wide is left alone. Anyone whose device is locked to landscape can dismiss
 it with **Continue anyway**, and it stays dismissed.
@@ -129,9 +129,15 @@ ride in a bar pinned to the bottom of the screen, and the diagram takes whatever
 left once the fixed rows are placed, so none of the twenty-one has to be scrolled through.
 The chapter chips and tabs scroll sideways rather than wrapping, and on a short screen the
 legend is dropped, so every chapter gets much the same diagram regardless of how long its
-title or its one line runs. Below roughly 660px of viewport height there is not enough left
+title or its one line runs. Below roughly 520px of viewport height there is not enough left
 to be worth it, and the chapter reverts to scrolling rather than showing a diagram squeezed
 to nothing.
+
+Those thresholds are set against what a phone actually gives the page, not what its spec
+sheet says. Safari's URL bar and toolbar take 100–190px, so a 390×844 handset hands CSS
+about 664px and a 375×812 one about 629px. Guards written against device heights looked fine
+in a headless browser — where there is no browser chrome at all — and switched the fit off on
+the very phones they were meant for.
 
 ## Running it locally
 

@@ -244,8 +244,14 @@ body.learning .wrap{padding-bottom:96px;max-width:760px}
 /* The fit needs a definite height to size the diagram against, and it is only
    worth doing while the diagram still gets a usable share of it. Under that the
    chapter falls back to normal flow and the page scrolls, which is honest —
-   better than a diagram squeezed to nothing, or rows clipped out of sight. */
-@media (min-height:660px){
+   better than a diagram squeezed to nothing, or rows clipped out of sight.
+
+   520px, not 660px, for the same reason the challenge's guard is 500px: a phone
+   hands the page 100-190px less than its device height once Safari's chrome is
+   accounted for, so a 660px guard switched the fit off on the very phones it was
+   written for. The chapter carries one bar rather than two, so it can sit a
+   little higher than the challenge's guard. */
+@media (min-height:520px){
   /* the fit places the bar itself, so the flow padding that clears it goes away */
   body.learning .wrap{padding-bottom:0}
   body.learning #screen-learn{display:flex;flex-direction:column;height:calc(100vh - 84px);height:calc(100svh - 84px)}
@@ -266,8 +272,16 @@ body.learning .wrap{padding-bottom:96px;max-width:760px}
 /* The challenge gets the same treatment: on a phone the whole field has to be
    visible at once, because the field is what you are being asked to judge.
    Below the guard it reverts to scrolling — a pitch squeezed to nothing is
-   worse than a scroll. */
-@media (min-height:640px){
+   worse than a scroll.
+
+   The guard is 500px, not 640px, and the difference matters more than it looks.
+   A phone's *device* height is not what the page gets: iOS Safari's URL bar and
+   toolbar take 100-190px, so a 390x844 handset hands CSS about 664px and a
+   375x812 one about 629px. A 640px guard therefore switched the fit off on real
+   phones while every synthetic 390x844 test passed, because a test viewport has
+   no browser chrome. 500px is below every phone-with-chrome height and still
+   leaves the pitch well clear of the 150px floor. */
+@media (min-height:500px){
   /* the fit places the answer bar itself, so the flow padding that clears it
      goes away — otherwise the page keeps a screen's worth of empty scroll */
   /* two later rules set this padding for `answering`; the fit places the bar
@@ -337,20 +351,22 @@ body.quizzing:not(.answering){--ab:8px}
 }
 
 /* ---------- rotated phone: ask for portrait rather than build a landscape ----------
-   The viewport fit above is gated at min-height:640px, and every landscape phone
-   falls under it — 375-430px tall, where even the landing menu scrolls. Building a
+   The viewport fit above is gated at min-height:500px, and every landscape phone
+   falls under it — 375-430px of device height, less browser chrome, where even
+   the landing menu scrolls. Building a
    sideways layout is not the answer: after the status and answer bars there is only
    ~240px left, which the title and brief eat before the pitch gets any.
 
    All three conditions carry weight:
      orientation:landscape  this is a rotated device, not merely a short one
-     max-height:639px       one below the fit's gate, so the panel covers exactly the
-                            band where the fit is off — landscape tablets (768-820px
-                            tall) already fit and are left alone
+     max-height:499px       one below the fit's gate, so the panel covers exactly the
+                            band where the fit is off — landscape tablets already fit
+                            and are left alone. It tracks the fit's guard: if that
+                            moves, this moves with it, or the two overlap.
      pointer:coarse         a desktop window dragged short-and-wide keeps scrolling;
                             telling someone with a mouse to turn their phone is absurd */
 #rotate{display:none}
-@media (orientation:landscape) and (max-height:639px) and (pointer:coarse){
+@media (orientation:landscape) and (max-height:499px) and (pointer:coarse){
   body:not(.rotate-ok) #rotate{
     display:grid;place-items:center;position:fixed;inset:0;z-index:90;
     background:var(--cream);padding:18px;text-align:center}
@@ -505,7 +521,7 @@ footer b{color:#4a4c56}
   #learnBar .btn{font-size:13px;padding:11px 12px}
 }
 /* the bar is shorter on a narrow screen, so the chapter gets those pixels back */
-@media (max-width:560px) and (min-height:660px){
+@media (max-width:560px) and (min-height:520px){
   body.learning #screen-learn{height:calc(100vh - 76px);height:calc(100svh - 76px)}
 }
 /* only in the scrolling fallback — when the fit is on, the bar is placed for us */
