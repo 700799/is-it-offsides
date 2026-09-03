@@ -1,7 +1,7 @@
 # is-it-offsides
 
 **Is It Offside?** — a graphical walkthrough of the whole offside law, plus a
-seventeen-scenario test called **the Offside Challenge**. Each scenario animates a passage
+sixteen-scenario test called **the Offside Challenge**. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
@@ -83,7 +83,7 @@ it with **Continue anyway**, and it stays dismissed.
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
-ranked categories. The bar is a single row: on a phone the seventeen progress dots leave it
+ranked categories. The bar is a single row: on a phone the sixteen progress dots leave it
 and become a hairline along its bottom edge, still green or red per scenario but costing
 four pixels instead of a second row.
 

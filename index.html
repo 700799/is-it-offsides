@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fdf3dc">
 <title>Is It Offside? — The Offside Challenge</title>
-<meta name="description" content="Review the rules for offside, then take the Offside Challenge: seventeen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
+<meta name="description" content="Review the rules for offside, then take the Offside Challenge: sixteen scenarios, easy to brutal. Watch the passage, call it Offside or Onside, and find out exactly what Law 11 says. You start as an American football player and might end up an actual footballer.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Ccircle%20cx='32'%20cy='32'%20r='32'%20fill='%23fdf3dc'/%3E%3Ccircle%20cx='32'%20cy='32'%20r='20'%20fill='%23fffaf0'%20stroke='%2317181c'%20stroke-width='3'/%3E%3Cpath%20d='M32%2020l8%206-3%2010h-10l-3-10z'%20fill='%2317181c'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -1063,23 +1063,7 @@ const SCENARIOS=[
   why:['To be in an offside position you must be nearer to the goal line than <b>both</b> the second-last opponent <b>and the ball</b>. He fails the second test.','The ball was already closer to the goal line than he was, so the pass came <b>backwards</b> to him. No offside position exists, no matter how far beyond the defenders he is. This is why cut-backs are unstoppable.']
 },
 {
-  id:7,diff:'Medium',title:'Keeper on Walkabout',
-  brief:'The keeper has charged upfield and is stranded in midfield. Just one red defender is left near his own goal when the pass is played.',
-  answer:'offside',freezeT:.5,
-  law:['Law 11.1 — It is the second-last OPPONENT, keeper or not'],
-  actors:[
-    {id:'P8',team:'blue',n:8,track:[[0,120,180],[1,140,180]]},
-    {id:'A9',team:'blue',n:9,track:[[0,300,205],[.5,322,205],[1,440,192]]},
-    {id:'GK',team:'gk',n:'GK',track:[[0,250,178],[1,262,186]]},
-    {id:'D5',team:'red',n:5,track:[[0,470,168],[.5,476,168],[1,486,176]]},
-    {id:'D4',team:'red',n:4,track:[[0,198,100],[1,212,102]]},
-    {id:'D6',team:'red',n:6,track:[[0,188,262],[1,202,260]]}],
-  ball:{track:[[0,120,180],[.5,120,180],[.78,334,202],[1,442,191]]},
-  caps:[[0,'The keeper has come up and hasn’t got back…'],[.5,'⚽ BALL PLAYED — count the reds nearer the goal line than the 9.'],[.8,'Only one. And the keeper is the second-last opponent.']],
-  why:['Nothing in Law 11 says the goalkeeper has to be one of the two players you count. The test is simply the <b>second-last opponent</b>, whoever that happens to be.','With the keeper stranded upfield, the second-last opponent <i>is</i> the keeper — and the 9 is well beyond him. One defender on his own cannot play anybody onside. Offside.']
-},
-{
-  id:8,diff:'Medium',title:'Nowhere Near It',
+  id:7,diff:'Medium',title:'Nowhere Near It',
   brief:'The 9 is loitering out on the far touchline, clearly past the last defender. The pass goes the other way entirely — to the 11, who is comfortably onside. The 9 never touches it, challenges nobody, and blocks nobody’s view.',
   answer:'onside',freezeT:.45,
   law:['Law 11.2 — A position is not an offence','Involvement in active play'],
@@ -1095,7 +1079,7 @@ const SCENARIOS=[
   why:['He is in an offside position, and the diagram is not being coy about it — his line is a long way beyond the offside line.','But <b>an offside position is not an offence.</b> That is the sentence the whole law hangs on. It becomes an offence only if, at the moment the ball is played, he <b>becomes involved in active play</b> — by interfering with play (touching the ball), by interfering with an opponent (challenging them, obstructing their line of vision, or any obvious action that impacts their ability to play it), or by gaining an advantage from a rebound or a save.','He did none of the three. The ball went to the opposite side of the pitch, he never touched it, and no defender had to deal with him. He is entitled to stand out there all afternoon. No offence, no flag, play on.','Compare this with the very next scenario. There, the attacker also never touches the ball — and it <i>is</i> offside. The difference is not the touch. It is whether he interfered with anybody.']
 },
 {
-  id:9,diff:'Hard',title:'Frozen',
+  id:8,diff:'Hard',title:'Frozen',
   brief:'A ball is knocked through to the 9, who is clearly offside. He sees it, stops dead and lets it run. He never moves for it, never looks at the defender, and the 5 strolls across and clears.',
   answer:'onside',freezeT:.42,
   law:['Law 11.2 — A position is not an offence','Involvement in active play'],
@@ -1111,7 +1095,7 @@ const SCENARIOS=[
   why:['He is in an offside position and the ball was played into the space he is standing in. Neither of those is the offence.','An offside position becomes an offence only if he <b>becomes involved in active play</b>. He did not touch the ball, did not challenge the 5 for it, did not block anybody’s line of vision, and made no action of any kind that affected an opponent. Standing still while a ball goes past you is not one of the three routes.','It makes no difference that the pass was going his way, or that he is the only blue player up there. The law asks what he <i>did</i>, not who the ball was meant for. Play on.','Now compare the very next scenario. Same position, same pass, same non-touch — and it is offside, because there he goes for it.']
 },
 {
-  id:10,diff:'Hard',title:'He Went For It',
+  id:9,diff:'Hard',title:'He Went For It',
   brief:'The identical ball, and the 9 is offside in the identical spot. This time he sprints at it. The 5 has to stretch and hack it away in a hurry. The 9 never gets a touch.',
   answer:'offside',freezeT:.42,
   law:['Law 11.2 — Interfering with an opponent','Challenging an opponent for the ball'],
@@ -1127,7 +1111,7 @@ const SCENARIOS=[
   why:['Everything about the freeze is identical to the previous scenario, and so is the outcome in one respect: he never touches the ball. If touching it were the test, this would be onside too.','It is not the test. <b>You do not have to touch the ball.</b> Law 11 lists <b>interfering with an opponent</b> as its own route to the offence, and that expressly includes <b>challenging an opponent for the ball</b> and <i>any obvious action which clearly impacts on the ability of an opponent to play the ball</i>.','By running at it he forced the 5 to stretch and rush a clearance he would otherwise have strolled onto. That is the impact the law is describing. Offside.','This pair is the whole point: <b>intent to be there is not the offence, and a touch is not required either</b>. What matters is whether he did something that affected the play or an opponent. Frozen — nothing. Going for it — everything.']
 },
 {
-  id:11,diff:'Hard',title:'In the Keeper’s Eyeline',
+  id:10,diff:'Hard',title:'In the Keeper’s Eyeline',
   brief:'Blue shoot from 25 yards. The 9 is standing in an offside position, right in front of the keeper. He never touches the ball — but the keeper never really sees it.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — Interfering with an opponent','Clearly obstructing the line of vision'],
@@ -1143,7 +1127,7 @@ const SCENARIOS=[
   why:['A player in an offside position commits an offence not only by touching the ball, but by <b>interfering with an opponent</b> — and that expressly includes <b>clearly obstructing an opponent’s line of vision</b>.','No touch is required. By standing in an offside position directly in the keeper’s sightline and affecting his ability to play the ball, the 9 has committed the offence. Goal disallowed.']
 },
 {
-  id:12,diff:'Hard',title:'Off the Woodwork',
+  id:11,diff:'Hard',title:'Off the Woodwork',
   brief:'The 8 shoots. The 9, in an offside position when the shot was struck, watches it cannon back off the post — and taps in the rebound.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — Gaining an advantage from a rebound'],
@@ -1159,7 +1143,7 @@ const SCENARIOS=[
   why:['He was in an offside position at the moment his teammate shot. The question is only whether he then became involved.','He did — by <b>gaining an advantage</b>. Law 11 states that a player in an offside position who plays a ball that has <b>rebounded or been deflected off the goalpost</b>, the crossbar, a match official or an opponent has committed an offence. The woodwork does not wipe the slate clean. Disallowed.']
 },
 {
-  id:13,diff:'Very hard',title:'Parried, Not Cleared',
+  id:12,diff:'Very hard',title:'Parried, Not Cleared',
   brief:'Same shot, same offside position — but this time the keeper gets a strong hand to it and parries it out. The 9 slams in the rebound.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — A deliberate SAVE never resets offside'],
@@ -1175,7 +1159,7 @@ const SCENARIOS=[
   why:['This is the one that splits crowds. He was offside when the shot was hit, and the ball reached him only via the goalkeeper.','Law 11 spells out the carve-out: a player in an offside position <b>is</b> penalised for playing a ball that rebounds or is deflected from a <b>deliberate save by any opponent</b>. A save is expressly excluded from the "deliberate play" reset.','Compare this with the very next scenario — the difference between a <b>save</b> and a <b>deliberate play</b> is the entire ballgame. Disallowed.']
 },
 {
-  id:14,diff:'Very hard',title:'The Defender’s Gift',
+  id:13,diff:'Very hard',title:'The Defender’s Gift',
   brief:'A hopeful ball is played forward with the 9 in an offside position. A red defender has time, sees it all the way, and heads it back towards his keeper — straight to the 9, who scores.',
   answer:'onside',freezeT:.4,resetT:.62,
   law:['Law 11.2 — A deliberate play by an opponent resets it'],
@@ -1191,7 +1175,7 @@ const SCENARIOS=[
   why:['Start where you must: at the pass, the 9 <b>was</b> in an offside position. So far, identical to the last one.','But then an opponent <b>deliberately played</b> the ball. Law 11 defines that as a player having control of the ball with the possibility of passing it to a teammate, gaining possession of it, or clearing it — and an inaccurate or unsuccessful clearance still counts as deliberate play.','A deliberate play by an opponent <b>starts a new phase</b> and cancels the earlier offside position. Only a deliberate <b>save</b> is excluded — and a controlled header back is not a save. Goal stands. Play on.']
 },
 {
-  id:15,diff:'Very hard',title:'Off the Shin',
+  id:14,diff:'Very hard',title:'Off the Shin',
   brief:'The 9 is in an offside position again. But this time the pass is drilled hard at a defender only a few yards away, who throws out a leg on instinct. It cannons off his shin and loops straight to the 9, who scores.',
   answer:'offside',freezeT:.4,
   law:['Law 11.2 — A deflection is not a deliberate play','Gaining an advantage'],
@@ -1207,7 +1191,7 @@ const SCENARIOS=[
   why:['Same starting point as the last one: the 9 was in an offside position when his teammate played the ball. The only question is whether what happened next wiped it out.','It did not, because this was a <b>deflection</b>, not a deliberate play. Law 11 defines deliberate play as a player having <b>control</b> of the ball with the possibility of passing it to a team-mate, gaining possession of it, or clearing it. The 4 had none of that. The ball was drilled at him from a few yards, its direction was unexpected, and he threw out a leg on instinct — a movement that achieved contact but no control.','A deflection off an opponent does not start a new phase. Worse, Law 11 lists playing a ball deflected off an opponent as <b>gaining an advantage</b> from the offside position. Disallowed.','This is the hardest call in the whole law, and the one that decides the arguments. Compare the three ways a ball can reach you off an opponent: a <b>deliberate play</b> resets it (previous scenario, onside), a <b>deliberate save</b> never does (the parried shot, offside), and a <b>deflection</b> never does either (this one, offside). Time, clear sight and control are what separate the first from the last.']
 },
 {
-  id:16,diff:'Very hard',title:'The Flag That Never Came',
+  id:15,diff:'Very hard',title:'The Flag That Never Came',
   brief:'A ball over the top, and it is desperately tight — a shoulder in it. The assistant referee’s flag stays down. The 9 races clear, rounds the keeper and rolls it in. Only then does the flag go up.',
   answer:'offside',freezeT:.42,
   law:['Law 11.1 — Offside position','Guidelines — the AR’s delayed flag'],
@@ -1222,7 +1206,7 @@ const SCENARIOS=[
   why:['At the moment the pass was played, the 9 had a shoulder beyond the second-last opponent. That is an offside position — and he went on to play the ball, so the offence was complete the instant the pass left his teammate’s boot.','So why did the flag stay down? Because the guidelines tell the assistant referee to do exactly that. On a tight call where an immediate goalscoring opportunity is likely, the AR uses the <b>wait-and-see technique</b>: keep the flag down, let the passage of play finish, then signal. It means a mistaken flag can never kill a legitimate attack — and if the attacking team scores, the AR <i>must</i> raise the flag.','A late flag is not a changed mind. The goal is disallowed and the restart is an indirect free kick to the defending side. Clear-cut offsides are still flagged immediately; the delay is only for the tight ones.','Notice where the AR has been standing all along: level with the second-last defender, or with the ball when the ball is nearer the goal line. That is their required position — the AR walks the offside line so they can judge it square-on.']
 },
 {
-  id:17,diff:'Very hard',title:'Advantage, Defence',
+  id:16,diff:'Very hard',title:'Advantage, Defence',
   brief:'A ball over the top to the 9, who is offside and takes a touch. A red defender robs him on the spot and the reds break out with the ball at their feet. The flag never goes up.',
   answer:'offside',freezeT:.4,flagStaysDown:true,
   law:['Law 11.2 — Interfering with play','Law 5 — Advantage','Guidelines — the AR holds the flag'],
@@ -1441,8 +1425,8 @@ const STAGES=[
  {min:1,  name:'Helmet Off',        blurb:'Fresh air. Dangerous new ideas.',     gear:['gear-pads','gear-cleats','hand-ball-oval','gear-hair']},
  {min:4,  name:'Pads Down',         blurb:'Starting to see the line.',           gear:['gear-jersey-plain','gear-shorts','gear-cleats','gear-headband']},
  {min:7,  name:'Kit Convert',       blurb:'Actual boots. Actual progress.',      gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','gear-headband']},
- {min:11, name:'Proper Baller',     blurb:'Reads the game. Mostly.',             gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
- {min:15, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.', gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
+ {min:10, name:'Proper Baller',     blurb:'Reads the game. Mostly.',             gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots','hand-ball-soccer','gear-headband']},
+ {min:14, name:'Offside Whisperer', blurb:'VAR calls HIM for a second opinion.', gear:['gear-jersey-soccer','gear-shorts','gear-socks','gear-boots-gold','gear-armband','gear-flag','hand-ball-soccer','gear-headband']}
 ];
 /* the last band the score has reached — open-ended at the top, so the number of
    scenarios can change without leaving a rank unreachable */
@@ -1457,8 +1441,8 @@ function renderAvatar(el,stage){
 const CATEGORIES=[
  {min:0,  name:'🏈 Gridiron Lifer',            bg:'#f4795b', blurb:'You brought a helmet to a football match and the flag never came down. In your defence, the offside law has confused entire nations for a century.'},
  {min:6,  name:'🤔 Offside-Curious',           bg:'#bfe3ff', blurb:'You know the flag means something and you are right about half the time. That is roughly the standard of the average pundit, so hold your head up.'},
- {min:12, name:'🚩 Assistant Referee (Prov.)', bg:'#ffd44d', blurb:'Steady flag arm. You know it is judged at the moment the ball is played and that a position on its own is not an offence, which already puts you ahead of most of the stadium.'},
- {min:16, name:'🛰️ Semi-Automated Overlord',   bg:'#6fc25a', blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
+ {min:11, name:'🚩 Assistant Referee (Prov.)', bg:'#ffd44d', blurb:'Steady flag arm. You know it is judged at the moment the ball is played and that a position on its own is not an offence, which already puts you ahead of most of the stadium.'},
+ {min:15, name:'🛰️ Semi-Automated Overlord',   bg:'#6fc25a', blurb:'The bunker called. They would like you to stop drawing lines on their monitors and go home. Genuinely excellent — Law 11 holds no secrets for you.'}
 ];
 const catFor=n=>CATEGORIES.filter(c=>n>=c.min).pop()||CATEGORIES[0];
 
