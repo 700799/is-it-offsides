@@ -1,7 +1,7 @@
 # is-it-offsides
 
 **Is It Offside?** — a graphical walkthrough of the whole offside law, plus a
-seventeen-scenario test called **the Offside Challenge**. Each scenario animates a passage
+sixteen-scenario test called **the Offside Challenge**. Each scenario animates a passage
 of play on a pitch and freezes at the moment the ball is played, with a dashed offside
 line drawn through the second-last opponent. You call it **Offside** or **Onside**, and
 get the answer explained against IFAB's Law 11.
@@ -75,7 +75,7 @@ Turn the phone sideways and it asks for it back. A landscape phone is 375–430p
 after the status bar and the answer bar that leaves about 240px — which the title and the
 brief eat before the pitch gets any. Rather than build a sideways layout that could only
 show part of the field, a full-screen panel asks you to turn the phone upright. It appears
-only where it is true: landscape, under 640px of height, on a touch device. Landscape
+only where it is true: landscape, under 500px of height, on a touch device. Landscape
 tablets are taller than that and already fit, so they never see it, and a desktop window
 dragged short and wide is left alone. Anyone whose device is locked to landscape can dismiss
 it with **Continue anyway**, and it stays dismissed.
@@ -83,7 +83,7 @@ it with **Continue anyway**, and it stays dismissed.
 A floating status bar keeps a running tally of right and wrong answers,
 and your on-screen character starts as an American football player in a helmet and pads,
 morphing towards an actual footballer as you get calls right. You finish in one of four
-ranked categories. The bar is a single row: on a phone the seventeen progress dots leave it
+ranked categories. The bar is a single row: on a phone the sixteen progress dots leave it
 and become a hairline along its bottom edge, still green or red per scenario but costing
 four pixels instead of a second row.
 
@@ -132,6 +132,16 @@ legend is dropped, so every chapter gets much the same diagram regardless of how
 title or its one line runs. Below roughly 660px of viewport height there is not enough left
 to be worth it, and the chapter reverts to scrolling rather than showing a diagram squeezed
 to nothing.
+
+That threshold is much higher than the challenge's, and the difference is not arbitrary. The
+challenge fits from about 500px up; the chapter carries chapter chips, shot tabs, a More
+detail row and the Prev/Replay/Next bar on top of the same diagram, so it needs roughly
+another 160px before the diagram clears a usable size. Both numbers are set against what a
+phone actually gives the page rather than what its spec sheet says: Safari's URL bar and
+toolbar take 100–190px, so a 390×844 handset hands CSS about 664px and a 375×812 one about
+629px. Guards written against device heights looked fine in a headless browser — where there
+is no browser chrome at all — and switched the challenge's fit off on the very phones it was
+meant for.
 
 ## Running it locally
 
