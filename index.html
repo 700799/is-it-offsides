@@ -246,12 +246,15 @@ body.learning .wrap{padding-bottom:96px;max-width:760px}
    chapter falls back to normal flow and the page scrolls, which is honest —
    better than a diagram squeezed to nothing, or rows clipped out of sight.
 
-   520px, not 660px, for the same reason the challenge's guard is 500px: a phone
-   hands the page 100-190px less than its device height once Safari's chrome is
-   accounted for, so a 660px guard switched the fit off on the very phones it was
-   written for. The chapter carries one bar rather than two, so it can sit a
-   little higher than the challenge's guard. */
-@media (min-height:520px){
+   660px, and deliberately much higher than the challenge's 500px, because the
+   chapter carries far more furniture: chapter chips, shot tabs, the More detail
+   row and the Prev/Replay/Next bar. Measured, the diagram comes out at roughly
+   (height - 505)px, so it only clears the 150px floor from about 655 up —
+   375x660 gives 155px and 390x664 gives 159px, while 375x629 gives 124px and
+   still overflows by 12px. Lowering this to match the challenge was tried and
+   reverted: it switched the fit on exactly where the chapter cannot afford it,
+   squeezing diagrams to 115px. Short screens scroll instead, on purpose. */
+@media (min-height:660px){
   /* the fit places the bar itself, so the flow padding that clears it goes away */
   body.learning .wrap{padding-bottom:0}
   body.learning #screen-learn{display:flex;flex-direction:column;height:calc(100vh - 84px);height:calc(100svh - 84px)}
@@ -521,7 +524,7 @@ footer b{color:#4a4c56}
   #learnBar .btn{font-size:13px;padding:11px 12px}
 }
 /* the bar is shorter on a narrow screen, so the chapter gets those pixels back */
-@media (max-width:560px) and (min-height:520px){
+@media (max-width:560px) and (min-height:660px){
   body.learning #screen-learn{height:calc(100vh - 76px);height:calc(100svh - 76px)}
 }
 /* only in the scrolling fallback — when the fit is on, the bar is placed for us */

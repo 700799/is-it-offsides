@@ -129,15 +129,19 @@ ride in a bar pinned to the bottom of the screen, and the diagram takes whatever
 left once the fixed rows are placed, so none of the twenty-one has to be scrolled through.
 The chapter chips and tabs scroll sideways rather than wrapping, and on a short screen the
 legend is dropped, so every chapter gets much the same diagram regardless of how long its
-title or its one line runs. Below roughly 520px of viewport height there is not enough left
+title or its one line runs. Below roughly 660px of viewport height there is not enough left
 to be worth it, and the chapter reverts to scrolling rather than showing a diagram squeezed
 to nothing.
 
-Those thresholds are set against what a phone actually gives the page, not what its spec
-sheet says. Safari's URL bar and toolbar take 100–190px, so a 390×844 handset hands CSS
-about 664px and a 375×812 one about 629px. Guards written against device heights looked fine
-in a headless browser — where there is no browser chrome at all — and switched the fit off on
-the very phones they were meant for.
+That threshold is much higher than the challenge's, and the difference is not arbitrary. The
+challenge fits from about 500px up; the chapter carries chapter chips, shot tabs, a More
+detail row and the Prev/Replay/Next bar on top of the same diagram, so it needs roughly
+another 160px before the diagram clears a usable size. Both numbers are set against what a
+phone actually gives the page rather than what its spec sheet says: Safari's URL bar and
+toolbar take 100–190px, so a 390×844 handset hands CSS about 664px and a 375×812 one about
+629px. Guards written against device heights looked fine in a headless browser — where there
+is no browser chrome at all — and switched the challenge's fit off on the very phones it was
+meant for.
 
 ## Running it locally
 
